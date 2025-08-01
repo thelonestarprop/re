@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Quizzes</title>
-    <!-- Inter font from Google Fonts for a modern look -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS CDN for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -46,11 +44,9 @@
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen flex flex-col md:flex-row overflow-hidden">
 
-    <!-- Left Navigation Sidebar -->
     <aside class="bg-gray-800 text-white w-full md:w-64 p-6 flex flex-col space-y-4 shadow-xl overflow-y-auto custom-scrollbar">
         <h1 class="text-3xl font-bold text-center border-b border-gray-700 pb-4 mb-4">Quiz App 🧠</h1>
         
-        <!-- Quiz list container using collapsible details -->
         <div id="quiz-list-container" class="space-y-2 mt-4">
             <details class="group cursor-pointer" open>
                 <summary class="text-xl font-semibold flex items-center p-2 rounded-lg hover:bg-gray-700 transition duration-200">
@@ -68,18 +64,16 @@
                 </summary>
                 <div class="pl-6 pt-2 space-y-1">
                     <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-quiz="Animal">Animal Kingdom</button>
+                    <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-quiz="Unit 4">Space Quiz</button>
                 </div>
             </details>
         </div>
     </aside>
 
-    <!-- Main Quiz Content Area -->
     <main class="flex-1 p-8 overflow-y-auto">
         <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full max-w-3xl mx-auto">
-            <!-- Quiz Header -->
             <h2 id="quiz-title" class="text-4xl font-extrabold text-center text-gray-800 dark:text-gray-200 mb-6">Select a Quiz</h2>
             
-            <!-- Progress counters and bar -->
             <div id="progress-container" class="mb-8 p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-inner hidden">
                 <div class="flex justify-between items-center text-lg font-bold mb-2">
                     <span id="correct-count" class="text-green-600">Correct: 0</span>
@@ -91,9 +85,7 @@
                 </div>
             </div>
 
-            <!-- Quiz Questions and Answers -->
             <div id="quiz-content">
-                <!-- Questions and answers will be injected here by JavaScript -->
                 <p class="text-center text-gray-600 dark:text-gray-400">
                     Click on a quiz from the left-hand navigation to get started!
                 </p>
@@ -115,450 +107,231 @@
         // Quiz data as a JSON object
         const quizData = {
             "Unit 1": [
-  {
-    "question": "Which of these is considered to be an encumbrance?",
-    "answers": [
-      {
-        "text": "A mortgage",
-        "correct": false
-      },
-      {
-        "text": "A lease",
-        "correct": false
-      },
-      {
-        "text": "An easement",
-        "correct": false
-      },
-      {
-        "text": "All of these",
-        "correct": true
-      }
-    ],
-    "explanation": "A lease, mortgage, easement, or restriction is considered an encumbrance of a fee simple title."
-  },
-  {
-    "question": "Which of the following courses of action would the Federal Reserve Board take during an elongated period of \"tight money?\"",
-    "answers": [
-      {
-        "text": "Purchasing large blocks of government bonds",
-        "correct": false
-      },
-      {
-        "text": "Lower the reserve requirements of bank members",
-        "correct": false
-      },
-      {
-        "text": "Decrease the discount rate for bank members",
-        "correct": false
-      },
-      {
-        "text": "Any of the following",
-        "correct": true
-      }
-    ],
-    "explanation": "Answers (a), (b), (c), and (d) are all courses of action taken by the Federal Reserve Board to help alleviate tight money conditions in the country."
-  },
-  {
-    "question": "A broker acting as agent for a principal has as much authority as:",
-    "answers": [
-      {
-        "text": "other parties believe the agent to possess.",
-        "correct": false
-      },
-      {
-        "text": "the agent chooses to accept.",
-        "correct": false
-      },
-      {
-        "text": "he chooses to accept as limited by the Statute of Limitations.",
-        "correct": false
-      },
-      {
-        "text": "the principal actually or ostensibly confers upon him.",
-        "correct": true
-      }
-    ],
-    "explanation": "An agent has as much authority as his principal actually or ostensibly confers upon him."
-  },
-  {
-    "question": "What does a general warranty deed contain?",
-    "answers": [
-      {
-        "text": "None of these.",
-        "correct": false
-      },
-      {
-        "text": "Covenants regarding quiet enjoyment",
-        "correct": false
-      },
-      {
-        "text": "Covenants that include provisions of a quitclaim deed",
-        "correct": false
-      },
-      {
-        "text": "Covenants that warrant the new owner’s undisturbed and clear title",
-        "correct": true
-      }
-    ],
-    "explanation": "Covenants that warrant the new owner’s undisturbed and clear title are contained in a general warranty deed."
-  },
-  {
-    "question": "In Texas, if Heather is an agent for a buyer Harry and she shows him a property that is known to have ghosts living there according to the neighbors, but she does not inform Harry of this information, after Harry purchases the property, Heather would:",
-    "answers": [
-      {
-        "text": "Be considered to have misrepresented Harry",
-        "correct": false
-      },
-      {
-        "text": "Be liable for misrepresentation",
-        "correct": false
-      },
-      {
-        "text": "Be open to being sued by Harry if he finds out about the ghosts",
-        "correct": false
-      },
-      {
-        "text": "Not be liable for the nondisclosure of ghosts",
-        "correct": true
-      }
-    ],
-    "explanation": "In Texas, agents are absolved from any liability regarding nondisclosure of stigmatized properties."
-  },
-  {
-    "question": "A couple is looking at houses and turns one down because they felt the price of the home was too high. This is based on what principle of real estate?",
-    "answers": [
-      {
-        "text": "Conformity",
-        "correct": false
-      },
-      {
-        "text": "Anticipation",
-        "correct": false
-      },
-      {
-        "text": "All of these",
-        "correct": false
-      },
-      {
-        "text": "Substitution",
-        "correct": true
-      }
-    ],
-    "explanation": "The principle of substitution is the basis of the appraisal process. Explained simply, value is set by the cost of getting an equally desirable substitute."
-  },
-  {
-    "question": "Constructive eviction may allow for a tenant to vacate the premises before the expiration of a lease term. Which would be an example of this?",
-    "answers": [
-      {
-        "text": "Landlord has shown property to prospective tenant and is negotiating terms",
-        "correct": false
-      },
-      {
-        "text": "Property cannot be used for original purpose due to unnecessary and considerable changes made by landlord",
-        "correct": false
-      },
-      {
-        "text": "Landlord fails to make necessary repairs",
-        "correct": false
-      },
-      {
-        "text": "All of the above",
-        "correct": true
-      }
-    ],
-    "explanation": "All of the above are examples of constructive eviction. a) Landlord has shown property to prospective tenant and is negotiating terms b) Property cannot be used for original purpose due to unnecessary and considerable changes made by landlord c) Landlord fails to make necessary repairs"
-  },
-  {
-    "question": "\"A\" receives a life estate for the life of \"X.\" \"A\" dies before \"X.\" The estate:",
-    "answers": [
-      {
-        "text": "ceases to exist.",
-        "correct": false
-      },
-      {
-        "text": "reverts to the original grantor.",
-        "correct": false
-      },
-      {
-        "text": "vests in",
-        "correct": false
-      },
-      {
-        "text": "vests in the heirs of",
-        "correct": true
-      }
-    ],
-    "explanation": "The estate vests in the heirs of \"A\" until \"X\" dies at which time the estate will revert to the original grantor."
-  },
-  {
-    "question": "The original amortization term minus the number of payments that have been applied refers to the:",
-    "answers": [
-      {
-        "text": "Remaining interest",
-        "correct": false
-      },
-      {
-        "text": "Total amortization term",
-        "correct": false
-      },
-      {
-        "text": "Loan amount",
-        "correct": false
-      },
-      {
-        "text": "Remaining term",
-        "correct": true
-      }
-    ],
-    "explanation": "The original amortization term minus the number of payments that have been applied refers to the remaining term."
-  },
-  {
-    "question": "If Franklin, a real estate agent, intentionally speaks very highly and enthusiastically about a property he is trying to sell to a client in order to secure the deal, this type of behavior would be:",
-    "answers": [
-      {
-        "text": "Steering",
-        "correct": false
-      },
-      {
-        "text": "Illegal",
-        "correct": false
-      },
-      {
-        "text": "Misrepresentation",
-        "correct": false
-      },
-      {
-        "text": "Puffing",
-        "correct": true
-      }
-    ],
-    "explanation": "The term “puffing” can be used to describe “sales talk” that is used to secure a deal. As long as there is no misrepresentation, it is considered a legal practice."
-  }
-],
-            "Unit 2":
-                [
-  {
-    "question": "A credit arrangement which allows a customer to borrow against a pre-approved line of credit when purchasing goods and services is called:",
-    "answers": [
-      {
-        "text": "A loan",
-        "correct": false
-      },
-      {
-        "text": "A credit card",
-        "correct": false
-      },
-      {
-        "text": "None of these",
-        "correct": false
-      },
-      {
-        "text": "Revolving debt",
-        "correct": true
-      }
-    ],
-    "explanation": "A credit arrangement which allows a customer to borrow against a pre-approved line of credit when purchasing goods and services is called revolving debt."
-  },
-  {
-    "question": "A valid written lease must include:",
-    "answers": [
-      {
-        "text": "agreement to let, agreement to take delivery, and acceptance.",
-        "correct": false
-      },
-      {
-        "text": "term, consideration, and description of the premises.",
-        "correct": false
-      },
-      {
-        "text": "a landlord and tenant with the legal capacity to enter a binding contract.",
-        "correct": false
-      },
-      {
-        "text": "all of the above",
-        "correct": true
-      }
-    ],
-    "explanation": "Each of the choices describes a necessary element of a valid lease."
-  },
-  {
-    "question": "How many acres are in the following described area: the W 1/2 of the N 1/2 of section 5?",
-    "answers": [
-      {
-        "text": "110",
-        "correct": false
-      },
-      {
-        "text": "120",
-        "correct": false
-      },
-      {
-        "text": "140",
-        "correct": false
-      },
-      {
-        "text": "160",
-        "correct": true
-      }
-    ],
-    "explanation": "A standard section of land is one square mile, which contains 640 acres. The N 1/2 of section 5 is 320 acres (640 / 2), and the W 1/2 of that is 160 acres (320 / 2)."
-  },
-  {
-    "question": "In Texas, if a builder of residential homes sells more than _______________ properties a year, they are required to obtain a real estate license or employ a licensed broker.",
-    "answers": [
-      {
-        "text": "3",
-        "correct": false
-      },
-      {
-        "text": "2",
-        "correct": false
-      },
-      {
-        "text": "1",
-        "correct": false
-      },
-      {
-        "text": "4",
-        "correct": true
-      }
-    ],
-    "explanation": "If a builder of residential homes sells more than 4 properties in a single year, they must obtain a real estate license or employ a real estate broker."
-  },
-  {
-    "question": "Real property includes all of the following except:",
-    "answers": [
-      {
-        "text": "airspace.",
-        "correct": false
-      },
-      {
-        "text": "minerals.",
-        "correct": false
-      },
-      {
-        "text": "water rights.",
-        "correct": false
-      },
-      {
-        "text": "oil.",
-        "correct": true
-      }
-    ],
-    "explanation": "Real property is land, anything permanently attached to the land, anything appurtenant to the land or anything immovable by law. Land includes airspace, surface rights, mineral rights, and water rights."
-  },
-  {
-    "question": "Brad sold his house to Jerry, who did not record the deed, but moved in. Brad then sold the same property to George, who reviewed the county recorder's records, but did not look at the property. Brad gave George a deed, which was recorded. Which of the following would be true concerning title to the property?",
-    "answers": [
-      {
-        "text": "Jerry and George are co-owners of the property",
-        "correct": false
-      },
-      {
-        "text": "George now owns the property because he recorded his deed and Jerry did not",
-        "correct": false
-      },
-      {
-        "text": "George has recourse against Jerry for failure to record",
-        "correct": false
-      },
-      {
-        "text": "Jerry maintains title",
-        "correct": true
-      }
-    ],
-    "explanation": "Although Jerry did not record the deed, he took possession by moving in. Possession of the property by Jerry gives constructive notice. Since George recorded after Jerry took possession, he had constructive notice of Jerry's rights."
-  },
-  {
-    "question": "Which of the following is correct concerning an ALTA extended coverage policy of title insurance?",
-    "answers": [
-      {
-        "text": "It protects a lessee who occupies the property after the date shown on the title insurance policy",
-        "correct": false
-      },
-      {
-        "text": "It protects against any encroachment that occurs after the date of issuance of the title policy",
-        "correct": false
-      },
-      {
-        "text": "It protects against any easements created during the term of the title insurance policy",
-        "correct": false
-      },
-      {
-        "text": "It is limited to stated conditions of title as of the date of the issuance of the title policy",
-        "correct": true
-      }
-    ],
-    "explanation": "An ALTA policy applies to owners or lenders not to lessees. A survey of the property is done at the time the policy is issued, but it does not protect against subsequent encroachments. Answer (b) is the only one that is correct."
-  },
-  {
-    "question": "The final step in the Statutory Dedication process is:",
-    "answers": [
-      {
-        "text": "The acceptance by the proper official",
-        "correct": false
-      },
-      {
-        "text": "The signature of the Real Estate Commissioner",
-        "correct": false
-      },
-      {
-        "text": "None of these",
-        "correct": false
-      },
-      {
-        "text": "The recording of the subdivision map",
-        "correct": true
-      }
-    ],
-    "explanation": "When the subdivision map is approved and recorded, this would be the final step in the Statutory Dedication process."
-  },
-  {
-    "question": "Consideration can be:",
-    "answers": [
-      {
-        "text": "money.",
-        "correct": false
-      },
-      {
-        "text": "services.",
-        "correct": false
-      },
-      {
-        "text": "covenants.",
-        "correct": false
-      },
-      {
-        "text": "all of the above",
-        "correct": true
-      }
-    ],
-    "explanation": "Covenants are promises and we know that consideration can be money, services, or promises. It can also be love and affection."
-  },
-  {
-    "question": "There are many agreements that could be placed in promissory notes that would prohibit the borrower from doing certain things. An agreement that would prohibit the borrower from paying off the loan before the maturity date is called a:",
-    "answers": [
-      {
-        "text": "prevention clause.",
-        "correct": false
-      },
-      {
-        "text": "defeasance clause.",
-        "correct": false
-      },
-      {
-        "text": "release clause.",
-        "correct": false
-      },
-      {
-        "text": "lock-in clause.",
-        "correct": true
-      }
-    ],
-    "explanation": "A lock-in clause prohibits borrowers from paying off a loan in advance. It is not allowed on residential units of less than four units."
-  }
-],
+                {
+                    "question": "Which of these is considered to be an encumbrance?",
+                    "answers": [
+                        { "text": "A mortgage", "correct": false },
+                        { "text": "A lease", "correct": false },
+                        { "text": "An easement", "correct": false },
+                        { "text": "All of these", "correct": true }
+                    ],
+                    "explanation": "A lease, mortgage, easement, or restriction is considered an encumbrance of a fee simple title."
+                },
+                {
+                    "question": "Which of the following courses of action would the Federal Reserve Board take during an elongated period of \"tight money?\"",
+                    "answers": [
+                        { "text": "Purchasing large blocks of government bonds", "correct": false },
+                        { "text": "Lower the reserve requirements of bank members", "correct": false },
+                        { "text": "Decrease the discount rate for bank members", "correct": false },
+                        { "text": "Any of the following", "correct": true }
+                    ],
+                    "explanation": "Answers (a), (b), (c), and (d) are all courses of action taken by the Federal Reserve Board to help alleviate tight money conditions in the country."
+                },
+                {
+                    "question": "A broker acting as agent for a principal has as much authority as:",
+                    "answers": [
+                        { "text": "other parties believe the agent to possess.", "correct": false },
+                        { "text": "the agent chooses to accept.", "correct": false },
+                        { "text": "he chooses to accept as limited by the Statute of Limitations.", "correct": false },
+                        { "text": "the principal actually or ostensibly confers upon him.", "correct": true }
+                    ],
+                    "explanation": "An agent has as much authority as his principal actually or ostensibly confers upon him."
+                },
+                {
+                    "question": "What does a general warranty deed contain?",
+                    "answers": [
+                        { "text": "None of these.", "correct": false },
+                        { "text": "Covenants regarding quiet enjoyment", "correct": false },
+                        { "text": "Covenants that include provisions of a quitclaim deed", "correct": false },
+                        { "text": "Covenants that warrant the new owner’s undisturbed and clear title", "correct": true }
+                    ],
+                    "explanation": "Covenants that warrant the new owner’s undisturbed and clear title are contained in a general warranty deed."
+                },
+                {
+                    "question": "In Texas, if Heather is an agent for a buyer Harry and she shows him a property that is known to have ghosts living there according to the neighbors, but she does not inform Harry of this information, after Harry purchases the property, Heather would:",
+                    "answers": [
+                        { "text": "Be considered to have misrepresented Harry", "correct": false },
+                        { "text": "Be liable for misrepresentation", "correct": false },
+                        { "text": "Be open to being sued by Harry if he finds out about the ghosts", "correct": false },
+                        { "text": "Not be liable for the nondisclosure of ghosts", "correct": true }
+                    ],
+                    "explanation": "In Texas, agents are absolved from any liability regarding nondisclosure of stigmatized properties."
+                },
+                {
+                    "question": "A couple is looking at houses and turns one down because they felt the price of the home was too high. This is based on what principle of real estate?",
+                    "answers": [
+                        { "text": "Conformity", "correct": false },
+                        { "text": "Anticipation", "correct": false },
+                        { "text": "All of these", "correct": false },
+                        { "text": "Substitution", "correct": true }
+                    ],
+                    "explanation": "The principle of substitution is the basis of the appraisal process. Explained simply, value is set by the cost of getting an equally desirable substitute."
+                },
+                {
+                    "question": "Constructive eviction may allow for a tenant to vacate the premises before the expiration of a lease term. Which would be an example of this?",
+                    "answers": [
+                        { "text": "Landlord has shown property to prospective tenant and is negotiating terms", "correct": false },
+                        { "text": "Property cannot be used for original purpose due to unnecessary and considerable changes made by landlord", "correct": false },
+                        { "text": "Landlord fails to make necessary repairs", "correct": false },
+                        { "text": "All of the above", "correct": true }
+                    ],
+                    "explanation": "All of the above are examples of constructive eviction. a) Landlord has shown property to prospective tenant and is negotiating terms b) Property cannot be used for original purpose due to unnecessary and considerable changes made by landlord c) Landlord fails to make necessary repairs"
+                },
+                {
+                    "question": "\"A\" receives a life estate for the life of \"X.\" \"A\" dies before \"X.\" The estate:",
+                    "answers": [
+                        { "text": "ceases to exist.", "correct": false },
+                        { "text": "reverts to the original grantor.", "correct": false },
+                        { "text": "vests in", "correct": false },
+                        { "text": "vests in the heirs of A until X dies at which time the estate will revert to the original grantor.", "correct": true }
+                    ],
+                    "explanation": "The estate vests in the heirs of \"A\" until \"X\" dies at which time the estate will revert to the original grantor."
+                },
+                {
+                    "question": "The original amortization term minus the number of payments that have been applied refers to the:",
+                    "answers": [
+                        { "text": "Remaining interest", "correct": false },
+                        { "text": "Total amortization term", "correct": false },
+                        { "text": "Loan amount", "correct": false },
+                        { "text": "Remaining term", "correct": true }
+                    ],
+                    "explanation": "The original amortization term minus the number of payments that have been applied refers to the remaining term."
+                },
+                {
+                    "question": "If Franklin, a real estate agent, intentionally speaks very highly and enthusiastically about a property he is trying to sell to a client in order to secure the deal, this type of behavior would be:",
+                    "answers": [
+                        { "text": "Steering", "correct": false },
+                        { "text": "Illegal", "correct": false },
+                        { "text": "Misrepresentation", "correct": false },
+                        { "text": "Puffing", "correct": true }
+                    ],
+                    "explanation": "The term “puffing” can be used to describe “sales talk” that is used to secure a deal. As long as there is no misrepresentation, it is considered a legal practice."
+                }
+            ],
+            "Unit 2": [
+                {
+                    "question": "A credit arrangement which allows a customer to borrow against a pre-approved line of credit when purchasing goods and services is called:",
+                    "answers": [
+                        { "text": "A loan", "correct": false },
+                        { "text": "A credit card", "correct": false },
+                        { "text": "None of these", "correct": false },
+                        { "text": "Revolving debt", "correct": true }
+                    ],
+                    "explanation": "A credit arrangement which allows a customer to borrow against a pre-approved line of credit when purchasing goods and services is called revolving debt."
+                },
+                {
+                    "question": "A valid written lease must include:",
+                    "answers": [
+                        { "text": "agreement to let, agreement to take delivery, and acceptance.", "correct": false },
+                        { "text": "term, consideration, and description of the premises.", "correct": false },
+                        { "text": "a landlord and tenant with the legal capacity to enter a binding contract.", "correct": false },
+                        { "text": "all of the above", "correct": true }
+                    ],
+                    "explanation": "Each of the choices describes a necessary element of a valid lease."
+                },
+                {
+                    "question": "How many acres are in the following described area: the W 1/2 of the N 1/2 of section 5?",
+                    "answers": [
+                        { "text": "110", "correct": false },
+                        { "text": "120", "correct": false },
+                        { "text": "140", "correct": false },
+                        { "text": "160", "correct": true }
+                    ],
+                    "explanation": "A standard section of land is one square mile, which contains 640 acres. The N 1/2 of section 5 is 320 acres (640 / 2), and the W 1/2 of that is 160 acres (320 / 2)."
+                },
+                {
+                    "question": "In Texas, if a builder of residential homes sells more than _______________ properties a year, they are required to obtain a real estate license or employ a licensed broker.",
+                    "answers": [
+                        { "text": "3", "correct": false },
+                        { "text": "2", "correct": false },
+                        { "text": "1", "correct": false },
+                        { "text": "4", "correct": true }
+                    ],
+                    "explanation": "If a builder of residential homes sells more than 4 properties in a single year, they must obtain a real estate license or employ a real estate broker."
+                },
+                {
+                    "question": "Real property includes all of the following except:",
+                    "answers": [
+                        { "text": "airspace.", "correct": false },
+                        { "text": "minerals.", "correct": false },
+                        { "text": "water rights.", "correct": false },
+                        { "text": "oil.", "correct": true }
+                    ],
+                    "explanation": "Real property is land, anything permanently attached to the land, anything appurtenant to the land or anything immovable by law. Land includes airspace, surface rights, mineral rights, and water rights."
+                },
+                {
+                    "question": "Brad sold his house to Jerry, who did not record the deed, but moved in. Brad then sold the same property to George, who reviewed the county recorder's records, but did not look at the property. Brad gave George a deed, which was recorded. Which of the following would be true concerning title to the property?",
+                    "answers": [
+                        { "text": "Jerry and George are co-owners of the property", "correct": false },
+                        { "text": "George now owns the property because he recorded his deed and Jerry did not", "correct": false },
+                        { "text": "George has recourse against Jerry for failure to record", "correct": false },
+                        { "text": "Jerry maintains title", "correct": true }
+                    ],
+                    "explanation": "Although Jerry did not record the deed, he took possession by moving in. Possession of the property by Jerry gives constructive notice. Since George recorded after Jerry took possession, he had constructive notice of Jerry's rights."
+                },
+                {
+                    "question": "Which of the following is correct concerning an ALTA extended coverage policy of title insurance?",
+                    "answers": [
+                        { "text": "It protects a lessee who occupies the property after the date shown on the title insurance policy", "correct": false },
+                        { "text": "It protects against any encroachment that occurs after the date of issuance of the title policy", "correct": false },
+                        { "text": "It protects against any easements created during the term of the title insurance policy", "correct": false },
+                        { "text": "It is limited to stated conditions of title as of the date of the issuance of the title policy", "correct": true }
+                    ],
+                    "explanation": "An ALTA policy applies to owners or lenders not to lessees. A survey of the property is done at the time the policy is issued, but it does not protect against subsequent encroachments. Answer (b) is the only one that is correct."
+                },
+                {
+                    "question": "The final step in the Statutory Dedication process is:",
+                    "answers": [
+                        { "text": "The acceptance by the proper official", "correct": false },
+                        { "text": "The signature of the Real Estate Commissioner", "correct": false },
+                        { "text": "None of these", "correct": false },
+                        { "text": "The recording of the subdivision map", "correct": true }
+                    ],
+                    "explanation": "When the subdivision map is approved and recorded, this would be the final step in the Statutory Dedication process."
+                },
+                {
+                    "question": "Consideration can be:",
+                    "answers": [
+                        { "text": "money.", "correct": false },
+                        { "text": "services.", "correct": false },
+                        { "text": "covenants.", "correct": false },
+                        { "text": "all of the above", "correct": true }
+                    ],
+                    "explanation": "Covenants are promises and we know that consideration can be money, services, or promises. It can also be love and affection."
+                },
+                {
+                    "question": "There are many agreements that could be placed in promissory notes that would prohibit the borrower from doing certain things. An agreement that would prohibit the borrower from paying off the loan before the maturity date is called a:",
+                    "answers": [
+                        { "text": "prevention clause.", "correct": false },
+                        { "text": "defeasance clause.", "correct": false },
+                        { "text": "release clause.", "correct": false },
+                        { "text": "lock-in clause.", "correct": true }
+                    ],
+                    "explanation": "A lock-in clause prohibits borrowers from paying off a loan in advance. It is not allowed on residential units of less than four units."
+                }
+            ],
+            "Unit 3": [
+                {
+                    "question": "Which planet is the hottest in our solar system?",
+                    "answers": [
+                        { "text": "Mercury", "correct": false },
+                        { "text": "Venus", "correct": true },
+                        { "text": "Earth", "correct": false },
+                        { "text": "Jupiter", "correct": false }
+                    ],
+                    "explanation": "Despite being farther from the Sun than Mercury, Venus has a thick atmosphere that traps heat, making it the hottest planet."
+                },
+                {
+                    "question": "What is the approximate length of a day on Venus?",
+                    "answers": [
+                        { "text": "24 hours", "correct": false },
+                        { "text": "10 Earth days", "correct": false },
+                        { "text": "243 Earth days", "correct": true },
+                        { "text": "1 year", "correct": false }
+                    ],
+                    "explanation": "A single day on Venus is incredibly long, taking about 243 Earth days to complete one rotation. This is longer than its year!"
+                }
+            ],
             "Animal": [
                 {
                     "question": "What is the fastest land animal?",
@@ -591,48 +364,26 @@
                     "explanation": "While other animals can glide, bats are the only mammals capable of sustained flight."
                 }
             ],
-            "Unit 2": [
+            "Unit 4": [ // Renamed from "Unit 2" to "Unit 4"
                 {
                     "question": "Which planet is known as the Red Planet?",
                     "answers": [
-                        { "text": "Unit 1", "correct": false },
-                        { "text": "Unit 2", "correct": true },
+                        { "text": "Mars", "correct": true }, // Changed "Unit 2" to "Mars"
+                        { "text": "Venus", "correct": false },
                         { "text": "Jupiter", "correct": false },
-                        { "text": "Unit 3", "correct": false }
+                        { "text": "Saturn", "correct": false }
                     ],
-                    "explanation": "Unit 2 is known as the Red Planet due to its reddish-orange appearance caused by iron oxide (rust) on its surface."
+                    "explanation": "Mars is known as the Red Planet due to its reddish-orange appearance caused by iron oxide (rust) on its surface."
                 },
                 {
-                    "question": "What is the name of the largest volcano on Unit 2?",
+                    "question": "What is the name of the largest volcano on Mars?", // Changed "Unit 2" to "Mars"
                     "answers": [
                         { "text": "Mount Sharp", "correct": false },
                         { "text": "Valles Marineris", "correct": false },
                         { "text": "Olympus Mons", "correct": true },
                         { "text": "Elysium Mons", "correct": false }
                     ],
-                    "explanation": "Olympus Mons is a massive shield volcano on Unit 2, and it is the largest volcano and highest known mountain on any planet in the Solar System."
-                }
-            ],
-            "Unit 3": [
-                {
-                    "question": "Which planet is the hottest in our solar system?",
-                    "answers": [
-                        { "text": "Mercury", "correct": false },
-                        { "text": "Unit 3", "correct": true },
-                        { "text": "Unit 1", "correct": false },
-                        { "text": "Jupiter", "correct": false }
-                    ],
-                    "explanation": "Despite being farther from the Sun than Mercury, Unit 3 has a thick atmosphere that traps heat, making it the hottest planet."
-                },
-                {
-                    "question": "What is the approximate length of a day on Unit 3?",
-                    "answers": [
-                        { "text": "24 hours", "correct": false },
-                        { "text": "10 Unit 1 days", "correct": false },
-                        { "text": "243 Unit 1 days", "correct": true },
-                        { "text": "1 year", "correct": false }
-                    ],
-                    "explanation": "A single day on Unit 3 is incredibly long, taking about 243 Unit 1 days to complete one rotation. This is longer than its year!"
+                    "explanation": "Olympus Mons is a massive shield volcano on Mars, and it is the largest volcano and highest known mountain on any planet in the Solar System."
                 }
             ]
         };
@@ -794,33 +545,26 @@
             incorrectCountEl.textContent = `Incorrect: ${incorrectCount}`;
 
             const totalAnswered = correctCount + incorrectCount;
-            let correctPercentage = 0;
-            let incorrectPercentage = 0;
-
-            if (totalQuestions > 0) {
-                correctPercentage = (correctCount / totalQuestions) * 100;
-                incorrectPercentage = (incorrectCount / totalQuestions) * 100;
+            if (totalQuestions > 0 && totalAnswered > 0) {
+                const correctPercentage = (correctCount / totalAnswered) * 100;
+                const incorrectPercentage = (incorrectCount / totalAnswered) * 100;
+                correctBarEl.style.width = `${correctPercentage}%`;
+                incorrectBarEl.style.width = `${incorrectPercentage}%`;
+                incorrectBarEl.style.left = `${correctPercentage}%`; // Position incorrect bar after correct bar
+            } else {
+                correctBarEl.style.width = '0%';
+                incorrectBarEl.style.width = '0%';
+                incorrectBarEl.style.left = '0%';
             }
-            
-            correctBarEl.style.width = `${correctPercentage}%`;
-            incorrectBarEl.style.width = `${incorrectPercentage}%`;
-            incorrectBarEl.style.left = `${correctPercentage}%`;
         }
 
-        // --- Event Listeners ---
-
-        // Attach event listeners to the quiz category buttons
+        // Event delegation for quiz selection buttons
         quizListContainer.addEventListener('click', (event) => {
-            if (event.target.classList.contains('quiz-btn')) {
-                const quizCategory = event.target.getAttribute('data-quiz');
+            const button = event.target.closest('.quiz-btn');
+            if (button) {
+                const quizCategory = button.dataset.quiz;
                 loadQuiz(quizCategory);
             }
-        });
-        
-        // Initial setup on page load
-        window.addEventListener('DOMContentLoaded', () => {
-            // No initial quiz loaded, just a welcome message
-            console.log("Welcome to the quiz app! Select a quiz to begin.");
         });
     </script>
 </body>
