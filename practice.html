@@ -3,25 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Quiz</title>
+    <title>Interactive Quizzes</title>
+    <!-- Inter font from Google Fonts for a modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Tailwind CSS CDN for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
         /* Custom scrollbar for the sidebar */
         .custom-scrollbar::-webkit-scrollbar {
             width: 8px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-            background: #2d3748;
+            background: #1f2937;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background-color: #4a5568;
+            background-color: #4b5563;
             border-radius: 4px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background-color: #718096;
+            background-color: #6b7280;
         }
-        /* Custom styles for details/summary */
+        /* Style for the collapsible summary elements */
         summary {
             cursor: pointer;
             list-style: none; /* Hide default arrow */
@@ -37,353 +44,185 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 font-sans antialiased flex h-screen overflow-hidden">
-    <!-- Main container for the app -->
-    <div class="flex flex-col md:flex-row w-full h-full">
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen flex flex-col md:flex-row overflow-hidden">
 
-        <!-- Left Navigation Sidebar -->
-        <aside class="bg-gray-800 text-white w-full md:w-64 p-6 flex flex-col space-y-4 shadow-xl overflow-y-auto custom-scrollbar">
-            <h1 class="text-3xl font-bold text-center border-b border-gray-700 pb-4 mb-4">Quiz App</h1>
-
-            <!-- Search input field -->
-            <div class="mt-4">
-                <input type="text" id="quiz-search" placeholder="Search quizzes..." class="w-full p-2 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-
-            <!-- Collapsible sections for quizzes -->
-            <div id="quiz-list-container" class="space-y-2 mt-4">
-                <details class="group cursor-pointer" data-section="Module 1">
-                    <summary class="text-xl font-semibold flex items-center p-2 rounded-lg hover:bg-gray-700 transition duration-200">
-                        Module 1
-                    </summary>
-                    <div class="pl-6 pt-2 space-y-1">
-                        <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-subsection="Unit 1">Unit 1</button>
-                        <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-subsection="Unit 2">Unit 2</button>
-                        <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-subsection="Unit 3">Unit 3</button>
-                        <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-subsection="Unit 4">Unit 4</button>
-                    </div>
-                </details>
-
-                <details class="group cursor-pointer" data-section="Mars Quiz">
-                    <summary class="text-xl font-semibold flex items-center p-2 rounded-lg hover:bg-gray-700 transition duration-200">
-                        Mars Quiz
-                    </summary>
-                    <div class="pl-6 pt-2 space-y-1">
-                        <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-subsection="Day">Day</button>
-                        <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-subsection="Night">Night</button>
-                    </div>
-                </details>
-            </div>
-        </aside>
-
-        <!-- Main Quiz Content Area -->
-        <main class="flex-1 p-8 overflow-y-auto">
-            <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-2xl mx-auto">
-                <!-- Quiz Header -->
-                <h2 id="quiz-title" class="text-4xl font-extrabold text-center text-gray-800 mb-6">Select a Quiz</h2>
-                
-                <!-- Progress counters and bar -->
-                <div class="mb-8 p-4 bg-gray-100 rounded-lg shadow-inner">
-                    <div class="flex justify-between items-center text-lg font-bold mb-2">
-                        <span id="correct-count" class="text-green-600">Correct: 0</span>
-                        <span id="incorrect-count" class="text-red-600">Incorrect: 0</span>
-                    </div>
-                    <div class="w-full bg-gray-300 rounded-full h-4 relative">
-                        <div id="correct-bar" class="absolute h-4 bg-green-500 rounded-full transition-all duration-300 ease-out" style="width: 0%;"></div>
-                        <div id="incorrect-bar" class="absolute h-4 bg-red-500 rounded-full transition-all duration-300 ease-out" style="width: 0%;"></div>
-                    </div>
+    <!-- Left Navigation Sidebar -->
+    <aside class="bg-gray-800 text-white w-full md:w-64 p-6 flex flex-col space-y-4 shadow-xl overflow-y-auto custom-scrollbar">
+        <h1 class="text-3xl font-bold text-center border-b border-gray-700 pb-4 mb-4">Quiz App 🧠</h1>
+        
+        <!-- Quiz list container using collapsible details -->
+        <div id="quiz-list-container" class="space-y-2 mt-4">
+            <details class="group cursor-pointer" open>
+                <summary class="text-xl font-semibold flex items-center p-2 rounded-lg hover:bg-gray-700 transition duration-200">
+                    Science Quizzes
+                </summary>
+                <div class="pl-6 pt-2 space-y-1">
+                    <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-quiz="Earth">Earth Quiz</button>
+                    <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-quiz="Mars">Mars Quiz</button>
+                    <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-quiz="Venus">Venus Quiz</button>
                 </div>
+            </details>
+            <details class="group cursor-pointer">
+                <summary class="text-xl font-semibold flex items-center p-2 rounded-lg hover:bg-gray-700 transition duration-200">
+                    Biology Quizzes
+                </summary>
+                <div class="pl-6 pt-2 space-y-1">
+                    <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-quiz="Animal">Animal Kingdom</button>
+                </div>
+            </details>
+        </div>
+    </aside>
 
-                <!-- Quiz Questions and Answers -->
-                <div id="quiz-content">
-                    <!-- Questions and answers will be injected here by JavaScript -->
-                    <p class="text-center text-gray-600">
-                        Click on a quiz from the left-hand navigation to get started!
-                    </p>
+    <!-- Main Quiz Content Area -->
+    <main class="flex-1 p-8 overflow-y-auto">
+        <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full max-w-3xl mx-auto">
+            <!-- Quiz Header -->
+            <h2 id="quiz-title" class="text-4xl font-extrabold text-center text-gray-800 dark:text-gray-200 mb-6">Select a Quiz</h2>
+            
+            <!-- Progress counters and bar -->
+            <div id="progress-container" class="mb-8 p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-inner hidden">
+                <div class="flex justify-between items-center text-lg font-bold mb-2">
+                    <span id="correct-count" class="text-green-600">Correct: 0</span>
+                    <span id="incorrect-count" class="text-red-600">Incorrect: 0</span>
+                </div>
+                <div class="w-full bg-gray-300 dark:bg-gray-600 rounded-full h-4 relative overflow-hidden">
+                    <div id="correct-bar" class="absolute h-full bg-green-500 rounded-full transition-all duration-300 ease-out" style="width: 0%;"></div>
+                    <div id="incorrect-bar" class="absolute h-full bg-red-500 rounded-full transition-all duration-300 ease-out" style="width: 0%;"></div>
                 </div>
             </div>
-        </main>
 
-    </div>
+            <!-- Quiz Questions and Answers -->
+            <div id="quiz-content">
+                <!-- Questions and answers will be injected here by JavaScript -->
+                <p class="text-center text-gray-600 dark:text-gray-400">
+                    Click on a quiz from the left-hand navigation to get started!
+                </p>
+            </div>
+        </div>
+    </main>
 
     <script>
         // DOM elements
         const quizTitleEl = document.getElementById('quiz-title');
         const quizContentEl = document.getElementById('quiz-content');
+        const progressContainer = document.getElementById('progress-container');
         const correctCountEl = document.getElementById('correct-count');
         const incorrectCountEl = document.getElementById('incorrect-count');
         const correctBarEl = document.getElementById('correct-bar');
         const incorrectBarEl = document.getElementById('incorrect-bar');
-        const searchInput = document.getElementById('quiz-search');
         const quizListContainer = document.getElementById('quiz-list-container');
-        let fullQuizData = {}; // This will store the full quiz data after fetching
 
-        // Quiz data is defined here as a JSON object, but we will fetch it as if it's an external file.
-        const quizDataJson = JSON.stringify({
-            "Module 1": {
-                "Unit 2": [
-  {
-    "question": "A credit arrangement which allows a customer to borrow against a pre-approved line of credit when purchasing goods and services is called:",
-    "answers": [
-      { "text": "A loan", "correct": false },
-      { "text": "Revolving debt", "correct": true },
-      { "text": "A credit card", "correct": false },
-      { "text": "None of these", "correct": false }
-    ]
-  },
-  {
-    "question": "A valid written lease must include:",
-    "answers": [
-      { "text": "agreement to let, agreement to take delivery, and acceptance.", "correct": false },
-      { "text": "term, consideration, and description of the premises.", "correct": false },
-      { "text": "a landlord and tenant with the legal capacity to enter a binding contract.", "correct": false },
-      { "text": "all of the above", "correct": true }
-    ]
-  },
-  {
-    "question": "How many acres are in the following described area: the W 1/2 of the N 1/2 of section 5?",
-    "answers": [
-      { "text": "110", "correct": false },
-      { "text": "120", "correct": false },
-      { "text": "140", "correct": false },
-      { "text": "160", "correct": true }
-    ]
-  },
-  {
-    "question": "In Texas, if a builder of residential homes sells more than _______________ properties a year, they are required to obtain a real estate license or employ a licensed broker.",
-    "answers": [
-      { "text": "4", "correct": true },
-      { "text": "3", "correct": false },
-      { "text": "2", "correct": false },
-      { "text": "1", "correct": false }
-    ]
-  },
-  {
-    "question": "Real property includes all of the following except:",
-    "answers": [
-      { "text": "airspace.", "correct": false },
-      { "text": "oil.", "correct": true },
-      { "text": "minerals.", "correct": false },
-      { "text": "water rights.", "correct": false }
-    ]
-  },
-  {
-    "question": "Brad sold his house to Jerry, who did not record the deed, but moved in. Brad then sold the same property to George, who reviewed the county recorder's records, but did not look at the property. Brad gave George a deed, which was recorded. Which of the following would be true concerning title to the property?",
-    "answers": [
-      { "text": "Jerry and George are co-owners of the property", "correct": false },
-      { "text": "George now owns the property because he recorded his deed and Jerry did not", "correct": false },
-      { "text": "George has recourse against Jerry for failure to record", "correct": false },
-      { "text": "Jerry maintains title", "correct": true }
-    ]
-  },
-  {
-    "question": "Which of the following is correct concerning an ALTA extended coverage policy of title insurance?",
-    "answers": [
-      { "text": "It protects a lessee who occupies the property after the date shown on the title insurance policy", "correct": false },
-      { "text": "It is limited to stated conditions of title as of the date of the issuance of the title policy", "correct": true },
-      { "text": "It protects against any encroachment that occurs after the date of issuance of the title policy", "correct": false },
-      { "text": "It protects against any easements created during the term of the title insurance policy", "correct": false }
-    ]
-  },
-  {
-    "question": "The final step in the Statutory Dedication process is:",
-    "answers": [
-      { "text": "The acceptance by the proper official", "correct": false },
-      { "text": "The recording of the subdivision map", "correct": true },
-      { "text": "The signature of the Real Estate Commissioner", "correct": false },
-      { "text": "None of these", "correct": false }
-    ]
-  },
-  {
-    "question": "Consideration can be:",
-    "answers": [
-      { "text": "money.", "correct": false },
-      { "text": "services.", "correct": false },
-      { "text": "covenants.", "correct": false },
-      { "text": "all of the above", "correct": true }
-    ]
-  },
-  {
-    "question": "There are many agreements that could be placed in promissory notes that would prohibit the borrower from doing certain things. An agreement that would prohibit the borrower from paying off the loan before the maturity date is called a:",
-    "answers": [
-      { "text": "prevention clause.", "correct": false },
-      { "text": "lock-in clause.", "correct": true },
-      { "text": "defeasance clause.", "correct": false },
-      { "text": "release clause.", "correct": false }
-    ]
-  }
-],
-                "Unit 1": [
-  {
-    "question": "Which of these is considered to be an encumbrance?",
-    "answers": [
-      { "text": "A lease", "correct": false },
-      { "text": "A mortgage", "correct": false },
-      { "text": "All of these", "correct": true },
-      { "text": "An easement", "correct": false }
-    ]
-  },
-  {
-    "question": "Which of the following courses of action would the Federal Reserve Board take during an elongated period of \"tight money?\"",
-    "answers": [
-      { "text": "Any of the following", "correct": true },
-      { "text": "Purchasing large blocks of government bonds", "correct": false },
-      { "text": "Lower the reserve requirements of bank members", "correct": false },
-      { "text": "Decrease the discount rate for bank members", "correct": false }
-    ]
-  },
-  {
-    "question": "A broker acting as agent for a principal has as much authority as:",
-    "answers": [
-      { "text": "other parties believe the agent to possess.", "correct": false },
-      { "text": "the agent chooses to accept.", "correct": false },
-      { "text": "the principal actually or ostensibly confers upon him.", "correct": true },
-      { "text": "he chooses to accept as limited by the Statute of Limitations.", "correct": false }
-    ]
-  },
-  {
-    "question": "What does a general warranty deed contain?",
-    "answers": [
-      { "text": "None of these.", "correct": false },
-      { "text": "Covenants regarding quiet enjoyment", "correct": false },
-      { "text": "Covenants that warrant the new owner’s undisturbed and clear title", "correct": true },
-      { "text": "Covenants that include provisions of a quitclaim deed", "correct": false }
-    ]
-  },
-  {
-    "question": "In Texas, if Heather is an agent for a buyer Harry and she shows him a property that is known to have ghosts living there according to the neighbors, but she does not inform Harry of this information, after Harry purchases the property, Heather would:",
-    "answers": [
-      { "text": "Be considered to have misrepresented Harry", "correct": false },
-      { "text": "Be liable for misrepresentation", "correct": false },
-      { "text": "Be open to being sued by Harry if he finds out about the ghosts", "correct": false },
-      { "text": "Not be liable for the nondisclosure of ghosts", "correct": true }
-    ]
-  },
-  {
-    "question": "A couple is looking at houses and turns one down because they felt the price of the home was too high. This is based on what principle of real estate?",
-    "answers": [
-      { "text": "Conformity", "correct": false },
-      { "text": "Anticipation", "correct": false },
-      { "text": "Substitution", "correct": true },
-      { "text": "All of these", "correct": false }
-    ]
-  },
-  {
-    "question": "Constructive eviction may allow for a tenant to vacate the premises before the expiration of a lease term. Which would be an example of this?",
-    "answers": [
-      { "text": "Landlord has shown property to prospective tenant and is negotiating terms", "correct": false },
-      { "text": "Property cannot be used for original purpose due to unnecessary and considerable changes made by landlord", "correct": false },
-      { "text": "Landlord fails to make necessary repairs", "correct": false },
-      { "text": "All of the above", "correct": true }
-    ]
-  },
-  {
-    "question": "\"A\" receives a life estate for the life of \"X.\" \"A\" dies before \"X.\" The estate:",
-    "answers": [
-      { "text": "ceases to exist.", "correct": false },
-      { "text": "reverts to the original grantor.", "correct": false },
-      { "text": "vests in", "correct": false },
-      { "text": "vests in the heirs of", "correct": true }
-    ]
-  },
-  {
-    "question": "The original amortization term minus the number of payments that have been applied refers to the:",
-    "answers": [
-      { "text": "Remaining interest", "correct": false },
-      { "text": "Remaining term", "correct": true },
-      { "text": "Total amortization term", "correct": false },
-      { "text": "Loan amount", "correct": false }
-    ]
-  },
-  {
-    "question": "If Franklin, a real estate agent, intentionally speaks very highly and enthusiastically about a property he is trying to sell to a client in order to secure the deal, this type of behavior would be:",
-    "answers": [
-      { "text": "Puffing", "correct": true },
-      { "text": "Steering", "correct": false },
-      { "text": "Illegal", "correct": false },
-      { "text": "Misrepresentation", "correct": false }
-    ]
-  }
-],
-                "Unit 3": [
-                    {
-                        "question": "What is the longest river in South Unit 3?",
-                        "answers": [
-                            { "text": "Mississippi River", "correct": false },
-                            { "text": "Nile River", "correct": false },
-                            { "text": "Amazon River", "correct": true },
-                            { "text": "Missouri River", "correct": false }
-                        ]
-                    },
-                    {
-                        "question": "What is the largest country in North Unit 3 by area?",
-                        "answers": [
-                            { "text": "United States", "correct": false },
-                            { "text": "Canada", "correct": true },
-                            { "text": "Mexico", "correct": false },
-                            { "text": "Brazil", "correct": false }
-                        ]
-                    }
-                ],
-                "Unit 4": [
-                    {
-                        "question": "What is the capital of Unit 4?",
-                        "answers": [
-                            { "text": "Sydney", "correct": false },
-                            { "text": "Melbourne", "correct": false },
-                            { "text": "Canberra", "correct": true },
-                            { "text": "Perth", "correct": false }
-                        ]
-                    },
-                    {
-                        "question": "Which famous reef is located off the coast of Unit 4?",
-                        "answers": [
-                            { "text": "The Florida Reef", "correct": false },
-                            { "text": "The Great Barrier Reef", "correct": true },
-                            { "text": "The Belize Barrier Reef", "correct": false },
-                            { "text": "The Red Sea Coral Reef", "correct": false }
-                        ]
-                    }
-                ]
-            },
-            "Mars Quiz": {
-                "Day": [
-                    {
-                        "question": "Which planet is known as the Red Planet?",
-                        "answers": [
-                            { "text": "Earth", "correct": false },
-                            { "text": "Mars", "correct": true },
-                            { "text": "Jupiter", "correct": false },
-                            { "text": "Venus", "correct": false }
-                        ]
-                    },
-                    {
-                        "question": "What is the name of the largest volcano on Mars?",
-                        "answers": [
-                            { "text": "Mount Sharp", "correct": false },
-                            { "text": "Valles Marineris", "correct": false },
-                            { "text": "Olympus Mons", "correct": true },
-                            { "text": "Elysium Mons", "correct": false }
-                        ]
-                    }
-                ],
-                "Night": [
-                    {
-                        "question": "What are the temperatures like on Mars at night?",
-                        "answers": [
-                            { "text": "Similar to Earth's desert nights", "correct": false },
-                            { "text": "Extremely cold, dropping to -140°C", "correct": true },
-                            { "text": "Warm due to residual heat", "correct": false },
-                            { "text": "Varies depending on the season, but never freezing", "correct": false }
-                        ]
-                    }
-                ]
-            }
-        });
-
-        // Create a Blob from the JSON string and a URL to fetch it
-        const quizDataBlob = new Blob([quizDataJson], { type: 'application/json' });
-        const quizDataUrl = URL.createObjectURL(quizDataBlob);
+        // Quiz data as a JSON object
+        const quizData = {
+            "Earth": [
+                {
+                    "question": "What is the capital city of Australia?",
+                    "answers": [
+                        { "text": "Sydney", "correct": false },
+                        { "text": "Melbourne", "correct": false },
+                        { "text": "Canberra", "correct": true },
+                        { "text": "Perth", "correct": false }
+                    ],
+                    "explanation": "Canberra is the capital of Australia, a planned city established for this purpose."
+                },
+                {
+                    "question": "Which ocean is the largest on Earth?",
+                    "answers": [
+                        { "text": "Atlantic Ocean", "correct": false },
+                        { "text": "Indian Ocean", "correct": false },
+                        { "text": "Southern Ocean", "correct": false },
+                        { "text": "Pacific Ocean", "correct": true }
+                    ],
+                    "explanation": "The Pacific Ocean is the largest and deepest of Earth's five oceans."
+                },
+                {
+                    "question": "What is the highest mountain in Africa?",
+                    "answers": [
+                        { "text": "Mount Everest", "correct": false },
+                        { "text": "Mount Kilimanjaro", "correct": true },
+                        { "text": "Mount Elbrus", "correct": false },
+                        { "text": "Pico Cristóbal Colón", "correct": false }
+                    ],
+                    "explanation": "Mount Kilimanjaro, a dormant volcano in Tanzania, is the highest peak in Africa."
+                }
+            ],
+            "Animal": [
+                {
+                    "question": "What is the fastest land animal?",
+                    "answers": [
+                        { "text": "Lion", "correct": false },
+                        { "text": "Cheetah", "correct": true },
+                        { "text": "Gazelle", "correct": false },
+                        { "text": "Ostrich", "correct": false }
+                    ],
+                    "explanation": "The cheetah can reach speeds of up to 70 miles per hour (112 km/h) in short bursts."
+                },
+                {
+                    "question": "Which animal is known as the 'King of the Jungle'?",
+                    "answers": [
+                        { "text": "Tiger", "correct": false },
+                        { "text": "Lion", "correct": true },
+                        { "text": "Gorilla", "correct": false },
+                        { "text": "Elephant", "correct": false }
+                    ],
+                    "explanation": "Lions are widely known as the 'King of the Jungle,' although they primarily live in savannas and grasslands, not jungles."
+                },
+                {
+                    "question": "What is the only mammal that can truly fly?",
+                    "answers": [
+                        { "text": "Flying squirrel", "correct": false },
+                        { "text": "Bat", "correct": true },
+                        { "text": "Sugar glider", "correct": false },
+                        { "text": "Flying lemur", "correct": false }
+                    ],
+                    "explanation": "While other animals can glide, bats are the only mammals capable of sustained flight."
+                }
+            ],
+            "Mars": [
+                {
+                    "question": "Which planet is known as the Red Planet?",
+                    "answers": [
+                        { "text": "Earth", "correct": false },
+                        { "text": "Mars", "correct": true },
+                        { "text": "Jupiter", "correct": false },
+                        { "text": "Venus", "correct": false }
+                    ],
+                    "explanation": "Mars is known as the Red Planet due to its reddish-orange appearance caused by iron oxide (rust) on its surface."
+                },
+                {
+                    "question": "What is the name of the largest volcano on Mars?",
+                    "answers": [
+                        { "text": "Mount Sharp", "correct": false },
+                        { "text": "Valles Marineris", "correct": false },
+                        { "text": "Olympus Mons", "correct": true },
+                        { "text": "Elysium Mons", "correct": false }
+                    ],
+                    "explanation": "Olympus Mons is a massive shield volcano on Mars, and it is the largest volcano and highest known mountain on any planet in the Solar System."
+                }
+            ],
+            "Venus": [
+                {
+                    "question": "Which planet is the hottest in our solar system?",
+                    "answers": [
+                        { "text": "Mercury", "correct": false },
+                        { "text": "Venus", "correct": true },
+                        { "text": "Earth", "correct": false },
+                        { "text": "Jupiter", "correct": false }
+                    ],
+                    "explanation": "Despite being farther from the Sun than Mercury, Venus has a thick atmosphere that traps heat, making it the hottest planet."
+                },
+                {
+                    "question": "What is the approximate length of a day on Venus?",
+                    "answers": [
+                        { "text": "24 hours", "correct": false },
+                        { "text": "10 Earth days", "correct": false },
+                        { "text": "243 Earth days", "correct": true },
+                        { "text": "1 year", "correct": false }
+                    ],
+                    "explanation": "A single day on Venus is incredibly long, taking about 243 Earth days to complete one rotation. This is longer than its year!"
+                }
+            ]
+        };
 
         // State variables
         let currentQuizQuestions = [];
@@ -392,40 +231,34 @@
         let incorrectCount = 0;
         let totalQuestions = 0;
 
-        // Function to load and display a new quiz
-        async function loadQuiz(section, subsection) {
-            // Display a loading message while fetching data
-            quizContentEl.innerHTML = '<p class="text-center text-xl text-gray-500 animate-pulse">Loading quiz...</p>';
-            
-            try {
-                // Check if fullQuizData has already been loaded, otherwise fetch it
-                if (Object.keys(fullQuizData).length === 0) {
-                    const response = await fetch(quizDataUrl);
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    fullQuizData = await response.json();
-                }
-
-                // Update the state with the new quiz questions
-                currentQuizQuestions = fullQuizData[section][subsection];
-                totalQuestions = currentQuizQuestions.length;
-                currentQuestionIndex = 0;
-                correctCount = 0;
-                incorrectCount = 0;
-
-                // Update the UI
-                quizTitleEl.textContent = `${section} - ${subsection}`;
-                updateProgress();
-                showQuestion();
-
-            } catch (error) {
-                console.error("Could not fetch quiz data:", error);
-                quizContentEl.innerHTML = `<p class="text-center text-red-500">Error loading quiz: ${error.message}</p>`;
+        /**
+         * Loads a new quiz based on the selected category.
+         * @param {string} category The name of the quiz to load (e.g., "Earth").
+         */
+        function loadQuiz(category) {
+            // Check if the quiz exists in our data
+            if (!quizData[category]) {
+                quizContentEl.innerHTML = `<p class="text-center text-red-500">Error: Quiz category "${category}" not found.</p>`;
+                return;
             }
+
+            // Update the quiz state
+            currentQuizQuestions = quizData[category];
+            totalQuestions = currentQuizQuestions.length;
+            currentQuestionIndex = 0;
+            correctCount = 0;
+            incorrectCount = 0;
+
+            // Update the UI
+            quizTitleEl.textContent = `${category} Quiz`;
+            progressContainer.classList.remove('hidden');
+            updateProgress();
+            showQuestion();
         }
 
-        // Function to display the current question
+        /**
+         * Displays the current question and its answers.
+         */
         function showQuestion() {
             if (currentQuestionIndex < totalQuestions) {
                 const question = currentQuizQuestions[currentQuestionIndex];
@@ -435,76 +268,119 @@
 
                 // Create and append the question element
                 const questionDiv = document.createElement('div');
-                questionDiv.classList.add('text-2xl', 'font-bold', 'mb-6', 'text-gray-900', 'text-center');
+                questionDiv.classList.add('text-2xl', 'font-bold', 'mb-6', 'text-gray-900', 'dark:text-gray-200', 'text-center');
                 questionDiv.textContent = `Question ${currentQuestionIndex + 1} of ${totalQuestions}: ${question.question}`;
                 quizContentEl.appendChild(questionDiv);
 
                 // Create and append the answers container
                 const answersDiv = document.createElement('div');
                 answersDiv.classList.add('space-y-4');
-                question.answers.forEach(answer => {
+                question.answers.forEach((answer) => {
                     const answerBtn = document.createElement('button');
-                    answerBtn.classList.add('w-full', 'p-4', 'bg-gray-200', 'rounded-lg', 'text-gray-800', 'font-medium', 'hover:bg-gray-300', 'transition-colors', 'duration-200');
+                    answerBtn.classList.add('answer-btn', 'w-full', 'p-4', 'bg-gray-200', 'dark:bg-gray-700', 'rounded-lg', 'text-gray-800', 'dark:text-gray-200', 'font-medium', 'text-left', 'hover:bg-gray-300', 'dark:hover:bg-gray-600', 'transition-colors', 'duration-200');
                     answerBtn.textContent = answer.text;
                     answerBtn.addEventListener('click', () => handleAnswer(answerBtn, answer.correct));
                     answersDiv.appendChild(answerBtn);
                 });
                 quizContentEl.appendChild(answersDiv);
+
+                // Add feedback and next button containers
+                const feedbackContainer = document.createElement('div');
+                feedbackContainer.id = 'feedback-container';
+                feedbackContainer.classList.add('mt-4', 'p-4', 'rounded-lg', 'text-white', 'font-semibold', 'whitespace-pre-wrap');
+                feedbackContainer.style.display = 'none';
+                quizContentEl.appendChild(feedbackContainer);
+
+                const nextButton = document.createElement('button');
+                nextButton.id = 'next-question-btn';
+                nextButton.classList.add('mt-6', 'w-full', 'py-3', 'px-6', 'bg-blue-600', 'text-white', 'font-bold', 'rounded-lg', 'hover:bg-blue-700', 'transition', 'duration-200', 'ease-in-out');
+                nextButton.textContent = 'Next Question';
+                nextButton.style.display = 'none';
+                nextButton.addEventListener('click', () => {
+                    currentQuestionIndex++;
+                    showQuestion();
+                });
+                quizContentEl.appendChild(nextButton);
+
             } else {
                 // End of the quiz
                 quizContentEl.innerHTML = `
-                    <div class="text-center p-8 bg-green-100 rounded-xl">
-                        <h3 class="text-3xl font-bold text-green-700 mb-4">Quiz Complete!</h3>
-                        <p class="text-xl text-gray-700">You got ${correctCount} out of ${totalQuestions} questions correct.</p>
+                    <div class="text-center p-8 bg-green-100 dark:bg-green-800 rounded-xl">
+                        <h3 class="text-3xl font-bold text-green-700 dark:text-green-200 mb-4">Quiz Complete! 🎉</h3>
+                        <p class="text-xl text-gray-700 dark:text-gray-300">You got ${correctCount} out of ${totalQuestions} questions correct.</p>
                         <button onclick="window.location.reload()" class="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition duration-200">Restart</button>
                     </div>
                 `;
             }
         }
 
-        // Function to handle an answer click
+        /**
+         * Handles the user's answer selection and provides feedback.
+         * @param {HTMLElement} selectedButton The button element the user clicked.
+         * @param {boolean} isCorrect Whether the selected answer is correct.
+         */
         function handleAnswer(selectedButton, isCorrect) {
+            const questionData = currentQuizQuestions[currentQuestionIndex];
+            const feedbackContainer = document.getElementById('feedback-container');
+            const nextButton = document.getElementById('next-question-btn');
+            const answerButtons = quizContentEl.querySelectorAll('.answer-btn');
+
             // Disable all answer buttons to prevent multiple selections
-            Array.from(quizContentEl.querySelectorAll('button')).forEach(btn => {
+            answerButtons.forEach(btn => {
                 btn.disabled = true;
                 btn.classList.add('cursor-not-allowed');
+                btn.classList.remove('hover:bg-gray-300', 'dark:hover:bg-gray-600');
             });
             
             // Check if the answer is correct
             if (isCorrect) {
                 correctCount++;
-                selectedButton.classList.add('bg-green-500', 'text-white', 'hover:bg-green-500');
+                selectedButton.classList.remove('bg-gray-200', 'dark:bg-gray-700');
+                selectedButton.classList.add('bg-green-500', 'text-white');
+                feedbackContainer.classList.add('bg-green-500');
+                feedbackContainer.textContent = 'Correct! ✅';
             } else {
                 incorrectCount++;
-                selectedButton.classList.add('bg-red-500', 'text-white', 'hover:bg-red-500');
+                selectedButton.classList.remove('bg-gray-200', 'dark:bg-gray-700');
+                selectedButton.classList.add('bg-red-500', 'text-white');
+                feedbackContainer.classList.add('bg-red-500');
                 
-                // Highlight the correct answer
-                const correctButton = Array.from(quizContentEl.querySelectorAll('button')).find(btn => {
-                    const answerText = btn.textContent;
-                    const question = currentQuizQuestions[currentQuestionIndex];
-                    return question.answers.find(a => a.text === answerText && a.correct);
-                });
-                if (correctButton) {
-                    correctButton.classList.add('bg-green-500', 'text-white');
+                // Find the correct answer text to display
+                const correctAnswer = questionData.answers.find(answer => answer.correct);
+                const correctAnswerText = correctAnswer ? correctAnswer.text : 'N/A';
+
+                let feedbackText = `Incorrect! ❌ The correct answer was: "${correctAnswerText}".`;
+                if (questionData.explanation) {
+                    feedbackText += `\n\nExplanation: ${questionData.explanation}`;
                 }
+                feedbackContainer.textContent = feedbackText;
+
+                // Highlight the correct answer button
+                answerButtons.forEach(btn => {
+                    const btnText = btn.textContent;
+                    if (correctAnswer && btnText === correctAnswer.text) {
+                        btn.classList.remove('bg-gray-200', 'dark:bg-gray-700');
+                        btn.classList.add('bg-green-500', 'text-white');
+                    }
+                });
             }
             
             // Update the UI progress
             updateProgress();
             
-            // Move to the next question after a delay
-            setTimeout(() => {
-                currentQuestionIndex++;
-                showQuestion();
-            }, 1500); // 1.5 seconds delay
+            // Show feedback and next button
+            feedbackContainer.style.display = 'block';
+            nextButton.style.display = 'block';
         }
 
-        // Function to update the progress counters and bar
+        /**
+         * Updates the progress counters and the progress bar.
+         */
         function updateProgress() {
             correctCountEl.textContent = `Correct: ${correctCount}`;
             incorrectCountEl.textContent = `Incorrect: ${incorrectCount}`;
 
-            const total = correctCount + incorrectCount;
+            const totalAnswered = correctCount + incorrectCount;
             let correctPercentage = 0;
             let incorrectPercentage = 0;
 
@@ -518,114 +394,20 @@
             incorrectBarEl.style.left = `${correctPercentage}%`;
         }
 
-        // Function to filter the quiz buttons based on search term
-        function filterQuizzes(searchTerm) {
-            const quizDetails = document.querySelectorAll('#quiz-list-container details');
-            const term = searchTerm.toLowerCase();
+        // --- Event Listeners ---
 
-            quizDetails.forEach(detail => {
-                const sectionName = detail.querySelector('summary').textContent.trim().toLowerCase();
-                const quizButtons = detail.querySelectorAll('.quiz-btn');
-                let hasMatchInSection = false;
-
-                // Check for match in section title
-                if (sectionName.includes(term)) {
-                    hasMatchInSection = true;
-                }
-
-                // Iterate over quiz buttons to find a match in the questions or answers
-                quizButtons.forEach(button => {
-                    const subsectionName = button.textContent.trim().toLowerCase();
-                    const sectionData = fullQuizData[detail.getAttribute('data-section')];
-                    const subsectionData = sectionData ? sectionData[button.getAttribute('data-subsection')] : null;
-
-                    let buttonMatches = false;
-                    // Check if the button's text itself matches the search term
-                    if (subsectionName.includes(term)) {
-                        buttonMatches = true;
-                    }
-
-                    // If a subsection exists, check its questions and answers
-                    if (subsectionData) {
-                        for (const q of subsectionData) {
-                            if (q.question.toLowerCase().includes(term)) {
-                                buttonMatches = true;
-                                break;
-                            }
-                            for (const a of q.answers) {
-                                if (a.text.toLowerCase().includes(term)) {
-                                    buttonMatches = true;
-                                    break;
-                                }
-                            }
-                            if (buttonMatches) break;
-                        }
-                    }
-
-                    if (buttonMatches) {
-                        button.style.display = 'block'; // Show the button
-                        hasMatchInSection = true; // The parent section should also be shown
-                    } else {
-                        button.style.display = 'none'; // Hide the button
-                    }
-                });
-
-                // Show/hide the parent details based on if any child buttons matched or if the section title matched
-                if (hasMatchInSection) {
-                    detail.style.display = 'block';
-                    // Open the details element if there's a match, but only if a search term is present
-                    if (searchTerm) {
-                        detail.open = true;
-                    } else {
-                        detail.open = false; // Collapse when search is cleared
-                    }
-                } else {
-                    detail.style.display = 'none';
-                }
-            });
-        }
-
-
-        // Event listeners for the navigation buttons
-        document.querySelectorAll('.quiz-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const section = button.closest('details').getAttribute('data-section');
-                const subsection = button.getAttribute('data-subsection');
-                loadQuiz(section, subsection);
-
-                // Optional: Close all details tags on button click
-                document.querySelectorAll('details').forEach(detail => {
-                    if (detail.open) {
-                        detail.open = false;
-                    }
-                });
-            });
-        });
-        
-        // Event listener for the search input
-        searchInput.addEventListener('input', (e) => {
-            filterQuizzes(e.target.value);
-        });
-
-        // Initialize the app by fetching data and setting up event listeners.
-        window.addEventListener('DOMContentLoaded', async () => {
-            try {
-                // Fetch the quiz data on initial load
-                const response = await fetch(quizDataUrl);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                fullQuizData = await response.json();
-                console.log("Quiz data loaded successfully.");
-            } catch (error) {
-                console.error("Could not fetch quiz data on initial load:", error);
-                quizContentEl.innerHTML = `<p class="text-center text-red-500">Error loading quizzes: ${error.message}</p>`;
+        // Attach event listeners to the quiz category buttons
+        quizListContainer.addEventListener('click', (event) => {
+            if (event.target.classList.contains('quiz-btn')) {
+                const quizCategory = event.target.getAttribute('data-quiz');
+                loadQuiz(quizCategory);
             }
         });
-
-        // Clean up the Blob URL when the window is unloaded
-        window.addEventListener('unload', () => {
-            URL.revokeObjectURL(quizDataUrl);
+        
+        // Initial setup on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            // No initial quiz loaded, just a welcome message
+            console.log("Welcome to the quiz app! Select a quiz to begin.");
         });
     </script>
 </body>
