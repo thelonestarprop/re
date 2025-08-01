@@ -585,6 +585,79 @@
             ]
         };
 
+
+// Insert this JavaScript code inside your <script> tags, preferably at the beginning
+// after the quizData definition, but before other event listeners.
+
+const searchInput = document.getElementById('search-input');
+const quizListContainer = document.getElementById('quiz-list-container');
+const allQuizButtons = quizListContainer.querySelectorAll('.quiz-btn'); // Get all quiz buttons initially
+
+function filterQuizzes() {
+    const searchTerm = searchInput.value.toLowerCase();
+
+    allQuizButtons.forEach(button => {
+        const quizName = button.textContent.toLowerCase();
+        let foundInQuizData = false;
+
+        // Check if the quiz name contains the search term
+        if (quizName.includes(searchTerm)) {
+            foundInQuizData = true;
+        } else {
+            // If not found in quiz name, check questions and answers within that quiz unit
+            const quizKey = button.dataset.quiz;
+            if (quizData[quizKey]) {
+                for (const questionObj of quizData[quizKey]) {
+                    if (questionObj.question.toLowerCase().includes(searchTerm)) {
+                        foundInQuizData = true;
+                        break;
+                    }
+                    for (const answer of questionObj.answers) {
+                        if (answer.text.toLowerCase().includes(searchTerm)) {
+                            foundInQuizData = true;
+                            break;
+                        }
+                    }
+                    if (foundInQuizData) break;
+                }
+            }
+        }
+
+        if (foundInQuizData) {
+            button.style.display = 'block'; // Show the button
+            // Optionally, open the parent details tag if a child button is found
+            const parentDetails = button.closest('details');
+            if (parentDetails) {
+                parentDetails.open = true;
+            }
+        } else {
+            button.style.display = 'none'; // Hide the button
+        }
+    });
+
+    // After filtering buttons, check if any buttons are visible in each details group.
+    // If not, collapse the details group.
+    quizListContainer.querySelectorAll('details').forEach(detailsElement => {
+        const visibleButtonsInGroup = detailsElement.querySelectorAll('.quiz-btn[style*="display: block"]');
+        if (visibleButtonsInGroup.length === 0 && searchTerm !== '') {
+            detailsElement.open = false;
+        } else if (searchTerm === '') {
+            // When search term is empty, ensure all details are open as per initial state
+            detailsElement.open = true;
+        }
+    });
+}
+
+// Add event listener to the search input
+searchInput.addEventListener('input', filterQuizzes);
+
+// Initial filter on page load (in case there's a pre-filled search term or for consistency)
+filterQuizzes();
+
+
+
+        
+        
         // DOM elements
         const quizTitleEl = document.getElementById('quiz-title');
         const quizContentEl = document.getElementById('quiz-content');
