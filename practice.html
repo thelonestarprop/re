@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Quiz</title>
+    <!-- Tailwind CSS CDN for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Custom scrollbar for the sidebar */
@@ -37,15 +38,19 @@
     </style>
 </head>
 <body class="bg-gray-100 font-sans antialiased flex h-screen overflow-hidden">
+    <!-- Main container for the app -->
     <div class="flex flex-col md:flex-row w-full h-full">
 
+        <!-- Left Navigation Sidebar -->
         <aside class="bg-gray-800 text-white w-full md:w-64 p-6 flex flex-col space-y-4 shadow-xl overflow-y-auto custom-scrollbar">
             <h1 class="text-3xl font-bold text-center border-b border-gray-700 pb-4 mb-4">Quiz App</h1>
 
+            <!-- Search input field -->
             <div class="mt-4">
                 <input type="text" id="quiz-search" placeholder="Search quizzes..." class="w-full p-2 rounded-lg bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
             </div>
 
+            <!-- Collapsible sections for quizzes -->
             <div id="quiz-list-container" class="space-y-2 mt-4">
                 <details class="group cursor-pointer" data-section="Module 1">
                     <summary class="text-xl font-semibold flex items-center p-2 rounded-lg hover:bg-gray-700 transition duration-200">
@@ -71,10 +76,13 @@
             </div>
         </aside>
 
+        <!-- Main Quiz Content Area -->
         <main class="flex-1 p-8 overflow-y-auto">
             <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-2xl mx-auto">
+                <!-- Quiz Header -->
                 <h2 id="quiz-title" class="text-4xl font-extrabold text-center text-gray-800 mb-6">Select a Quiz</h2>
                 
+                <!-- Progress counters and bar -->
                 <div class="mb-8 p-4 bg-gray-100 rounded-lg shadow-inner">
                     <div class="flex justify-between items-center text-lg font-bold mb-2">
                         <span id="correct-count" class="text-green-600">Correct: 0</span>
@@ -86,7 +94,9 @@
                     </div>
                 </div>
 
+                <!-- Quiz Questions and Answers -->
                 <div id="quiz-content">
+                    <!-- Questions and answers will be injected here by JavaScript -->
                     <p class="text-center text-gray-600">
                         Click on a quiz from the left-hand navigation to get started!
                     </p>
@@ -109,297 +119,267 @@
         let fullQuizData = {}; // This will store the full quiz data after fetching
 
         // Quiz data is defined here as a JSON object, but we will fetch it as if it's an external file.
-        // THIS IS THE CRITICAL SECTION - ENSURE THIS IS EXACTLY AS PROVIDED
-        const quizDataJson = `
-{
-    "Module 1": {
-        "Unit 2": [
-            {
-                "question": "A credit arrangement which allows a customer to borrow against a pre-approved line of credit when purchasing goods and services is called:",
-                "answers": [
-                    { "text": "A loan", "correct": false },
-                    { "text": "Revolving debt", "correct": true },
-                    { "text": "A credit card", "correct": false },
-                    { "text": "None of these", "correct": false }
+        const quizDataJson = JSON.stringify({
+            "Module 1": {
+                "Unit 2": [
+  {
+    "question": "A credit arrangement which allows a customer to borrow against a pre-approved line of credit when purchasing goods and services is called:",
+    "answers": [
+      { "text": "A loan", "correct": false },
+      { "text": "Revolving debt", "correct": true },
+      { "text": "A credit card", "correct": false },
+      { "text": "None of these", "correct": false }
+    ]
+  },
+  {
+    "question": "A valid written lease must include:",
+    "answers": [
+      { "text": "agreement to let, agreement to take delivery, and acceptance.", "correct": false },
+      { "text": "term, consideration, and description of the premises.", "correct": false },
+      { "text": "a landlord and tenant with the legal capacity to enter a binding contract.", "correct": false },
+      { "text": "all of the above", "correct": true }
+    ]
+  },
+  {
+    "question": "How many acres are in the following described area: the W 1/2 of the N 1/2 of section 5?",
+    "answers": [
+      { "text": "110", "correct": false },
+      { "text": "120", "correct": false },
+      { "text": "140", "correct": false },
+      { "text": "160", "correct": true }
+    ]
+  },
+  {
+    "question": "In Texas, if a builder of residential homes sells more than _______________ properties a year, they are required to obtain a real estate license or employ a licensed broker.",
+    "answers": [
+      { "text": "4", "correct": true },
+      { "text": "3", "correct": false },
+      { "text": "2", "correct": false },
+      { "text": "1", "correct": false }
+    ]
+  },
+  {
+    "question": "Real property includes all of the following except:",
+    "answers": [
+      { "text": "airspace.", "correct": false },
+      { "text": "oil.", "correct": true },
+      { "text": "minerals.", "correct": false },
+      { "text": "water rights.", "correct": false }
+    ]
+  },
+  {
+    "question": "Brad sold his house to Jerry, who did not record the deed, but moved in. Brad then sold the same property to George, who reviewed the county recorder's records, but did not look at the property. Brad gave George a deed, which was recorded. Which of the following would be true concerning title to the property?",
+    "answers": [
+      { "text": "Jerry and George are co-owners of the property", "correct": false },
+      { "text": "George now owns the property because he recorded his deed and Jerry did not", "correct": false },
+      { "text": "George has recourse against Jerry for failure to record", "correct": false },
+      { "text": "Jerry maintains title", "correct": true }
+    ]
+  },
+  {
+    "question": "Which of the following is correct concerning an ALTA extended coverage policy of title insurance?",
+    "answers": [
+      { "text": "It protects a lessee who occupies the property after the date shown on the title insurance policy", "correct": false },
+      { "text": "It is limited to stated conditions of title as of the date of the issuance of the title policy", "correct": true },
+      { "text": "It protects against any encroachment that occurs after the date of issuance of the title policy", "correct": false },
+      { "text": "It protects against any easements created during the term of the title insurance policy", "correct": false }
+    ]
+  },
+  {
+    "question": "The final step in the Statutory Dedication process is:",
+    "answers": [
+      { "text": "The acceptance by the proper official", "correct": false },
+      { "text": "The recording of the subdivision map", "correct": true },
+      { "text": "The signature of the Real Estate Commissioner", "correct": false },
+      { "text": "None of these", "correct": false }
+    ]
+  },
+  {
+    "question": "Consideration can be:",
+    "answers": [
+      { "text": "money.", "correct": false },
+      { "text": "services.", "correct": false },
+      { "text": "covenants.", "correct": false },
+      { "text": "all of the above", "correct": true }
+    ]
+  },
+  {
+    "question": "There are many agreements that could be placed in promissory notes that would prohibit the borrower from doing certain things. An agreement that would prohibit the borrower from paying off the loan before the maturity date is called a:",
+    "answers": [
+      { "text": "prevention clause.", "correct": false },
+      { "text": "lock-in clause.", "correct": true },
+      { "text": "defeasance clause.", "correct": false },
+      { "text": "release clause.", "correct": false }
+    ]
+  }
+],
+                "Unit 1": [
+  {
+    "question": "Which of these is considered to be an encumbrance?",
+    "answers": [
+      { "text": "A lease", "correct": false },
+      { "text": "A mortgage", "correct": false },
+      { "text": "All of these", "correct": true },
+      { "text": "An easement", "correct": false }
+    ]
+  },
+  {
+    "question": "Which of the following courses of action would the Federal Reserve Board take during an elongated period of \"tight money?\"",
+    "answers": [
+      { "text": "Any of the following", "correct": true },
+      { "text": "Purchasing large blocks of government bonds", "correct": false },
+      { "text": "Lower the reserve requirements of bank members", "correct": false },
+      { "text": "Decrease the discount rate for bank members", "correct": false }
+    ]
+  },
+  {
+    "question": "A broker acting as agent for a principal has as much authority as:",
+    "answers": [
+      { "text": "other parties believe the agent to possess.", "correct": false },
+      { "text": "the agent chooses to accept.", "correct": false },
+      { "text": "the principal actually or ostensibly confers upon him.", "correct": true },
+      { "text": "he chooses to accept as limited by the Statute of Limitations.", "correct": false }
+    ]
+  },
+  {
+    "question": "What does a general warranty deed contain?",
+    "answers": [
+      { "text": "None of these.", "correct": false },
+      { "text": "Covenants regarding quiet enjoyment", "correct": false },
+      { "text": "Covenants that warrant the new owner’s undisturbed and clear title", "correct": true },
+      { "text": "Covenants that include provisions of a quitclaim deed", "correct": false }
+    ]
+  },
+  {
+    "question": "In Texas, if Heather is an agent for a buyer Harry and she shows him a property that is known to have ghosts living there according to the neighbors, but she does not inform Harry of this information, after Harry purchases the property, Heather would:",
+    "answers": [
+      { "text": "Be considered to have misrepresented Harry", "correct": false },
+      { "text": "Be liable for misrepresentation", "correct": false },
+      { "text": "Be open to being sued by Harry if he finds out about the ghosts", "correct": false },
+      { "text": "Not be liable for the nondisclosure of ghosts", "correct": true }
+    ]
+  },
+  {
+    "question": "A couple is looking at houses and turns one down because they felt the price of the home was too high. This is based on what principle of real estate?",
+    "answers": [
+      { "text": "Conformity", "correct": false },
+      { "text": "Anticipation", "correct": false },
+      { "text": "Substitution", "correct": true },
+      { "text": "All of these", "correct": false }
+    ]
+  },
+  {
+    "question": "Constructive eviction may allow for a tenant to vacate the premises before the expiration of a lease term. Which would be an example of this?",
+    "answers": [
+      { "text": "Landlord has shown property to prospective tenant and is negotiating terms", "correct": false },
+      { "text": "Property cannot be used for original purpose due to unnecessary and considerable changes made by landlord", "correct": false },
+      { "text": "Landlord fails to make necessary repairs", "correct": false },
+      { "text": "All of the above", "correct": true }
+    ]
+  },
+  {
+    "question": "\"A\" receives a life estate for the life of \"X.\" \"A\" dies before \"X.\" The estate:",
+    "answers": [
+      { "text": "ceases to exist.", "correct": false },
+      { "text": "reverts to the original grantor.", "correct": false },
+      { "text": "vests in", "correct": false },
+      { "text": "vests in the heirs of", "correct": true }
+    ]
+  },
+  {
+    "question": "The original amortization term minus the number of payments that have been applied refers to the:",
+    "answers": [
+      { "text": "Remaining interest", "correct": false },
+      { "text": "Remaining term", "correct": true },
+      { "text": "Total amortization term", "correct": false },
+      { "text": "Loan amount", "correct": false }
+    ]
+  },
+  {
+    "question": "If Franklin, a real estate agent, intentionally speaks very highly and enthusiastically about a property he is trying to sell to a client in order to secure the deal, this type of behavior would be:",
+    "answers": [
+      { "text": "Puffing", "correct": true },
+      { "text": "Steering", "correct": false },
+      { "text": "Illegal", "correct": false },
+      { "text": "Misrepresentation", "correct": false }
+    ]
+  }
+],
+                "Unit 3": [
+                    {
+                        "question": "What is the longest river in South Unit 3?",
+                        "answers": [
+                            { "text": "Mississippi River", "correct": false },
+                            { "text": "Nile River", "correct": false },
+                            { "text": "Amazon River", "correct": true },
+                            { "text": "Missouri River", "correct": false }
+                        ]
+                    },
+                    {
+                        "question": "What is the largest country in North Unit 3 by area?",
+                        "answers": [
+                            { "text": "United States", "correct": false },
+                            { "text": "Canada", "correct": true },
+                            { "text": "Mexico", "correct": false },
+                            { "text": "Brazil", "correct": false }
+                        ]
+                    }
                 ],
-                "explanation": "Revolving debt, such as a credit card or line of credit, allows a customer to borrow repeatedly up to a certain limit, pay it back, and borrow again."
+                "Unit 4": [
+                    {
+                        "question": "What is the capital of Unit 4?",
+                        "answers": [
+                            { "text": "Sydney", "correct": false },
+                            { "text": "Melbourne", "correct": false },
+                            { "text": "Canberra", "correct": true },
+                            { "text": "Perth", "correct": false }
+                        ]
+                    },
+                    {
+                        "question": "Which famous reef is located off the coast of Unit 4?",
+                        "answers": [
+                            { "text": "The Florida Reef", "correct": false },
+                            { "text": "The Great Barrier Reef", "correct": true },
+                            { "text": "The Belize Barrier Reef", "correct": false },
+                            { "text": "The Red Sea Coral Reef", "correct": false }
+                        ]
+                    }
+                ]
             },
-            {
-                "question": "A valid written lease must include:",
-                "answers": [
-                    { "text": "agreement to let, agreement to take delivery, and acceptance.", "correct": false },
-                    { "text": "term, consideration, and description of the premises.", "correct": false },
-                    { "text": "a landlord and tenant with the legal capacity to enter a binding contract.", "correct": false },
-                    { "text": "all of the above", "correct": true }
+            "Mars Quiz": {
+                "Day": [
+                    {
+                        "question": "Which planet is known as the Red Planet?",
+                        "answers": [
+                            { "text": "Earth", "correct": false },
+                            { "text": "Mars", "correct": true },
+                            { "text": "Jupiter", "correct": false },
+                            { "text": "Venus", "correct": false }
+                        ]
+                    },
+                    {
+                        "question": "What is the name of the largest volcano on Mars?",
+                        "answers": [
+                            { "text": "Mount Sharp", "correct": false },
+                            { "text": "Valles Marineris", "correct": false },
+                            { "text": "Olympus Mons", "correct": true },
+                            { "text": "Elysium Mons", "correct": false }
+                        ]
+                    }
                 ],
-                "explanation": "For a valid written lease, all parties must have legal capacity, there must be an agreement to let and take delivery, a specified term, consideration (rent), and a clear description of the premises."
-            },
-            {
-                "question": "How many acres are in the following described area: the W 1/2 of the N 1/2 of section 5?",
-                "answers": [
-                    { "text": "110", "correct": false },
-                    { "text": "120", "correct": false },
-                    { "text": "140", "correct": false },
-                    { "text": "160", "correct": true }
-                ],
-                "explanation": "A standard section is 640 acres. The N 1/2 of a section is 320 acres. The W 1/2 of the N 1/2 is half of that, so 160 acres."
-            },
-            {
-                "question": "In Texas, if a builder of residential homes sells more than _______________ properties a year, they are required to obtain a real estate license or employ a licensed broker.",
-                "answers": [
-                    { "text": "4", "correct": true },
-                    { "text": "3", "correct": false },
-                    { "text": "2", "correct": false },
-                    { "text": "1", "correct": false }
-                ],
-                "explanation": "In Texas, a builder selling more than 4 residential properties in a year must be licensed or employ a licensed broker to handle the sales."
-            },
-            {
-                "question": "Real property includes all of the following except:",
-                "answers": [
-                    { "text": "airspace.", "correct": false },
-                    { "text": "oil.", "correct": true },
-                    { "text": "minerals.", "correct": false },
-                    { "text": "water rights.", "correct": false }
-                ],
-                "explanation": "While 'minerals' are often associated with real property, 'oil' specifically (before extraction) is typically considered personal property. Once extracted, it becomes personal property. Airspace and water rights are generally considered components of real property."
-            },
-            {
-                "question": "Brad sold his house to Jerry, who did not record the deed, but moved in. Brad then sold the same property to George, who reviewed the county recorder's records, but did not look at the property. Brad gave George a deed, which was recorded. Which of the following would be true concerning title to the property?",
-                "answers": [
-                    { "text": "Jerry and George are co-owners of the property", "correct": false },
-                    { "text": "George now owns the property because he recorded his deed and Jerry did not", "correct": false },
-                    { "text": "George has recourse against Jerry for failure to record", "correct": false },
-                    { "text": "Jerry maintains title", "correct": true }
-                ],
-                "explanation": "Jerry maintains title. In many jurisdictions, actual possession (Jerry moving in) provides constructive notice of his interest, even if the deed isn't recorded. George, by not inspecting the property, failed to take reasonable steps to discover prior interests."
-            },
-            {
-                "question": "Which of the following is correct concerning an ALTA extended coverage policy of title insurance?",
-                "answers": [
-                    { "text": "It protects a lessee who occupies the property after the date shown on the title insurance policy", "correct": false },
-                    { "text": "It is limited to stated conditions of title as of the date of the issuance of the title policy", "correct": true },
-                    { "text": "It protects against any encroachment that occurs after the date of issuance of the title policy", "correct": false },
-                    { "text": "It protects against any easements created during the term of the title insurance policy", "correct": false }
-                ],
-                "explanation": "An ALTA extended coverage policy provides broader protection than a standard policy but is still limited to conditions of title as of the date of its issuance. It doesn't cover issues arising after that date."
-            },
-            {
-                "question": "The final step in the Statutory Dedication process is:",
-                "answers": [
-                    { "text": "The acceptance by the proper official", "correct": false },
-                    { "text": "The recording of the subdivision map", "correct": true },
-                    { "text": "The signature of the Real Estate Commissioner", "correct": false },
-                    { "text": "None of these", "correct": false }
-                ],
-                "explanation": "The final step in a statutory dedication, which involves dedicating land for public use (like streets in a subdivision), is typically the recording of the subdivision map after all necessary approvals."
-            },
-            {
-                "question": "Consideration can be:",
-                "answers": [
-                    { "text": "money.", "correct": false },
-                    { "text": "services.", "correct": false },
-                    { "text": "covenants.", "correct": false },
-                    { "text": "all of the above", "correct": true }
-                ],
-                "explanation": "Consideration in a contract can be anything of value exchanged between parties, including money, services, or promises (covenants)."
-            },
-            {
-                "question": "There are many agreements that could be placed in promissory notes that would prohibit the borrower from doing certain things. An agreement that would prohibit the borrower from paying off the loan before the maturity date is called a:",
-                "answers": [
-                    { "text": "prevention clause.", "correct": false },
-                    { "text": "lock-in clause.", "correct": true },
-                    { "text": "defeasance clause.", "correct": false },
-                    { "text": "release clause.", "correct": false }
-                ],
-                "explanation": "A lock-in clause in a promissory note prevents a borrower from prepaying a loan before its maturity date. This is often used in loans where the lender wants to ensure a certain interest income over the loan's term."
+                "Night": [
+                    {
+                        "question": "What are the temperatures like on Mars at night?",
+                        "answers": [
+                            { "text": "Similar to Earth's desert nights", "correct": false },
+                            { "text": "Extremely cold, dropping to -140°C", "correct": true },
+                            { "text": "Warm due to residual heat", "correct": false },
+                            { "text": "Varies depending on the season, but never freezing", "correct": false }
+                        ]
+                    }
+                ]
             }
-        ],
-        "Unit 1": [
-            {
-                "question": "Which of these is considered to be an encumbrance?",
-                "answers": [
-                    { "text": "A lease", "correct": false },
-                    { "text": "A mortgage", "correct": false },
-                    { "text": "All of these", "correct": true },
-                    { "text": "An easement", "correct": false }
-                ],
-                "explanation": "A lease, mortgage, easement, or restriction is considered an encumbrance of a fee simple title, as they all represent a claim or liability against the property."
-            },
-            {
-                "question": "Which of the following courses of action would the Federal Reserve Board take during an elongated period of \"tight money?\"",
-                "answers": [
-                    { "text": "Any of the following", "correct": true },
-                    { "text": "Purchasing large blocks of government bonds", "correct": false },
-                    { "text": "Lower the reserve requirements of bank members", "correct": false },
-                    { "text": "Decrease the discount rate for bank members", "correct": false }
-                ],
-                "explanation": "During a period of 'tight money' (when credit is scarce and expensive), the Federal Reserve would typically use tools like purchasing government bonds, lowering reserve requirements, or decreasing the discount rate to inject money into the economy and ease credit."
-            },
-            {
-                "question": "A broker acting as agent for a principal has as much authority as:",
-                "answers": [
-                    { "text": "other parties believe the agent to possess.", "correct": false },
-                    { "text": "the agent chooses to accept.", "correct": false },
-                    { "text": "the principal actually or ostensibly confers upon him.", "correct": true },
-                    { "text": "he chooses to accept as limited by the Statute of Limitations.", "correct": false }
-                ],
-                "explanation": "An agent's authority is derived from the principal, whether expressly granted (actual authority) or implied through the principal's actions (ostensible authority)."
-            },
-            {
-                "question": "What does a general warranty deed contain?",
-                "answers": [
-                    { "text": "None of these.", "correct": false },
-                    { "text": "Covenants regarding quiet enjoyment", "correct": false },
-                    { "text": "Covenants that warrant the new owner’s undisturbed and clear title", "correct": true },
-                    { "text": "Covenants that include provisions of a quitclaim deed", "correct": false }
-                ],
-                "explanation": "A general warranty deed provides the most comprehensive protection to the buyer, including covenants that warrant the new owner's undisturbed and clear title against defects, even those from before the seller's ownership."
-            },
-            {
-                "question": "In Texas, if Heather is an agent for a buyer Harry and she shows him a property that is known to have ghosts living there according to the neighbors, but she does not inform Harry of this information, after Harry purchases the property, Heather would:",
-                "answers": [
-                    { "text": "Be considered to have misrepresented Harry", "correct": false },
-                    { "text": "Be liable for misrepresentation", "correct": false },
-                    { "text": "Be open to being sued by Harry if he finds out about the ghosts", "correct": false },
-                    { "text": "Not be liable for the nondisclosure of ghosts", "correct": true }
-                ],
-                "explanation": "In Texas, a real estate agent is generally not liable for failing to disclose 'psychologically impacted' properties, such as those believed to be haunted, unless it's a material defect affecting the property's physical condition."
-            },
-            {
-                "question": "A couple is looking at houses and turns one down because they felt the price of the home was too high. This is based on what principle of real estate?",
-                "answers": [
-                    { "text": "Conformity", "correct": false },
-                    { "text": "Anticipation", "correct": false },
-                    { "text": "Substitution", "correct": true },
-                    { "text": "All of these", "correct": false }
-                ],
-                "explanation": "The principle of substitution states that a buyer will pay no more for a property than the cost of acquiring an equally desirable substitute property."
-            },
-            {
-                "question": "Constructive eviction may allow for a tenant to vacate the premises before the expiration of a lease term. Which would be an example of this?",
-                "answers": [
-                    { "text": "Landlord has shown property to prospective tenant and is negotiating terms", "correct": false },
-                    { "text": "Property cannot be used for original purpose due to unnecessary and considerable changes made by landlord", "correct": false },
-                    { "text": "Landlord fails to make necessary repairs", "correct": false },
-                    { "text": "All of the above", "correct": true }
-                ],
-                "explanation": "Constructive eviction occurs when a landlord's actions (or inactions, like failing to make necessary repairs) render the property uninhabitable or unsuitable for its intended use, effectively forcing the tenant to leave."
-            },
-            {
-                "question": "\"A\" receives a life estate for the life of \"X.\" \"A\" dies before \"X.\" The estate:",
-                "answers": [
-                    { "text": "ceases to exist.", "correct": false },
-                    { "text": "reverts to the original grantor.", "correct": false },
-                    { "text": "vests in", "correct": false },
-                    { "text": "vests in the heirs of", "correct": true }
-                ],
-                "explanation": "When a life estate is 'pur autre vie' (for the life of another, in this case, X), if the grantee (A) dies before the measuring life (X), the life estate interest passes to A's heirs until X dies."
-            },
-            {
-                "question": "The original amortization term minus the number of payments that have been applied refers to the:",
-                "answers": [
-                    { "text": "Remaining interest", "correct": false },
-                    { "text": "Remaining term", "correct": true },
-                    { "text": "Total amortization term", "correct": false },
-                    { "text": "Loan amount", "correct": false }
-                ],
-                "explanation": "The remaining term of a loan is simply the original amortization term less the number of payments already made."
-            },
-            {
-                "question": "If Franklin, a real estate agent, intentionally speaks very highly and enthusiastically about a property he is trying to sell to a client in order to secure the deal, this type of behavior would be:",
-                "answers": [
-                    { "text": "Puffing", "correct": true },
-                    { "text": "Steering", "correct": false },
-                    { "text": "Illegal", "correct": false },
-                    { "text": "Misrepresentation", "correct": false }
-                ],
-                "explanation": "Puffing refers to exaggerated or superlative comments about a property that are subjective and not considered factual misrepresentation (e.g., 'This house has the best view in the city!')."
-            }
-        ],
-        "Unit 3": [
-            {
-                "question": "What is the longest river in South America?",
-                "answers": [
-                    { "text": "Mississippi River", "correct": false },
-                    { "text": "Nile River", "correct": false },
-                    { "text": "Amazon River", "correct": true },
-                    { "text": "Missouri River", "correct": false }
-                ],
-                "explanation": "The Amazon River is the longest river in South America and the largest by discharge volume in the world."
-            },
-            {
-                "question": "What is the largest country in North America by area?",
-                "answers": [
-                    { "text": "United States", "correct": false },
-                    { "text": "Canada", "correct": true },
-                    { "text": "Mexico", "correct": false },
-                    { "text": "Brazil", "correct": false }
-                ],
-                "explanation": "Canada is the largest country in North America by total area, and the second largest in the world."
-            }
-        ],
-        "Unit 4": [
-            {
-                "question": "What is the capital of Australia?",
-                "answers": [
-                    { "text": "Sydney", "correct": false },
-                    { "text": "Melbourne", "correct": false },
-                    { "text": "Canberra", "correct": true },
-                    { "text": "Perth", "correct": false }
-                ],
-                "explanation": "While Sydney and Melbourne are larger cities, Canberra is the capital city of Australia."
-            },
-            {
-                "question": "Which famous reef is located off the coast of Australia?",
-                "answers": [
-                    { "text": "The Florida Reef", "correct": false },
-                    { "text": "The Great Barrier Reef", "correct": true },
-                    { "text": "The Belize Barrier Reef", "correct": false },
-                    { "text": "The Red Sea Coral Reef", "correct": false }
-                ],
-                "explanation": "The Great Barrier Reef is the world's largest coral reef system, located off the coast of Queensland, Australia."
-            }
-        ]
-    },
-    "Mars Quiz": {
-        "Day": [
-            {
-                "question": "Which planet is known as the Red Planet?",
-                "answers": [
-                    { "text": "Earth", "correct": false },
-                    { "text": "Mars", "correct": true },
-                    { "text": "Jupiter", "correct": false },
-                    { "text": "Venus", "correct": false }
-                ],
-                "explanation": "Mars is known as the Red Planet due to its reddish-orange appearance caused by iron oxide (rust) on its surface."
-            },
-            {
-                "question": "What is the name of the largest volcano on Mars?",
-                "answers": [
-                    { "text": "Mount Sharp", "correct": false },
-                    { "text": "Valles Marineris", "correct": false },
-                    { "text": "Olympus Mons", "correct": true },
-                    { "text": "Elysium Mons", "correct": false }
-                ],
-                "explanation": "Olympus Mons is a massive shield volcano on Mars, and it is the largest volcano and highest known mountain on any planet in the Solar System."
-            }
-        ],
-        "Night": [
-            {
-                "question": "What are the temperatures like on Mars at night?",
-                "answers": [
-                    { "text": "Similar to Earth's desert nights", "correct": false },
-                    { "text": "Extremely cold, dropping to -140°C", "correct": true },
-                    { "text": "Warm due to residual heat", "correct": false },
-                    { "text": "Varies depending on the season, but never freezing", "correct": false }
-                ],
-                "explanation": "Mars has a very thin atmosphere, which means it cannot retain heat efficiently. As a result, temperatures on Mars can drop significantly at night, reaching as low as -140°C (-220°F)."
-            }
-        ]
-    }
-}
-        `;
+        });
 
         // Create a Blob from the JSON string and a URL to fetch it
         const quizDataBlob = new Blob([quizDataJson], { type: 'application/json' });
@@ -418,23 +398,13 @@
             quizContentEl.innerHTML = '<p class="text-center text-xl text-gray-500 animate-pulse">Loading quiz...</p>';
             
             try {
-                // fullQuizData should already be loaded by the DOMContentLoaded listener.
-                // We're keeping this check here as a fallback or if logic changes.
+                // Check if fullQuizData has already been loaded, otherwise fetch it
                 if (Object.keys(fullQuizData).length === 0) {
-                    console.warn("fullQuizData was empty when loadQuiz was called. Attempting to fetch.");
                     const response = await fetch(quizDataUrl);
                     if (!response.ok) {
                         throw new Error(`HTTP error! status: ${response.status}`);
                     }
                     fullQuizData = await response.json();
-                }
-
-                // Crucial check: Ensure the section and subsection exist in the loaded data
-                if (!fullQuizData[section]) {
-                    throw new Error(`Quiz section "${section}" not found in data.`);
-                }
-                if (!fullQuizData[section][subsection]) {
-                    throw new Error(`Quiz subsection "${subsection}" not found in section "${section}".`);
                 }
 
                 // Update the state with the new quiz questions
@@ -450,7 +420,7 @@
                 showQuestion();
 
             } catch (error) {
-                console.error("Could not load quiz:", error);
+                console.error("Could not fetch quiz data:", error);
                 quizContentEl.innerHTML = `<p class="text-center text-red-500">Error loading quiz: ${error.message}</p>`;
             }
         }
@@ -472,34 +442,14 @@
                 // Create and append the answers container
                 const answersDiv = document.createElement('div');
                 answersDiv.classList.add('space-y-4');
-                question.answers.forEach((answer, index) => { // Added index here
+                question.answers.forEach(answer => {
                     const answerBtn = document.createElement('button');
-                    answerBtn.classList.add('answer-btn', 'w-full', 'p-4', 'bg-gray-200', 'rounded-lg', 'text-gray-800', 'font-medium', 'hover:bg-gray-300', 'transition-colors', 'duration-200');
+                    answerBtn.classList.add('w-full', 'p-4', 'bg-gray-200', 'rounded-lg', 'text-gray-800', 'font-medium', 'hover:bg-gray-300', 'transition-colors', 'duration-200');
                     answerBtn.textContent = answer.text;
-                    answerBtn.setAttribute('data-index', index); // Set data-index for easy retrieval
                     answerBtn.addEventListener('click', () => handleAnswer(answerBtn, answer.correct));
                     answersDiv.appendChild(answerBtn);
                 });
                 quizContentEl.appendChild(answersDiv);
-
-                // Add feedback and next button containers
-                const feedbackContainer = document.createElement('div');
-                feedbackContainer.id = 'feedback-container';
-                feedbackContainer.classList.add('mt-4', 'p-4', 'rounded-lg', 'text-white', 'font-semibold', 'whitespace-pre-wrap'); // Added whitespace-pre-wrap
-                feedbackContainer.style.display = 'none';
-                quizContentEl.appendChild(feedbackContainer);
-
-                const nextButton = document.createElement('button');
-                nextButton.id = 'next-question-btn';
-                nextButton.classList.add('mt-6', 'w-full', 'py-3', 'px-6', 'bg-blue-600', 'text-white', 'font-bold', 'rounded-lg', 'hover:bg-blue-700', 'transition', 'duration-200', 'ease-in-out');
-                nextButton.textContent = 'Next Question';
-                nextButton.style.display = 'none';
-                nextButton.addEventListener('click', () => {
-                    currentQuestionIndex++;
-                    showQuestion();
-                });
-                quizContentEl.appendChild(nextButton);
-
             } else {
                 // End of the quiz
                 quizContentEl.innerHTML = `
@@ -514,59 +464,39 @@
 
         // Function to handle an answer click
         function handleAnswer(selectedButton, isCorrect) {
-            const questionData = currentQuizQuestions[currentQuestionIndex];
-            const feedbackContainer = document.getElementById('feedback-container');
-            const nextButton = document.getElementById('next-question-btn');
-            const answerButtons = quizContentEl.querySelectorAll('.answer-btn');
-
             // Disable all answer buttons to prevent multiple selections
-            answerButtons.forEach(btn => {
+            Array.from(quizContentEl.querySelectorAll('button')).forEach(btn => {
                 btn.disabled = true;
                 btn.classList.add('cursor-not-allowed');
-                btn.classList.remove('hover:bg-gray-300'); // Remove hover effect
             });
             
             // Check if the answer is correct
             if (isCorrect) {
                 correctCount++;
-                selectedButton.classList.remove('bg-gray-200', 'text-gray-800');
-                selectedButton.classList.add('bg-green-500', 'text-white');
-                feedbackContainer.classList.remove('bg-red-500'); // Remove red if previously set
-                feedbackContainer.classList.add('bg-green-500');
-                feedbackContainer.textContent = 'Correct!';
+                selectedButton.classList.add('bg-green-500', 'text-white', 'hover:bg-green-500');
             } else {
                 incorrectCount++;
-                selectedButton.classList.remove('bg-gray-200', 'text-gray-800');
-                selectedButton.classList.add('bg-red-500', 'text-white');
-                feedbackContainer.classList.remove('bg-green-500'); // Remove green if previously set
-                feedbackContainer.classList.add('bg-red-500');
+                selectedButton.classList.add('bg-red-500', 'text-white', 'hover:bg-red-500');
                 
-                // Find the correct answer text
-                const correctAnswer = questionData.answers.find(answer => answer.correct);
-                const correctAnswerText = correctAnswer ? correctAnswer.text : 'N/A';
-
-                let feedbackText = `Incorrect! The correct answer was: "${correctAnswerText}".`;
-                if (questionData.explanation) {
-                    feedbackText += `\n\nExplanation: ${questionData.explanation}`;
-                }
-                feedbackContainer.textContent = feedbackText;
-
-                // Highlight the correct answer button
-                answerButtons.forEach(btn => {
-                    const btnText = btn.textContent;
-                    if (correctAnswer && btnText === correctAnswer.text) {
-                        btn.classList.remove('bg-gray-200', 'text-gray-800');
-                        btn.classList.add('bg-green-500', 'text-white');
-                    }
+                // Highlight the correct answer
+                const correctButton = Array.from(quizContentEl.querySelectorAll('button')).find(btn => {
+                    const answerText = btn.textContent;
+                    const question = currentQuizQuestions[currentQuestionIndex];
+                    return question.answers.find(a => a.text === answerText && a.correct);
                 });
+                if (correctButton) {
+                    correctButton.classList.add('bg-green-500', 'text-white');
+                }
             }
             
             // Update the UI progress
             updateProgress();
             
-            // Show feedback and next button
-            feedbackContainer.style.display = 'block';
-            nextButton.style.display = 'block';
+            // Move to the next question after a delay
+            setTimeout(() => {
+                currentQuestionIndex++;
+                showQuestion();
+            }, 1500); // 1.5 seconds delay
         }
 
         // Function to update the progress counters and bar
@@ -574,7 +504,7 @@
             correctCountEl.textContent = `Correct: ${correctCount}`;
             incorrectCountEl.textContent = `Incorrect: ${incorrectCount}`;
 
-            const totalAnswered = correctCount + incorrectCount;
+            const total = correctCount + incorrectCount;
             let correctPercentage = 0;
             let incorrectPercentage = 0;
 
@@ -615,7 +545,7 @@
                         buttonMatches = true;
                     }
 
-                    // If a subsection exists, check its questions, answers, and explanations
+                    // If a subsection exists, check its questions and answers
                     if (subsectionData) {
                         for (const q of subsectionData) {
                             if (q.question.toLowerCase().includes(term)) {
@@ -627,9 +557,6 @@
                                     buttonMatches = true;
                                     break;
                                 }
-                            }
-                            if (q.explanation && q.explanation.toLowerCase().includes(term)) {
-                                buttonMatches = true;
                             }
                             if (buttonMatches) break;
                         }
@@ -650,8 +577,7 @@
                     if (searchTerm) {
                         detail.open = true;
                     } else {
-                        // Keep current state if no search term, or explicitly set to false if desired default
-                        // detail.open = false; // Uncomment this if you want it to collapse when search is cleared
+                        detail.open = false; // Collapse when search is cleared
                     }
                 } else {
                     detail.style.display = 'none';
@@ -684,13 +610,13 @@
         // Initialize the app by fetching data and setting up event listeners.
         window.addEventListener('DOMContentLoaded', async () => {
             try {
-                // Fetch the quiz data on initial load and store it
+                // Fetch the quiz data on initial load
                 const response = await fetch(quizDataUrl);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 fullQuizData = await response.json();
-                console.log("Quiz data loaded successfully on DOMContentLoaded.");
+                console.log("Quiz data loaded successfully.");
             } catch (error) {
                 console.error("Could not fetch quiz data on initial load:", error);
                 quizContentEl.innerHTML = `<p class="text-center text-red-500">Error loading quizzes: ${error.message}</p>`;
