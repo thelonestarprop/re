@@ -57,7 +57,7 @@
                     Module 1
                 </summary>
                 <div class="pl-6 pt-2 space-y-1">
-                    <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-quiz="Earth">Unit 1</button>
+                    <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-quiz="Unit 1">Unit 1</button>
                     <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-quiz="Mars">Mars Quiz</button>
                     <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-quiz="Venus">Venus Quiz</button>
                 </div>
@@ -114,7 +114,7 @@
 
         // Quiz data as a JSON object
         const quizData = {
-            "Earth": [
+            "Unit 1": [
                 {
                     "question": "What is the capital city of Australia?",
                     "answers": [
@@ -126,14 +126,14 @@
                     "explanation": "Canberra is the capital of Australia, a planned city established for this purpose."
                 },
                 {
-                    "question": "Which ocean is the largest on Earth?",
+                    "question": "Which ocean is the largest on Unit 1?",
                     "answers": [
                         { "text": "Atlantic Ocean", "correct": false },
                         { "text": "Indian Ocean", "correct": false },
                         { "text": "Southern Ocean", "correct": false },
                         { "text": "Pacific Ocean", "correct": true }
                     ],
-                    "explanation": "The Pacific Ocean is the largest and deepest of Earth's five oceans."
+                    "explanation": "The Pacific Ocean is the largest and deepest of Unit 1's five oceans."
                 },
                 {
                     "question": "What is the highest mountain in Africa?",
@@ -182,7 +182,7 @@
                 {
                     "question": "Which planet is known as the Red Planet?",
                     "answers": [
-                        { "text": "Earth", "correct": false },
+                        { "text": "Unit 1", "correct": false },
                         { "text": "Mars", "correct": true },
                         { "text": "Jupiter", "correct": false },
                         { "text": "Venus", "correct": false }
@@ -206,7 +206,7 @@
                     "answers": [
                         { "text": "Mercury", "correct": false },
                         { "text": "Venus", "correct": true },
-                        { "text": "Earth", "correct": false },
+                        { "text": "Unit 1", "correct": false },
                         { "text": "Jupiter", "correct": false }
                     ],
                     "explanation": "Despite being farther from the Sun than Mercury, Venus has a thick atmosphere that traps heat, making it the hottest planet."
@@ -215,11 +215,11 @@
                     "question": "What is the approximate length of a day on Venus?",
                     "answers": [
                         { "text": "24 hours", "correct": false },
-                        { "text": "10 Earth days", "correct": false },
-                        { "text": "243 Earth days", "correct": true },
+                        { "text": "10 Unit 1 days", "correct": false },
+                        { "text": "243 Unit 1 days", "correct": true },
                         { "text": "1 year", "correct": false }
                     ],
-                    "explanation": "A single day on Venus is incredibly long, taking about 243 Earth days to complete one rotation. This is longer than its year!"
+                    "explanation": "A single day on Venus is incredibly long, taking about 243 Unit 1 days to complete one rotation. This is longer than its year!"
                 }
             ]
         };
@@ -233,7 +233,7 @@
 
         /**
          * Loads a new quiz based on the selected category.
-         * @param {string} category The name of the quiz to load (e.g., "Earth").
+         * @param {string} category The name of the quiz to load (e.g., "Unit 1").
          */
         function loadQuiz(category) {
             // Check if the quiz exists in our data
