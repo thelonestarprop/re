@@ -40,18 +40,21 @@
         details[open] summary::before {
             transform: rotate(90deg);
         }
+        .highlight {
+            background-color: yellow;
+            color: black;
+        }
     </style>
 </head>
 <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen flex flex-col md:flex-row overflow-hidden">
 
     <aside class="bg-gray-800 text-white w-full md:w-64 p-6 flex flex-col space-y-4 shadow-xl overflow-y-auto custom-scrollbar">
         <h1 class="text-3xl font-bold text-center border-b border-gray-700 pb-4 mb-4">RE Quiz</h1>
+        
+        <div class="mb-4">
+            <input type="text" id="search-input" placeholder="Search questions or answers..." class="w-full p-2 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
 
-    <div class="mb-4">
-        <input type="text" id="search-input" placeholder="Search quizzes..." class="w-full p-2 rounded-md bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
-    </div>
-        
-        
         <div id="quiz-list-container" class="space-y-2 mt-4">
             <details class="group cursor-pointer" open>
                 <summary class="text-xl font-semibold flex items-center p-2 rounded-lg hover:bg-gray-700 transition duration-200">
@@ -76,7 +79,7 @@
                 </summary>
                 <div class="pl-6 pt-2 space-y-1">
                     <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-quiz="Animal">Animal Kingdom</button>
-                    <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-quiz="Unit 4">Space Quiz</button>
+                    <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-quiz="Space Quiz">Space Quiz</button>
                 </div>
             </details>
         </div>
@@ -313,552 +316,542 @@
                 }
             ],
             "Unit 3": [
-  {
-    "question": "Under the provisions of the Interstate Subdivided Lands Act, can the buyer rescind his offer within specified time limits, if he buys:",
-    "answers": [
-      { "text": "land projects.", "correct": true },
-      { "text": "condominium.", "correct": false },
-      { "text": "stock cooperative project.", "correct": false },
-      { "text": "none of the above", "correct": false }
-    ],
-    "explanation": "The law allows a buyer 14 days after signing a contract to purchase property in a land project to rescind the offer, with a full refund of any money paid."
-  },
-  {
-    "question": "In Texas, if an unlicensed person is charged with a first-time misdemeanor of performing activities requiring a real estate license, they:",
-    "answers": [
-      { "text": "May be subject to a penalty of imprisonment to exceed 90 days", "correct": false },
-      { "text": "May be subject to a penalty of a fine not to exceed $500", "correct": true },
-      { "text": "May be subject to a penalty of a fine to exceed $500", "correct": false },
-      { "text": "None of these", "correct": false }
-    ],
-    "explanation": "In Texas, any unlicensed person who is charged with a first-time misdemeanor of performing activities requiring a real estate license may be subject to a penalty of a fine not to exceed $500, imprisonment not to exceed 90 days, or both."
-  },
-  {
-    "question": "A cash payment of $10,001 is given as earnest money to secure a property. What must be filed?",
-    "answers": [
-      { "text": "A procurement contract", "correct": false },
-      { "text": "An expediting loan form", "correct": false },
-      { "text": "An IRS Form 8300", "correct": true },
-      { "text": "A documenting receipt", "correct": false }
-    ],
-    "explanation": "The IRS requires any cash payments over $10,000 be recorded by filing a form 8300."
-  },
-  {
-    "question": "When a broker obtains a new contract, it is considered what until fully performed?",
-    "answers": [
-      { "text": "Pre-performed", "correct": false },
-      { "text": "Invalid", "correct": false },
-      { "text": "Pre-executed", "correct": false },
-      { "text": "Executory", "correct": true }
-    ],
-    "explanation": "A contract that has not been fully performed is known as executory. Once it is performed, it is called executed."
-  },
-  {
-    "question": "A wife can will:",
-    "answers": [
-      { "text": "all the community property.", "correct": false },
-      { "text": "1/2 the community property.", "correct": true },
-      { "text": "any community property the husband has not willed.", "correct": false },
-      { "text": "none of the community property.", "correct": false }
-    ],
-    "explanation": "Both husband and wife have the right to will 1/2 the community property."
-  },
-  {
-    "question": "Individual lots that are created from a larger tract and that are offered for sale or lease best describes a:",
-    "answers": [
-      { "text": "Suburb", "correct": false },
-      { "text": "Housing tract", "correct": false },
-      { "text": "Development", "correct": false },
-      { "text": "Subdivision", "correct": true }
-    ],
-    "explanation": "Individual lots that are created from a larger tract and that are offered for sale or lease best describes a subdivision."
-  },
-  {
-    "question": "Mr. Noro bought a property using a purchase money trust deed. A few years later he sold the property to Ms. Hassen for all cash. Which of the following would not be disclosed by the public records?",
-    "answers": [
-      { "text": "A grant deed to Mr. Noro", "correct": false },
-      { "text": "The original trust deed that Mr. Noro used in purchasing the property", "correct": false },
-      { "text": "A reconveyance deed to Mr. Noro", "correct": false },
-      { "text": "A reconveyance deed to Ms. Hassen", "correct": true }
-    ],
-    "explanation": "Since Ms. Hassen paid all cash for the property, there would be no need for a reconveyance deed to Ms. Hassen. Therefore, it would not appear on public records."
-  },
-  {
-    "question": "A licensed agent working under John, a broker, withdraws funds from John’s broker trust account with John’s permission. The agent is licensed but not bonded. This transaction would be:",
-    "answers": [
-      { "text": "Illegal", "correct": true },
-      { "text": "None of these", "correct": false },
-      { "text": "Unethical", "correct": false },
-      { "text": "Legal", "correct": false }
-    ],
-    "explanation": "In order for someone other than the broker to withdraw funds from the broker’s trust account, the person must be bonded."
-  },
-  {
-    "question": "While the objective in the cost approach generally is to estimate the value of both land and improvements, the land typically is appraised using the:",
-    "answers": [
-      { "text": "income approach.", "correct": false },
-      { "text": "gross rent multiplier approach.", "correct": false },
-      { "text": "option approach.", "correct": false },
-      { "text": "market data approach.", "correct": true }
-    ],
-    "explanation": "Land is appraised by comparing the subject property to recent sales of comparable parcels of land."
-  },
-  {
-    "question": "A down payment of $1,000 for the purchase of an apartment house valued at $690,000 is a good example of:",
-    "answers": [
-      { "text": "plottage.", "correct": false },
-      { "text": "leverage.", "correct": true },
-      { "text": "highest and best value.", "correct": false },
-      { "text": "none of the above", "correct": false }
-    ],
-    "explanation": "The definition of leverage can be viewed as using a small down payment to purchase as much property as possible."
-  }
-],
-            "Unit 4":
-                [
-  {
-    "question": "In Texas, an on-site manager who negotiates apartment leases during the normal course of business:",
-    "answers": [
-      { "text": "Must hold a real estate salesperson’s or broker’s license", "correct": false },
-      { "text": "None of these", "correct": false },
-      { "text": "Must have applied for a real estate license", "correct": false },
-      { "text": "Is not required to hold a real estate salesperson’s or broker’s license", "correct": true }
-    ],
-    "explanation": "In Texas, an on-site manager who negotiates apartment leases during the normal course of business is not required to hold a real estate salesperson’s or broker’s license. This exemption only applies to apartments; managers of condominiums or town homes need to be licensed."
-  },
-  {
-    "question": "Which of these terms refers to the owner of real property selling the property to someone else and is a legal right?",
-    "answers": [
-      { "text": "Salage", "correct": false },
-      { "text": "Release", "correct": false },
-      { "text": "Salable", "correct": false },
-      { "text": "Disposition", "correct": true }
-    ],
-    "explanation": "Disposition (which can also be called alienation), refers to the disposal of something. In real estate it is a right of alienation to do this with real property."
-  },
-  {
-    "question": "Which of the following falls under the term “real property”?",
-    "answers": [
-      { "text": "Furniture", "correct": false },
-      { "text": "Crops", "correct": false },
-      { "text": "Trees", "correct": true },
-      { "text": "Fixtures", "correct": false }
-    ],
-    "explanation": "Real property is the things that “go with the land”. Clearly trees are not personal property and they must “go with the land”, therefore trees is the correct answer in this case."
-  },
-  {
-    "question": "Elderly homeowners can sometimes tap the equity in their home without having to make monthly payments by using a:",
-    "answers": [
-      { "text": "conversion option.", "correct": false },
-      { "text": "blanket mortgage.", "correct": false },
-      { "text": "wraparound mortgage.", "correct": false },
-      { "text": "reverse mortgage.", "correct": true }
-    ],
-    "explanation": "With a reverse mortgage, the homeowner receives a lump sum or monthly checks, and no repayment is made until the property is sold or the owner dies."
-  },
-  {
-    "question": "If there is an easement appurtenant, there must also be:",
-    "answers": [
-      { "text": "A dominant tenement", "correct": true },
-      { "text": "None of these", "correct": false },
-      { "text": "A tenement in gross", "correct": false },
-      { "text": "A specific lien", "correct": false }
-    ],
-    "explanation": "An easement appurtenant can only exist if there is a dominant tenement."
-  },
-  {
-    "question": "If an agent makes claims to homeowners in a certain geographical location that their property values would decrease if certain ethnic groups were to move into the area, this could be an example of:",
-    "answers": [
-      { "text": "Blockbusting", "correct": true },
-      { "text": "Negotiation", "correct": false },
-      { "text": "Coercion", "correct": false },
-      { "text": "Steering", "correct": false }
-    ],
-    "explanation": "Blockbusting is historically when a mostly white neighborhood is seen as less valuable if mainly African Americans were to move in. This has been a tactic of some real estate agents in the past to try to trick white homeowners into selling their property at a lower price “before it’s too late.” Subsequently this practice has been outlawed."
-  },
-  {
-    "question": "Broker Smith operates a small business in a small room in his home. The room has its own entrance with just a sign over the door reading \"Smith Realtor\". He has no salesperson working for him except a 17-year-old student he has in training for the business and to whom he pays $5.00 for each listing the student brings in. Broker Smith is not a member of a real estate board. Since he lives outside of town he holds all deposits received until he goes to town, about once a week. From the information given, broker Smith is in violation of the Real Estate Law in all of the following, except:",
-    "answers": [
-      { "text": "paying compensation to an unlicensed person.", "correct": false },
-      { "text": "using the term", "correct": false },
-      { "text": "location of his office.", "correct": true },
-      { "text": "commingling.", "correct": false }
-    ],
-    "explanation": "He is definitely in violation of the Real Estate Law in answers (a), (b), and (d)."
-  },
-  {
-    "question": "If a property is in default and a meeting is announced in a public location to sell the property in order to recoup the mortgage in default, this would be an example of a:",
-    "answers": [
-      { "text": "Foreclosure", "correct": false },
-      { "text": "Eviction", "correct": false },
-      { "text": "Public auction", "correct": true }
-    ],
-    "explanation": "In order to repay a mortgage in default, sometimes a meeting in an announced public location occurs to attempt to sell the property. This is called a public auction."
-  },
-  {
-    "question": "What relationship to the broker’s client is a salesperson?",
-    "answers": [
-      { "text": "A dual agent", "correct": false },
-      { "text": "A special agent", "correct": false },
-      { "text": "A joint agent", "correct": false },
-      { "text": "A subagent", "correct": true }
-    ],
-    "explanation": "A salesperson is a subagent to the broker’s client."
-  },
-  {
-    "question": "In the sale of real property which of the following runs with the land?",
-    "answers": [
-      { "text": "Easements", "correct": false },
-      { "text": "Conditions", "correct": false },
-      { "text": "Stock in a mutual water company", "correct": false },
-      { "text": "All of the above", "correct": true }
-    ],
-    "explanation": "All are appurtenant, incident to, and run with the land."
-  }
-],
-                        "Unit 5":
-                [],
-                        "Unit 6":
-                [],
-                        "Unit 7":
-                [],
-                        "Unit 8":
-                [],
-                        "Unit 9":
-                [],
-                        "Unit 10":
-                [],
-                            
+                {
+                    "question": "Under the provisions of the Interstate Subdivided Lands Act, can the buyer rescind his offer within specified time limits, if he buys:",
+                    "answers": [
+                        { "text": "land projects.", "correct": true },
+                        { "text": "condominium.", "correct": false },
+                        { "text": "stock cooperative project.", "correct": false },
+                        { "text": "none of the above", "correct": false }
+                    ],
+                    "explanation": "The law allows a buyer 14 days after signing a contract to purchase property in a land project to rescind the offer, with a full refund of any money paid."
+                },
+                {
+                    "question": "In Texas, if an unlicensed person is charged with a first-time misdemeanor of performing activities requiring a real estate license, they:",
+                    "answers": [
+                        { "text": "May be subject to a penalty of imprisonment to exceed 90 days", "correct": false },
+                        { "text": "May be subject to a penalty of a fine not to exceed $500", "correct": true },
+                        { "text": "May be subject to a penalty of a fine to exceed $500", "correct": false },
+                        { "text": "None of these", "correct": false }
+                    ],
+                    "explanation": "In Texas, any unlicensed person who is charged with a first-time misdemeanor of performing activities requiring a real estate license may be subject to a penalty of a fine not to exceed $500, imprisonment not to exceed 90 days, or both."
+                },
+                {
+                    "question": "A cash payment of $10,001 is given as earnest money to secure a property. What must be filed?",
+                    "answers": [
+                        { "text": "A procurement contract", "correct": false },
+                        { "text": "An expediting loan form", "correct": false },
+                        { "text": "An IRS Form 8300", "correct": true },
+                        { "text": "A documenting receipt", "correct": false }
+                    ],
+                    "explanation": "The IRS requires any cash payments over $10,000 be recorded by filing a form 8300."
+                },
+                {
+                    "question": "When a broker obtains a new contract, it is considered what until fully performed?",
+                    "answers": [
+                        { "text": "Pre-performed", "correct": false },
+                        { "text": "Invalid", "correct": false },
+                        { "text": "Pre-executed", "correct": false },
+                        { "text": "Executory", "correct": true }
+                    ],
+                    "explanation": "A contract that has not been fully performed is known as executory. Once it is performed, it is called executed."
+                },
+                {
+                    "question": "A wife can will:",
+                    "answers": [
+                        { "text": "all the community property.", "correct": false },
+                        { "text": "1/2 the community property.", "correct": true },
+                        { "text": "any community property the husband has not willed.", "correct": false },
+                        { "text": "none of the community property.", "correct": false }
+                    ],
+                    "explanation": "Both husband and wife have the right to will 1/2 the community property."
+                },
+                {
+                    "question": "Individual lots that are created from a larger tract and that are offered for sale or lease best describes a:",
+                    "answers": [
+                        { "text": "Suburb", "correct": false },
+                        { "text": "Housing tract", "correct": false },
+                        { "text": "Development", "correct": false },
+                        { "text": "Subdivision", "correct": true }
+                    ],
+                    "explanation": "Individual lots that are created from a larger tract and that are offered for sale or lease best describes a subdivision."
+                },
+                {
+                    "question": "Mr. Noro bought a property using a purchase money trust deed. A few years later he sold the property to Ms. Hassen for all cash. Which of the following would not be disclosed by the public records?",
+                    "answers": [
+                        { "text": "A grant deed to Mr. Noro", "correct": false },
+                        { "text": "The original trust deed that Mr. Noro used in purchasing the property", "correct": false },
+                        { "text": "A reconveyance deed to Mr. Noro", "correct": false },
+                        { "text": "A reconveyance deed to Ms. Hassen", "correct": true }
+                    ],
+                    "explanation": "Since Ms. Hassen paid all cash for the property, there would be no need for a reconveyance deed to Ms. Hassen. Therefore, it would not appear on public records."
+                },
+                {
+                    "question": "A licensed agent working under John, a broker, withdraws funds from John’s broker trust account with John’s permission. The agent is licensed but not bonded. This transaction would be:",
+                    "answers": [
+                        { "text": "Illegal", "correct": true },
+                        { "text": "None of these", "correct": false },
+                        { "text": "Unethical", "correct": false },
+                        { "text": "Legal", "correct": false }
+                    ],
+                    "explanation": "In order for someone other than the broker to withdraw funds from the broker’s trust account, the person must be bonded."
+                },
+                {
+                    "question": "While the objective in the cost approach generally is to estimate the value of both land and improvements, the land typically is appraised using the:",
+                    "answers": [
+                        { "text": "income approach.", "correct": false },
+                        { "text": "gross rent multiplier approach.", "correct": false },
+                        { "text": "option approach.", "correct": false },
+                        { "text": "market data approach.", "correct": true }
+                    ],
+                    "explanation": "Land is appraised by comparing the subject property to recent sales of comparable parcels of land."
+                },
+                {
+                    "question": "A down payment of $1,000 for the purchase of an apartment house valued at $690,000 is a good example of:",
+                    "answers": [
+                        { "text": "plottage.", "correct": false },
+                        { "text": "leverage.", "correct": true },
+                        { "text": "highest and best value.", "correct": false },
+                        { "text": "none of the above", "correct": false }
+                    ],
+                    "explanation": "The definition of leverage can be viewed as using a small down payment to purchase as much property as possible."
+                }
+            ],
+            "Unit 4": [
+                {
+                    "question": "In Texas, an on-site manager who negotiates apartment leases during the normal course of business:",
+                    "answers": [
+                        { "text": "Must hold a real estate salesperson’s or broker’s license", "correct": false },
+                        { "text": "None of these", "correct": false },
+                        { "text": "Must have applied for a real estate license", "correct": false },
+                        { "text": "Is not required to hold a real estate salesperson’s or broker’s license", "correct": true }
+                    ],
+                    "explanation": "In Texas, an on-site manager who negotiates apartment leases during the normal course of business is not required to hold a real estate salesperson’s or broker’s license. This exemption only applies to apartments; managers of condominiums or town homes need to be licensed."
+                },
+                {
+                    "question": "Which of these terms refers to the owner of real property selling the property to someone else and is a legal right?",
+                    "answers": [
+                        { "text": "Salage", "correct": false },
+                        { "text": "Release", "correct": false },
+                        { "text": "Salable", "correct": false },
+                        { "text": "Disposition", "correct": true }
+                    ],
+                    "explanation": "Disposition (which can also be called alienation), refers to the disposal of something. In real estate it is a right of alienation to do this with real property."
+                },
+                {
+                    "question": "Which of the following falls under the term “real property”?",
+                    "answers": [
+                        { "text": "Furniture", "correct": false },
+                        { "text": "Crops", "correct": false },
+                        { "text": "Trees", "correct": true },
+                        { "text": "Fixtures", "correct": false }
+                    ],
+                    "explanation": "Real property is the things that “go with the land”. Clearly trees are not personal property and they must “go with the land”, therefore trees is the correct answer in this case."
+                },
+                {
+                    "question": "Elderly homeowners can sometimes tap the equity in their home without having to make monthly payments by using a:",
+                    "answers": [
+                        { "text": "conversion option.", "correct": false },
+                        { "text": "blanket mortgage.", "correct": false },
+                        { "text": "wraparound mortgage.", "correct": false },
+                        { "text": "reverse mortgage.", "correct": true }
+                    ],
+                    "explanation": "With a reverse mortgage, the homeowner receives a lump sum or monthly checks, and no repayment is made until the property is sold or the owner dies."
+                },
+                {
+                    "question": "If there is an easement appurtenant, there must also be:",
+                    "answers": [
+                        { "text": "A dominant tenement", "correct": true },
+                        { "text": "None of these", "correct": false },
+                        { "text": "A tenement in gross", "correct": false },
+                        { "text": "A specific lien", "correct": false }
+                    ],
+                    "explanation": "An easement appurtenant can only exist if there is a dominant tenement."
+                },
+                {
+                    "question": "If an agent makes claims to homeowners in a certain geographical location that their property values would decrease if certain ethnic groups were to move into the area, this could be an example of:",
+                    "answers": [
+                        { "text": "Blockbusting", "correct": true },
+                        { "text": "Negotiation", "correct": false },
+                        { "text": "Coercion", "correct": false },
+                        { "text": "Steering", "correct": false }
+                    ],
+                    "explanation": "Blockbusting is historically when a mostly white neighborhood is seen as less valuable if mainly African Americans were to move in. This has been a tactic of some real estate agents in the past to try to trick white homeowners into selling their property at a lower price “before it’s too late.” Subsequently this practice has been outlawed."
+                }
+            ],
+            "Unit 5": [
+                {
+                    "question": "What is the primary role of a real estate agent in a transaction?",
+                    "answers": [
+                        { "text": "To set the property price", "correct": false },
+                        { "text": "To provide legal advice", "correct": false },
+                        { "text": "To represent a client in buying or selling property", "correct": true },
+                        { "text": "To offer mortgage loans", "correct": false }
+                    ],
+                    "explanation": "A real estate agent's primary role is to act as an intermediary between buyers and sellers, representing their clients' interests."
+                },
+                {
+                    "question": "Which document is used to transfer ownership of real property from one party to another?",
+                    "answers": [
+                        { "text": "Lease agreement", "correct": false },
+                        { "text": "Promissory note", "correct": false },
+                        { "text": "Deed", "correct": true },
+                        { "text": "Mortgage", "correct": false }
+                    ],
+                    "explanation": "A deed is a legal document that transfers ownership of real property from the grantor (seller) to the grantee (buyer)."
+                }
+            ],
+            "Unit 6": [
+                {
+                    "question": "What is a 'lien' in real estate?",
+                    "answers": [
+                        { "text": "A type of insurance policy", "correct": false },
+                        { "text": "A legal claim against a property to secure a debt", "correct": true },
+                        { "text": "A property boundary marker", "correct": false },
+                        { "text": "A tax levied on real estate transactions", "correct": false }
+                    ],
+                    "explanation": "A lien is a legal claim or a right against a property granted by a court or a contract to an individual or entity until a debt is satisfied."
+                },
+                {
+                    "question": "The term 'escheat' refers to:",
+                    "answers": [
+                        { "text": "The right of eminent domain", "correct": false },
+                        { "text": "The process of property reverting to the state when an owner dies without heirs or a will", "correct": true },
+                        { "text": "A type of property easement", "correct": false },
+                        { "text": "The transfer of property through adverse possession", "correct": false }
+                    ],
+                    "explanation": "Escheat is the right of a government to take ownership of estate assets or unclaimed property."
+                }
+            ],
+            "Unit 7": [
+                {
+                    "question": "What is the purpose of a 'title search'?",
+                    "answers": [
+                        { "text": "To determine the market value of a property", "correct": false },
+                        { "text": "To verify the property's legal ownership and identify any encumbrances", "correct": true },
+                        { "text": "To assess the structural integrity of a building", "correct": false },
+                        { "text": "To negotiate the terms of a mortgage loan", "correct": false }
+                    ],
+                    "explanation": "A title search is conducted to ensure that the seller has the legal right to sell the property and to uncover any liens, easements, or other issues that could affect the transfer of ownership."
+                },
+                {
+                    "question": "Which of the following is an example of a 'fixture' in real estate?",
+                    "answers": [
+                        { "text": "A freestanding refrigerator", "correct": false },
+                        { "text": "A portable microwave oven", "correct": false },
+                        { "text": "Built-in kitchen cabinets", "correct": true },
+                        { "text": "A rug that is not attached to the floor", "correct": false }
+                    ],
+                    "explanation": "A fixture is an item of personal property that has been attached to real property in such a way that it is now considered part of the real property."
+                }
+            ],
+            "Unit 8": [
+                {
+                    "question": "What is the main difference between a 'mortgage' and a 'deed of trust'?",
+                    "answers": [
+                        { "text": "There is no difference; the terms are interchangeable", "correct": false },
+                        { "text": "A mortgage involves three parties, while a deed of trust involves two", "correct": false },
+                        { "text": "A deed of trust involves three parties (borrower, lender, trustee), while a mortgage involves two (borrower, lender)", "correct": true },
+                        { "text": "Only mortgages allow for foreclosure in case of default", "correct": false }
+                    ],
+                    "explanation": "A key distinction lies in the parties involved: a mortgage has a mortgagor (borrower) and a mortgagee (lender), while a deed of trust adds a third party, the trustee, who holds the title until the loan is repaid."
+                },
+                {
+                    "question": "The principle of 'highest and best use' in real estate appraisal refers to:",
+                    "answers": [
+                        { "text": "The most expensive use of a property", "correct": false },
+                        { "text": "The use that generates the most immediate profit", "correct": false },
+                        { "text": "The reasonably probable and legal use of vacant land or an improved property that is physically possible, appropriately supported, financially feasible, and that results in the highest value.", "correct": true },
+                        { "text": "The historical use of a property", "correct": false }
+                    ],
+                    "explanation": "Highest and best use considers the use of a property that is most likely to produce the greatest net return to the land and/or building over a given period."
+                }
+            ],
+            "Unit 9": [
+                {
+                    "question": "What is 'zoning' in urban planning?",
+                    "answers": [
+                        { "text": "A method of property valuation", "correct": false },
+                        { "text": "Government regulations that dictate how real property can and cannot be used in certain areas", "correct": true },
+                        { "text": "A type of property insurance", "correct": false },
+                        { "text": "The process of land surveying", "correct": false }
+                    ],
+                    "explanation": "Zoning ordinances are local laws that divide land into different zones (e.g., residential, commercial, industrial) and specify allowed uses within each zone."
+                },
+                {
+                    "question": "Which of the following describes 'eminent domain'?",
+                    "answers": [
+                        { "text": "The right of a private citizen to claim property through adverse possession", "correct": false },
+                        { "text": "The power of the government to take private property for public use, with just compensation", "correct": true },
+                        { "text": "The process of transferring property through a will", "correct": false },
+                        { "text": "The ability to sell a property quickly in a hot market", "correct": false }
+                    ],
+                    "explanation": "Eminent domain is the right of a government or its agent to expropriate private property for public use, with payment of compensation."
+                }
+            ],
+            "Unit 10": [
+                {
+                    "question": "What is the purpose of 'earnest money' in a real estate transaction?",
+                    "answers": [
+                        { "text": "To cover the closing costs", "correct": false },
+                        { "text": "To serve as a deposit demonstrating the buyer's serious intent to purchase", "correct": true },
+                        { "text": "To pay the real estate agent's commission", "correct": false },
+                        { "text": "To pay for property inspections", "correct": false }
+                    ],
+                    "explanation": "Earnest money is a deposit made to a seller that represents a buyer's good faith to buy a home. It gives the buyer extra time to get financing and conduct a title search, appraisal, and inspections before closing."
+                },
+                {
+                    "question": "Which term refers to the gradual addition of land by natural causes, such as the deposition of soil by a river?",
+                    "answers": [
+                        { "text": "Erosion", "correct": false },
+                        { "text": "Avulsion", "correct": false },
+                        { "text": "Accretion", "correct": true },
+                        { "text": "Reliction", "correct": false }
+                    ],
+                    "explanation": "Accretion is the process of growth or increase, typically by the gradual accumulation of additional layers or matter. In real estate, it's the increase of land by the gradual deposition of soil from the water."
+                }
+            ],
             "Animal": [
+                {
+                    "question": "Which animal is known as the 'king of the jungle'?",
+                    "answers": [
+                        { "text": "Tiger", "correct": false },
+                        { "text": "Lion", "correct": true },
+                        { "text": "Elephant", "correct": false },
+                        { "text": "Bear", "correct": false }
+                    ],
+                    "explanation": "Lions are widely referred to as the 'king of the jungle' due to their majestic appearance and position as apex predators."
+                },
                 {
                     "question": "What is the fastest land animal?",
                     "answers": [
                         { "text": "Lion", "correct": false },
-                        { "text": "Cheetah", "correct": true },
                         { "text": "Gazelle", "correct": false },
-                        { "text": "Ostrich", "correct": false }
+                        { "text": "Cheetah", "correct": true },
+                        { "text": "Horse", "correct": false }
                     ],
-                    "explanation": "The cheetah can reach speeds of up to 70 miles per hour (112 km/h) in short bursts."
-                },
-                {
-                    "question": "Which animal is known as the 'King of the Jungle'?",
-                    "answers": [
-                        { "text": "Tiger", "correct": false },
-                        { "text": "Lion", "correct": true },
-                        { "text": "Gorilla", "correct": false },
-                        { "text": "Elephant", "correct": false }
-                    ],
-                    "explanation": "Lions are widely known as the 'King of the Jungle,' although they primarily live in savannas and grasslands, not jungles."
-                },
-                {
-                    "question": "What is the only mammal that can truly fly?",
-                    "answers": [
-                        { "text": "Flying squirrel", "correct": false },
-                        { "text": "Bat", "correct": true },
-                        { "text": "Sugar glider", "correct": false },
-                        { "text": "Flying lemur", "correct": false }
-                    ],
-                    "explanation": "While other animals can glide, bats are the only mammals capable of sustained flight."
+                    "explanation": "The cheetah can run at speeds of up to 70 miles per hour, making it the fastest land animal."
                 }
             ],
-            "Unit 4": [ // Renamed from "Unit 2" to "Unit 4"
+            "Space Quiz": [
                 {
-                    "question": "Which planet is known as the Red Planet?",
+                    "question": "What is the largest planet in our solar system?",
                     "answers": [
-                        { "text": "Mars", "correct": true }, // Changed "Unit 2" to "Mars"
-                        { "text": "Venus", "correct": false },
-                        { "text": "Jupiter", "correct": false },
+                        { "text": "Mars", "correct": false },
+                        { "text": "Jupiter", "correct": true },
+                        { "text": "Earth", "correct": false },
                         { "text": "Saturn", "correct": false }
                     ],
-                    "explanation": "Mars is known as the Red Planet due to its reddish-orange appearance caused by iron oxide (rust) on its surface."
+                    "explanation": "Jupiter is the largest planet in our solar system by a considerable margin."
                 },
                 {
-                    "question": "What is the name of the largest volcano on Mars?", // Changed "Unit 2" to "Mars"
+                    "question": "Which galaxy is our solar system a part of?",
                     "answers": [
-                        { "text": "Mount Sharp", "correct": false },
-                        { "text": "Valles Marineris", "correct": false },
-                        { "text": "Olympus Mons", "correct": true },
-                        { "text": "Elysium Mons", "correct": false }
+                        { "text": "Andromeda Galaxy", "correct": false },
+                        { "text": "Triangulum Galaxy", "correct": false },
+                        { "text": "Whirlpool Galaxy", "correct": false },
+                        { "text": "Milky Way Galaxy", "correct": true }
                     ],
-                    "explanation": "Olympus Mons is a massive shield volcano on Mars, and it is the largest volcano and highest known mountain on any planet in the Solar System."
+                    "explanation": "Our solar system resides within the Milky Way Galaxy."
                 }
             ]
         };
 
-
-// Insert this JavaScript code inside your <script> tags, preferably at the beginning
-// after the quizData definition, but before other event listeners.
-
-const searchInput = document.getElementById('search-input');
-const quizListContainer = document.getElementById('quiz-list-container');
-const allQuizButtons = quizListContainer.querySelectorAll('.quiz-btn'); // Get all quiz buttons initially
-
-function filterQuizzes() {
-    const searchTerm = searchInput.value.toLowerCase();
-
-    allQuizButtons.forEach(button => {
-        const quizName = button.textContent.toLowerCase();
-        let foundInQuizData = false;
-
-        // Check if the quiz name contains the search term
-        if (quizName.includes(searchTerm)) {
-            foundInQuizData = true;
-        } else {
-            // If not found in quiz name, check questions and answers within that quiz unit
-            const quizKey = button.dataset.quiz;
-            if (quizData[quizKey]) {
-                for (const questionObj of quizData[quizKey]) {
-                    if (questionObj.question.toLowerCase().includes(searchTerm)) {
-                        foundInQuizData = true;
-                        break;
-                    }
-                    for (const answer of questionObj.answers) {
-                        if (answer.text.toLowerCase().includes(searchTerm)) {
-                            foundInQuizData = true;
-                            break;
-                        }
-                    }
-                    if (foundInQuizData) break;
-                }
-            }
-        }
-
-        if (foundInQuizData) {
-            button.style.display = 'block'; // Show the button
-            // Optionally, open the parent details tag if a child button is found
-            const parentDetails = button.closest('details');
-            if (parentDetails) {
-                parentDetails.open = true;
-            }
-        } else {
-            button.style.display = 'none'; // Hide the button
-        }
-    });
-
-    // After filtering buttons, check if any buttons are visible in each details group.
-    // If not, collapse the details group.
-    quizListContainer.querySelectorAll('details').forEach(detailsElement => {
-        const visibleButtonsInGroup = detailsElement.querySelectorAll('.quiz-btn[style*="display: block"]');
-        if (visibleButtonsInGroup.length === 0 && searchTerm !== '') {
-            detailsElement.open = false;
-        } else if (searchTerm === '') {
-            // When search term is empty, ensure all details are open as per initial state
-            detailsElement.open = true;
-        }
-    });
-}
-
-// Add event listener to the search input
-searchInput.addEventListener('input', filterQuizzes);
-
-// Initial filter on page load (in case there's a pre-filled search term or for consistency)
-filterQuizzes();
-
-
-
-        
-        
-        // DOM elements
-        const quizTitleEl = document.getElementById('quiz-title');
-        const quizContentEl = document.getElementById('quiz-content');
+        const quizButtons = document.querySelectorAll('.quiz-btn');
+        const quizTitle = document.getElementById('quiz-title');
+        const quizContent = document.getElementById('quiz-content');
         const progressContainer = document.getElementById('progress-container');
-        const correctCountEl = document.getElementById('correct-count');
-        const incorrectCountEl = document.getElementById('incorrect-count');
-        const correctBarEl = document.getElementById('correct-bar');
-        const incorrectBarEl = document.getElementById('incorrect-bar');
-        const quizListContainer = document.getElementById('quiz-list-container');
+        const correctCountSpan = document.getElementById('correct-count');
+        const incorrectCountSpan = document.getElementById('incorrect-count');
+        const correctBar = document.getElementById('correct-bar');
+        const incorrectBar = document.getElementById('incorrect-bar');
+        const searchInput = document.getElementById('search-input');
 
-
-        // State variables
         let currentQuizQuestions = [];
-        let currentQuestionIndex = 0;
-        let correctCount = 0;
-        let incorrectCount = 0;
-        let totalQuestions = 0;
+        let correctAnswers = 0;
+        let incorrectAnswers = 0;
+        let answeredQuestions = 0;
 
-        /**
-         * Loads a new quiz based on the selected category.
-         * @param {string} category The name of the quiz to load (e.g., "Unit 1").
-         */
-        function loadQuiz(category) {
-            // Check if the quiz exists in our data
-            if (!quizData[category]) {
-                quizContentEl.innerHTML = `<p class="text-center text-red-500">Error: Quiz category "${category}" not found.</p>`;
+        // Function to display questions
+        function displayQuiz(quizName, questionsToDisplay) {
+            quizTitle.textContent = quizName;
+            quizContent.innerHTML = '';
+            progressContainer.classList.add('hidden'); // Hide progress for search results initially
+            correctAnswers = 0;
+            incorrectAnswers = 0;
+            answeredQuestions = 0;
+            updateProgressBars();
+
+            if (questionsToDisplay.length === 0) {
+                quizContent.innerHTML = `<p class="text-center text-gray-600 dark:text-gray-400">No questions found for "${quizName}" matching your search.</p>`;
                 return;
             }
 
-            // Update the quiz state
-            currentQuizQuestions = quizData[category];
-            totalQuestions = currentQuizQuestions.length;
-            currentQuestionIndex = 0;
-            correctCount = 0;
-            incorrectCount = 0;
-
-            // Update the UI
-            quizTitleEl.textContent = `${category} Quiz`;
-            progressContainer.classList.remove('hidden');
-            updateProgress();
-            showQuestion();
-        }
-
-        /**
-         * Displays the current question and its answers.
-         */
-        function showQuestion() {
-            if (currentQuestionIndex < totalQuestions) {
-                const question = currentQuizQuestions[currentQuestionIndex];
-                
-                // Clear previous content
-                quizContentEl.innerHTML = '';
-
-                // Create and append the question element
-                const questionDiv = document.createElement('div');
-                questionDiv.classList.add('text-2xl', 'font-bold', 'mb-6', 'text-gray-900', 'dark:text-gray-200', 'text-center');
-                questionDiv.textContent = `Question ${currentQuestionIndex + 1} of ${totalQuestions}: ${question.question}`;
-                quizContentEl.appendChild(questionDiv);
-
-                // Create and append the answers container
-                const answersDiv = document.createElement('div');
-                answersDiv.classList.add('space-y-4');
-                question.answers.forEach((answer) => {
-                    const answerBtn = document.createElement('button');
-                    answerBtn.classList.add('answer-btn', 'w-full', 'p-4', 'bg-gray-200', 'dark:bg-gray-700', 'rounded-lg', 'text-gray-800', 'dark:text-gray-200', 'font-medium', 'text-left', 'hover:bg-gray-300', 'dark:hover:bg-gray-600', 'transition-colors', 'duration-200');
-                    answerBtn.textContent = answer.text;
-                    answerBtn.addEventListener('click', () => handleAnswer(answerBtn, answer.correct, question.explanation));
-                    answersDiv.appendChild(answerBtn);
-                });
-                quizContentEl.appendChild(answersDiv);
-
-                // Add feedback and next button containers
-                const feedbackContainer = document.createElement('div');
-                feedbackContainer.id = 'feedback-container';
-                feedbackContainer.classList.add('mt-4', 'p-4', 'rounded-lg', 'text-white', 'font-semibold', 'whitespace-pre-wrap', 'hidden'); // Hidden by default
-                quizContentEl.appendChild(feedbackContainer);
-
-                const nextButton = document.createElement('button');
-                nextButton.id = 'next-button';
-                nextButton.classList.add('mt-6', 'w-full', 'p-4', 'bg-blue-600', 'text-white', 'rounded-lg', 'font-bold', 'hover:bg-blue-700', 'transition-colors', 'duration-200', 'hidden'); // Hidden by default
-                nextButton.textContent = 'Next Question';
-                nextButton.addEventListener('click', nextQuestion);
-                quizContentEl.appendChild(nextButton);
-
-            } else {
-                // Quiz finished
-                displayQuizResults();
-            }
-        }
-
-        /**
-         * Handles the user's answer selection.
-         * @param {HTMLElement} selectedButton The button element that was clicked.
-         * @param {boolean} isCorrect Whether the selected answer is correct.
-         * @param {string} explanation The explanation for the answer.
-         */
-        function handleAnswer(selectedButton, isCorrect, explanation) {
-            // Disable all answer buttons after selection
-            document.querySelectorAll('.answer-btn').forEach(btn => {
-                btn.disabled = true;
-                btn.classList.remove('hover:bg-gray-300', 'dark:hover:bg-gray-600');
+            questionsToDisplay.forEach((q, index) => {
+                const questionElement = document.createElement('div');
+                questionElement.classList.add('mb-8', 'p-6', 'bg-gray-50', 'dark:bg-gray-700', 'rounded-lg', 'shadow');
+                questionElement.innerHTML = `
+                    <p class="text-xl font-semibold mb-4">${index + 1}. ${q.question}</p>
+                    <div class="answers-container space-y-3">
+                        ${q.answers.map(answer => `
+                            <button class="answer-btn w-full text-left p-3 rounded-md bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 transition duration-200"
+                                data-correct="${answer.correct}">${answer.text}</button>
+                        `).join('')}
+                    </div>
+                    <div class="explanation mt-4 p-3 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded-md hidden">
+                        <strong>Explanation:</strong> ${q.explanation}
+                    </div>
+                `;
+                quizContent.appendChild(questionElement);
             });
 
-            const feedbackContainer = document.getElementById('feedback-container');
-            const nextButton = document.getElementById('next-button');
+            addAnswerButtonListeners();
+        }
 
-            feedbackContainer.classList.remove('hidden');
-            nextButton.classList.remove('hidden');
+        // Function to handle answer clicks
+        function addAnswerButtonListeners() {
+            quizContent.querySelectorAll('.answer-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const selectedButton = e.target;
+                    const isCorrect = selectedButton.dataset.correct === 'true';
+                    const answersContainer = selectedButton.closest('.answers-container');
+                    const explanationElement = answersContainer.nextElementSibling;
 
-            if (isCorrect) {
-                correctCount++;
-                selectedButton.classList.add('bg-green-500', 'dark:bg-green-700');
-                feedbackContainer.classList.remove('bg-red-500', 'dark:bg-red-700');
-                feedbackContainer.classList.add('bg-green-500', 'dark:bg-green-700');
-                feedbackContainer.textContent = 'Correct!';
-            } else {
-                incorrectCount++;
-                selectedButton.classList.add('bg-red-500', 'dark:bg-red-700');
-                feedbackContainer.classList.remove('bg-green-500', 'dark:bg-green-700');
-                feedbackContainer.classList.add('bg-red-500', 'dark:bg-red-700');
-                feedbackContainer.textContent = `Incorrect. ${explanation}`;
-                // Highlight the correct answer
-                const currentQuestion = currentQuizQuestions[currentQuestionIndex];
-                currentQuestion.answers.forEach(answer => {
-                    if (answer.correct) {
-                        document.querySelectorAll('.answer-btn').forEach(btn => {
-                            if (btn.textContent === answer.text) {
-                                btn.classList.add('bg-green-500', 'dark:bg-green-700', 'border-2', 'border-green-800');
-                            }
-                        });
+                    // Disable all buttons for this question after an answer is selected
+                    answersContainer.querySelectorAll('.answer-btn').forEach(btn => {
+                        btn.disabled = true;
+                        btn.classList.remove('hover:bg-gray-300', 'dark:hover:bg-gray-500');
+                        if (btn.dataset.correct === 'true') {
+                            btn.classList.add('bg-green-200', 'dark:bg-green-700', 'text-green-900', 'dark:text-green-100');
+                        } else {
+                            btn.classList.add('bg-red-200', 'dark:bg-red-700', 'text-red-900', 'dark:text-red-100');
+                        }
+                    });
+
+                    if (isCorrect) {
+                        correctAnswers++;
+                    } else {
+                        incorrectAnswers++;
                     }
+                    answeredQuestions++;
+
+                    explanationElement.classList.remove('hidden'); // Show explanation
+                    updateProgressBars();
                 });
+            });
+        }
+
+        // Function to update progress bars
+        function updateProgressBars() {
+            if (currentQuizQuestions.length === 0) {
+                progressContainer.classList.add('hidden');
+                return;
             }
-            updateProgress();
-        }
 
-        /**
-         * Moves to the next question or displays quiz results.
-         */
-        function nextQuestion() {
-            currentQuestionIndex++;
-            showQuestion();
-        }
+            progressContainer.classList.remove('hidden');
+            correctCountSpan.textContent = `Correct: ${correctAnswers}`;
+            incorrectCountSpan.textContent = `Incorrect: ${incorrectAnswers}`;
 
-        /**
-         * Updates the progress bar and counts.
-         */
-        function updateProgress() {
-            correctCountEl.textContent = `Correct: ${correctCount}`;
-            incorrectCountEl.textContent = `Incorrect: ${incorrectCount}`;
+            const totalQuestions = currentQuizQuestions.length;
+            const correctPercentage = (correctAnswers / totalQuestions) * 100;
+            const incorrectPercentage = (incorrectAnswers / totalQuestions) * 100;
 
-            const correctPercentage = totalQuestions > 0 ? (correctCount / totalQuestions) * 100 : 0;
-            const incorrectPercentage = totalQuestions > 0 ? (incorrectCount / totalQuestions) * 100 : 0;
-            const totalAnswered = correctCount + incorrectCount;
-            const remainingPercentage = totalQuestions > 0 ? ((totalQuestions - totalAnswered) / totalQuestions) * 100 : 0;
+            correctBar.style.width = `${correctPercentage}%`;
+            incorrectBar.style.width = `${incorrectPercentage}%`;
 
-
-            correctBarEl.style.width = `${correctPercentage}%`;
-            incorrectBarEl.style.width = `${incorrectPercentage}%`;
-
-            // Adjust the position of the incorrect bar based on the correct bar
-            incorrectBarEl.style.left = `${correctPercentage}%`;
-        }
-
-        /**
-         * Displays the final quiz results.
-         */
-        function displayQuizResults() {
-            quizContentEl.innerHTML = `
-                <h2 class="text-3xl font-bold text-center text-gray-800 dark:text-gray-200 mb-6">Quiz Complete!</h2>
-                <div class="text-center text-xl space-y-2">
-                    <p class="text-green-600">Total Correct: ${correctCount}</p>
-                    <p class="text-red-600">Total Incorrect: ${incorrectCount}</p>
-                    <p class="text-gray-700 dark:text-gray-300">You scored ${((correctCount / totalQuestions) * 100).toFixed(2)}%</p>
-                </div>
-                <button onclick="restartQuiz()" class="mt-8 w-full p-4 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 transition-colors duration-200">
-                    Restart Quiz
-                </button>
-            `;
-            // Hide progress container when quiz is over
-            progressContainer.classList.add('hidden');
-        }
-
-        /**
-         * Restarts the current quiz.
-         */
-        function restartQuiz() {
-            const currentCategory = quizTitleEl.textContent.replace(' Quiz', '');
-            loadQuiz(currentCategory);
+            // Adjust positioning for both bars if one or both are present
+            if (correctPercentage > 0 && incorrectPercentage > 0) {
+                incorrectBar.style.left = `${correctPercentage}%`;
+            } else {
+                incorrectBar.style.left = '0%'; // Reset if only incorrect
+            }
         }
 
         // Event listeners for quiz selection buttons
-        quizListContainer.addEventListener('click', (event) => {
-            if (event.target.classList.contains('quiz-btn')) {
-                const category = event.target.dataset.quiz;
-                loadQuiz(category);
-            }
+        quizButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const quizName = button.dataset.quiz;
+                currentQuizQuestions = quizData[quizName];
+                displayQuiz(quizName, currentQuizQuestions);
+                searchInput.value = ''; // Clear search input when a new quiz is selected
+            });
         });
 
-        // Initialize with the first quiz (optional, or leave blank to show instructions)
-        // loadQuiz("Unit 1"); // Uncomment to load Unit 1 by default
+        // Search functionality
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            const allQuestions = [];
+
+            // Gather all questions from all quizzes
+            for (const quizName in quizData) {
+                quizData[quizName].forEach(q => {
+                    allQuestions.push({ ...q, quizName: quizName }); // Add quizName for context
+                });
+            }
+
+            if (searchTerm === '') {
+                quizTitle.textContent = "Select a Quiz";
+                quizContent.innerHTML = `<p class="text-center text-gray-600 dark:text-gray-400">
+                    Click on a quiz from the left-hand navigation to get started!
+                </p>`;
+                progressContainer.classList.add('hidden');
+                return;
+            }
+
+            const filteredQuestions = allQuestions.filter(question => {
+                const questionText = question.question.toLowerCase();
+                const answersText = question.answers.map(a => a.text.toLowerCase()).join(' ');
+                const explanationText = question.explanation ? question.explanation.toLowerCase() : '';
+
+                return questionText.includes(searchTerm) ||
+                       answersText.includes(searchTerm) ||
+                       explanationText.includes(searchTerm);
+            });
+
+            displaySearchResults(filteredQuestions, searchTerm);
+        });
+
+        function displaySearchResults(results, searchTerm) {
+            quizTitle.textContent = `Search Results for "${searchTerm}"`;
+            quizContent.innerHTML = '';
+            progressContainer.classList.add('hidden'); // Hide progress bars for search results
+
+            if (results.length === 0) {
+                quizContent.innerHTML = `<p class="text-center text-gray-600 dark:text-gray-400">No questions or answers found matching "${searchTerm}".</p>`;
+                return;
+            }
+
+            results.forEach((q, index) => {
+                const questionElement = document.createElement('div');
+                questionElement.classList.add('mb-8', 'p-6', 'bg-gray-50', 'dark:bg-gray-700', 'rounded-lg', 'shadow');
+
+                // Highlight search term in question
+                let highlightedQuestion = q.question.replace(new RegExp(searchTerm, 'gi'), match => `<span class="highlight">${match}</span>`);
+
+                // Highlight search term in answers and explanation
+                let answersHtml = q.answers.map(answer => {
+                    let highlightedAnswer = answer.text.replace(new RegExp(searchTerm, 'gi'), match => `<span class="highlight">${match}</span>`);
+                    return `
+                        <button class="answer-btn w-full text-left p-3 rounded-md bg-gray-200 dark:bg-gray-600 transition duration-200"
+                            data-correct="${answer.correct}">${highlightedAnswer}</button>
+                    `;
+                }).join('');
+
+                let highlightedExplanation = q.explanation ? q.explanation.replace(new RegExp(searchTerm, 'gi'), match => `<span class="highlight">${match}</span>`) : '';
+
+                questionElement.innerHTML = `
+                    <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">From: ${q.quizName}</p>
+                    <p class="text-xl font-semibold mb-4">${index + 1}. ${highlightedQuestion}</p>
+                    <div class="answers-container space-y-3">
+                        ${answersHtml}
+                    </div>
+                    <div class="explanation mt-4 p-3 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded-md">
+                        <strong>Explanation:</strong> ${highlightedExplanation}
+                    </div>
+                `;
+                quizContent.appendChild(questionElement);
+            });
+        }
     </script>
 </body>
 </html>
