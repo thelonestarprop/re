@@ -105,6 +105,10 @@
                     Click on a quiz from the left-hand navigation to get started!
                 </p>
             </div>
+
+            <div id="quiz-navigation" class="mt-8 flex justify-end space-x-4 hidden">
+                <button id="next-question-btn" class="px-6 py-3 bg-blue-600 text-white font-bold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200">Next Question</button>
+            </div>
         </div>
     </main>
 
@@ -586,7 +590,7 @@
                         { "text": "The process of transferring property through a will", "correct": false },
                         { "text": "The ability to sell a property quickly in a hot market", "correct": false }
                     ],
-                    "explanation": "Eminent domain is the right of a government or its agent to expropriate private property for public use, with payment of compensation."
+                    "explanation": "Eminent domain is the right of a government to take private property for public use, with payment of compensation."
                 }
             ],
             "Unit 10": [
@@ -666,51 +670,71 @@
         const correctBar = document.getElementById('correct-bar');
         const incorrectBar = document.getElementById('incorrect-bar');
         const searchInput = document.getElementById('search-input');
+        const quizNavigation = document.getElementById('quiz-navigation');
+        const nextQuestionBtn = document.getElementById('next-question-btn');
 
         let currentQuizQuestions = [];
+        let currentQuestionIndex = 0;
         let correctAnswers = 0;
         let incorrectAnswers = 0;
         let answeredQuestions = 0;
+        let activeQuizName = ''; // To store the name of the currently active quiz
 
-        // Function to display questions
-        function displayQuiz(quizName, questionsToDisplay) {
-            quizTitle.textContent = quizName;
-            quizContent.innerHTML = '';
-            progressContainer.classList.add('hidden'); // Hide progress for search results initially
+        // Function to start a quiz (display the first question)
+        function startQuiz(quizName) {
+            activeQuizName = quizName;
+            currentQuizQuestions = quizData[quizName];
+            currentQuestionIndex = 0;
             correctAnswers = 0;
             incorrectAnswers = 0;
             answeredQuestions = 0;
-            updateProgressBars();
 
-            if (questionsToDisplay.length === 0) {
-                quizContent.innerHTML = `<p class="text-center text-gray-600 dark:text-gray-400">No questions found for "${quizName}" matching your search.</p>`;
+            quizTitle.textContent = quizName;
+            progressContainer.classList.remove('hidden');
+            quizNavigation.classList.remove('hidden');
+            nextQuestionBtn.textContent = 'Next Question'; // Reset button text
+            nextQuestionBtn.disabled = true; // Disable next until answer is selected
+
+            updateProgressBars();
+            renderCurrentQuestion();
+        }
+
+        // Function to render the current question
+        function renderCurrentQuestion() {
+            quizContent.innerHTML = ''; // Clear previous question
+            
+            if (currentQuestionIndex >= currentQuizQuestions.length) {
+                displayQuizResults();
                 return;
             }
 
-            questionsToDisplay.forEach((q, index) => {
-                const questionElement = document.createElement('div');
-                questionElement.classList.add('mb-8', 'p-6', 'bg-gray-50', 'dark:bg-gray-700', 'rounded-lg', 'shadow');
-                questionElement.innerHTML = `
-                    <p class="text-xl font-semibold mb-4">${index + 1}. ${q.question}</p>
-                    <div class="answers-container space-y-3">
-                        ${q.answers.map(answer => `
-                            <button class="answer-btn w-full text-left p-3 rounded-md bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 transition duration-200"
-                                data-correct="${answer.correct}">${answer.text}</button>
-                        `).join('')}
-                    </div>
-                    <div class="explanation mt-4 p-3 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded-md hidden">
-                        <strong>Explanation:</strong> ${q.explanation}
-                    </div>
-                `;
-                quizContent.appendChild(questionElement);
-            });
+            const q = currentQuizQuestions[currentQuestionIndex];
 
-            addAnswerButtonListeners();
+            const questionElement = document.createElement('div');
+            questionElement.classList.add('mb-8', 'p-6', 'bg-gray-50', 'dark:bg-gray-700', 'rounded-lg', 'shadow');
+            questionElement.innerHTML = `
+                <p class="text-xl font-semibold mb-4">${currentQuestionIndex + 1}. ${q.question}</p>
+                <div class="answers-container space-y-3">
+                    ${q.answers.map(answer => `
+                        <button class="answer-btn w-full text-left p-3 rounded-md bg-gray-200 dark:bg-gray-600 hover:bg-gray-300 dark:hover:bg-gray-500 transition duration-200"
+                            data-correct="${answer.correct}">${answer.text}</button>
+                    `).join('')}
+                </div>
+                <div class="explanation mt-4 p-3 bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200 rounded-md hidden">
+                    <strong>Explanation:</strong> ${q.explanation}
+                </div>
+            `;
+            quizContent.appendChild(questionElement);
+
+            addAnswerButtonListeners(); // Attach listeners for the newly rendered question
         }
 
         // Function to handle answer clicks
         function addAnswerButtonListeners() {
-            quizContent.querySelectorAll('.answer-btn').forEach(button => {
+            const currentQuestionAnswers = quizContent.querySelector('.answers-container');
+            if (!currentQuestionAnswers) return; // Exit if no answers container found
+
+            currentQuestionAnswers.querySelectorAll('.answer-btn').forEach(button => {
                 button.addEventListener('click', (e) => {
                     const selectedButton = e.target;
                     const isCorrect = selectedButton.dataset.correct === 'true';
@@ -736,6 +760,10 @@
                     answeredQuestions++;
 
                     explanationElement.classList.remove('hidden'); // Show explanation
+                    nextQuestionBtn.disabled = false; // Enable next button after answer
+                    if (currentQuestionIndex === currentQuizQuestions.length - 1) {
+                        nextQuestionBtn.textContent = 'Show Results';
+                    }
                     updateProgressBars();
                 });
             });
@@ -767,17 +795,45 @@
             }
         }
 
+        // Function to display final quiz results
+        function displayQuizResults() {
+            quizTitle.textContent = `Quiz Complete: ${activeQuizName}`;
+            quizContent.innerHTML = `
+                <p class="text-center text-2xl font-bold mb-4">You have finished the quiz!</p>
+                <p class="text-center text-xl mb-2">Total Questions: ${currentQuizQuestions.length}</p>
+                <p class="text-center text-xl text-green-600 mb-2">Correct Answers: ${correctAnswers}</p>
+                <p class="text-center text-xl text-red-600 mb-4">Incorrect Answers: ${incorrectAnswers}</p>
+                <div class="flex justify-center mt-6">
+                    <button id="restart-quiz-btn" class="px-6 py-3 bg-indigo-600 text-white font-bold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-200">
+                        Restart Quiz
+                    </button>
+                </div>
+            `;
+            quizNavigation.classList.add('hidden'); // Hide navigation buttons
+            progressContainer.classList.remove('hidden'); // Keep progress visible for results
+
+            document.getElementById('restart-quiz-btn').addEventListener('click', () => {
+                startQuiz(activeQuizName); // Restart the current quiz
+            });
+        }
+
         // Event listeners for quiz selection buttons
         quizButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const quizName = button.dataset.quiz;
-                currentQuizQuestions = quizData[quizName];
-                displayQuiz(quizName, currentQuizQuestions);
-                searchInput.value = ''; // Clear search input when a new quiz is selected
+                searchInput.value = ''; // Clear search input
+                startQuiz(quizName);
             });
         });
 
-        // Search functionality
+        // Event listener for Next Question button
+        nextQuestionBtn.addEventListener('click', () => {
+            currentQuestionIndex++;
+            renderCurrentQuestion();
+            nextQuestionBtn.disabled = true; // Disable until next answer is selected
+        });
+
+        // Search functionality (remains showing all results at once)
         searchInput.addEventListener('input', () => {
             const searchTerm = searchInput.value.toLowerCase();
             const allQuestions = [];
@@ -795,6 +851,7 @@
                     Click on a quiz from the left-hand navigation to get started!
                 </p>`;
                 progressContainer.classList.add('hidden');
+                quizNavigation.classList.add('hidden'); // Hide navigation buttons
                 return;
             }
 
@@ -815,6 +872,7 @@
             quizTitle.textContent = `Search Results for "${searchTerm}"`;
             quizContent.innerHTML = '';
             progressContainer.classList.add('hidden'); // Hide progress bars for search results
+            quizNavigation.classList.add('hidden'); // Hide navigation buttons for search results
 
             if (results.length === 0) {
                 quizContent.innerHTML = `<p class="text-center text-gray-600 dark:text-gray-400">No questions or answers found matching "${searchTerm}".</p>`;
