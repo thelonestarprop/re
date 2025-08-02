@@ -58,6 +58,11 @@
                     <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-quiz="Unit 3">Unit 3</button>
                     <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-quiz="Unit 4">Unit 4</button>
                     <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-quiz="Unit 5">Unit 5</button>
+                    <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-quiz="Unit 6">Unit 6</button>
+                    <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-quiz="Unit 7">Unit 7</button>
+                    <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-quiz="Unit 8">Unit 8</button>
+                    <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-quiz="Unit 9">Unit 9</button>
+                    <button class="quiz-btn w-full text-left p-2 rounded-md hover:bg-gray-600 transition duration-200" data-quiz="Unit 10">Unit 10</button>
                 </div>
             </details>
             <details class="group cursor-pointer">
@@ -72,508 +77,501 @@
         </div>
     </aside>
 
-    <main class="flex-1 p-8 overflow-y-auto">
-        <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full max-w-3xl mx-auto">
-            <h2 id="quiz-title" class="text-4xl font-extrabold text-center text-gray-800 dark:text-gray-200 mb-6">Select a Quiz</h2>
-            
-            <div id="progress-container" class="mb-8 p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-inner hidden">
-                <div class="flex justify-between items-center text-lg font-bold mb-2">
-                    <span id="correct-count" class="text-green-600">Correct: 0</span>
-                    <span id="incorrect-count" class="text-red-600">Incorrect: 0</span>
-                </div>
-                <div class="w-full bg-gray-300 dark:bg-gray-600 rounded-full h-4 relative overflow-hidden">
-                    <div id="correct-bar" class="absolute h-full bg-green-500 rounded-full transition-all duration-300 ease-out" style="width: 0%;"></div>
-                    <div id="incorrect-bar" class="absolute h-full bg-red-500 rounded-full transition-all duration-300 ease-out" style="width: 0%;"></div>
-                </div>
+<main class="flex-1 p-8 overflow-y-auto">
+    <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg w-full max-w-3xl mx-auto">
+        <h2 id="quiz-title" class="text-4xl font-extrabold text-center text-gray-800 dark:text-gray-200 mb-6">Select a Quiz</h2>
+        
+        <div id="progress-container" class="mb-8 p-4 bg-gray-100 dark:bg-gray-700 rounded-lg shadow-inner hidden">
+            <div class="flex justify-between items-center text-lg font-bold mb-2">
+                <span id="correct-count" class="text-green-600">Correct: 0</span>
+                <span id="incorrect-count" class="text-red-600">Incorrect: 0</span>
             </div>
-
-            <div id="quiz-content">
-                <p class="text-center text-gray-600 dark:text-gray-400">
-                    Click on a quiz from the left-hand navigation to get started!
-                </p>
+            <div class="w-full bg-gray-300 dark:bg-gray-600 rounded-full h-4 relative overflow-hidden">
+                <div id="correct-bar" class="absolute h-full bg-green-500 rounded-full transition-all duration-300 ease-out" style="width: 0%;"></div>
+                <div id="incorrect-bar" class="absolute h-full bg-red-500 rounded-full transition-all duration-300 ease-out" style="width: 0%;"></div>
             </div>
         </div>
-    </main>
 
-    <script>
-        // Quiz data as a JSON object
-        const quizData = {
-            "Unit 1": [
-                {
-                    "question": "Which of these is considered to be an encumbrance?",
-                    "answers": [
-                        { "text": "A mortgage", "correct": false },
-                        { "text": "A lease", "correct": false },
-                        { "text": "An easement", "correct": false },
-                        { "text": "All of these", "correct": true }
-                    ],
-                    "explanation": "A lease, mortgage, easement, or restriction is considered an encumbrance of a fee simple title."
-                },
-                {
-                    "question": "Which of the following courses of action would the Federal Reserve Board take during an elongated period of \"tight money?\"",
-                    "answers": [
-                        { "text": "Purchasing large blocks of government bonds", "correct": false },
-                        { "text": "Lower the reserve requirements of bank members", "correct": false },
-                        { "text": "Decrease the discount rate for bank members", "correct": false },
-                        { "text": "Any of the following", "correct": true }
-                    ],
-                    "explanation": "Answers (a), (b), (c), and (d) are all courses of action taken by the Federal Reserve Board to help alleviate tight money conditions in the country."
-                },
-                {
-                    "question": "A broker acting as agent for a principal has as much authority as:",
-                    "answers": [
-                        { "text": "other parties believe the agent to possess.", "correct": false },
-                        { "text": "the agent chooses to accept.", "correct": false },
-                        { "text": "he chooses to accept as limited by the Statute of Limitations.", "correct": false },
-                        { "text": "the principal actually or ostensibly confers upon him.", "correct": true }
-                    ],
-                    "explanation": "An agent has as much authority as his principal actually or ostensibly confers upon him."
-                },
-                {
-                    "question": "What does a general warranty deed contain?",
-                    "answers": [
-                        { "text": "None of these.", "correct": false },
-                        { "text": "Covenants regarding quiet enjoyment", "correct": false },
-                        { "text": "Covenants that include provisions of a quitclaim deed", "correct": false },
-                        { "text": "Covenants that warrant the new owner’s undisturbed and clear title", "correct": true }
-                    ],
-                    "explanation": "Covenants that warrant the new owner’s undisturbed and clear title are contained in a general warranty deed."
-                },
-                {
-                    "question": "In Texas, if Heather is an agent for a buyer Harry and she shows him a property that is known to have ghosts living there according to the neighbors, but she does not inform Harry of this information, after Harry purchases the property, Heather would:",
-                    "answers": [
-                        { "text": "Be considered to have misrepresented Harry", "correct": false },
-                        { "text": "Be liable for misrepresentation", "correct": false },
-                        { "text": "Be open to being sued by Harry if he finds out about the ghosts", "correct": false },
-                        { "text": "Not be liable for the nondisclosure of ghosts", "correct": true }
-                    ],
-                    "explanation": "In Texas, agents are absolved from any liability regarding nondisclosure of stigmatized properties."
-                },
-                {
-                    "question": "A couple is looking at houses and turns one down because they felt the price of the home was too high. This is based on what principle of real estate?",
-                    "answers": [
-                        { "text": "Conformity", "correct": false },
-                        { "text": "Anticipation", "correct": false },
-                        { "text": "All of these", "correct": false },
-                        { "text": "Substitution", "correct": true }
-                    ],
-                    "explanation": "The principle of substitution is the basis of the appraisal process. Explained simply, value is set by the cost of getting an equally desirable substitute."
-                },
-                {
-                    "question": "Constructive eviction may allow for a tenant to vacate the premises before the expiration of a lease term. Which would be an example of this?",
-                    "answers": [
-                        { "text": "Landlord has shown property to prospective tenant and is negotiating terms", "correct": false },
-                        { "text": "Property cannot be used for original purpose due to unnecessary and considerable changes made by landlord", "correct": false },
-                        { "text": "Landlord fails to make necessary repairs", "correct": false },
-                        { "text": "All of the above", "correct": true }
-                    ],
-                    "explanation": "All of the above are examples of constructive eviction. a) Landlord has shown property to prospective tenant and is negotiating terms b) Property cannot be used for original purpose due to unnecessary and considerable changes made by landlord c) Landlord fails to make necessary repairs"
-                },
-                {
-                    "question": "\"A\" receives a life estate for the life of \"X.\" \"A\" dies before \"X.\" The estate:",
-                    "answers": [
-                        { "text": "ceases to exist.", "correct": false },
-                        { "text": "reverts to the original grantor.", "correct": false },
-                        { "text": "vests in", "correct": false },
-                        { "text": "vests in the heirs of A until X dies at which time the estate will revert to the original grantor.", "correct": true }
-                    ],
-                    "explanation": "The estate vests in the heirs of \"A\" until \"X\" dies at which time the estate will revert to the original grantor."
-                },
-                {
-                    "question": "The original amortization term minus the number of payments that have been applied refers to the:",
-                    "answers": [
-                        { "text": "Remaining interest", "correct": false },
-                        { "text": "Total amortization term", "correct": false },
-                        { "text": "Loan amount", "correct": false },
-                        { "text": "Remaining term", "correct": true }
-                    ],
-                    "explanation": "The original amortization term minus the number of payments that have been applied refers to the remaining term."
-                },
-                {
-                    "question": "If Franklin, a real estate agent, intentionally speaks very highly and enthusiastically about a property he is trying to sell to a client in order to secure the deal, this type of behavior would be:",
-                    "answers": [
-                        { "text": "Steering", "correct": false },
-                        { "text": "Illegal", "correct": false },
-                        { "text": "Misrepresentation", "correct": false },
-                        { "text": "Puffing", "correct": true }
-                    ],
-                    "explanation": "The term “puffing” can be used to describe “sales talk” that is used to secure a deal. As long as there is no misrepresentation, it is considered a legal practice."
-                }
-            ],
-            "Unit 2": [
-                {
-                    "question": "A credit arrangement which allows a customer to borrow against a pre-approved line of credit when purchasing goods and services is called:",
-                    "answers": [
-                        { "text": "A loan", "correct": false },
-                        { "text": "A credit card", "correct": false },
-                        { "text": "None of these", "correct": false },
-                        { "text": "Revolving debt", "correct": true }
-                    ],
-                    "explanation": "A credit arrangement which allows a customer to borrow against a pre-approved line of credit when purchasing goods and services is called revolving debt."
-                },
-                {
-                    "question": "A valid written lease must include:",
-                    "answers": [
-                        { "text": "agreement to let, agreement to take delivery, and acceptance.", "correct": false },
-                        { "text": "term, consideration, and description of the premises.", "correct": false },
-                        { "text": "a landlord and tenant with the legal capacity to enter a binding contract.", "correct": false },
-                        { "text": "all of the above", "correct": true }
-                    ],
-                    "explanation": "Each of the choices describes a necessary element of a valid lease."
-                },
-                {
-                    "question": "How many acres are in the following described area: the W 1/2 of the N 1/2 of section 5?",
-                    "answers": [
-                        { "text": "110", "correct": false },
-                        { "text": "120", "correct": false },
-                        { "text": "140", "correct": false },
-                        { "text": "160", "correct": true }
-                    ],
-                    "explanation": "A standard section of land is one square mile, which contains 640 acres. The N 1/2 of section 5 is 320 acres (640 / 2), and the W 1/2 of that is 160 acres (320 / 2)."
-                },
-                {
-                    "question": "In Texas, if a builder of residential homes sells more than _______________ properties a year, they are required to obtain a real estate license or employ a licensed broker.",
-                    "answers": [
-                        { "text": "3", "correct": false },
-                        { "text": "2", "correct": false },
-                        { "text": "1", "correct": false },
-                        { "text": "4", "correct": true }
-                    ],
-                    "explanation": "If a builder of residential homes sells more than 4 properties in a single year, they must obtain a real estate license or employ a real estate broker."
-                },
-                {
-                    "question": "Real property includes all of the following except:",
-                    "answers": [
-                        { "text": "airspace.", "correct": false },
-                        { "text": "minerals.", "correct": false },
-                        { "text": "water rights.", "correct": false },
-                        { "text": "oil.", "correct": true }
-                    ],
-                    "explanation": "Real property is land, anything permanently attached to the land, anything appurtenant to the land or anything immovable by law. Land includes airspace, surface rights, mineral rights, and water rights."
-                },
-                {
-                    "question": "Brad sold his house to Jerry, who did not record the deed, but moved in. Brad then sold the same property to George, who reviewed the county recorder's records, but did not look at the property. Brad gave George a deed, which was recorded. Which of the following would be true concerning title to the property?",
-                    "answers": [
-                        { "text": "Jerry and George are co-owners of the property", "correct": false },
-                        { "text": "George now owns the property because he recorded his deed and Jerry did not", "correct": false },
-                        { "text": "George has recourse against Jerry for failure to record", "correct": false },
-                        { "text": "Jerry maintains title", "correct": true }
-                    ],
-                    "explanation": "Although Jerry did not record the deed, he took possession by moving in. Possession of the property by Jerry gives constructive notice. Since George recorded after Jerry took possession, he had constructive notice of Jerry's rights."
-                },
-                {
-                    "question": "Which of the following is correct concerning an ALTA extended coverage policy of title insurance?",
-                    "answers": [
-                        { "text": "It protects a lessee who occupies the property after the date shown on the title insurance policy", "correct": false },
-                        { "text": "It protects against any encroachment that occurs after the date of issuance of the title policy", "correct": false },
-                        { "text": "It protects against any easements created during the term of the title insurance policy", "correct": false },
-                        { "text": "It is limited to stated conditions of title as of the date of the issuance of the title policy", "correct": true }
-                    ],
-                    "explanation": "An ALTA policy applies to owners or lenders not to lessees. A survey of the property is done at the time the policy is issued, but it does not protect against subsequent encroachments. Answer (b) is the only one that is correct."
-                },
-                {
-                    "question": "The final step in the Statutory Dedication process is:",
-                    "answers": [
-                        { "text": "The acceptance by the proper official", "correct": false },
-                        { "text": "The signature of the Real Estate Commissioner", "correct": false },
-                        { "text": "None of these", "correct": false },
-                        { "text": "The recording of the subdivision map", "correct": true }
-                    ],
-                    "explanation": "When the subdivision map is approved and recorded, this would be the final step in the Statutory Dedication process."
-                },
-                {
-                    "question": "Consideration can be:",
-                    "answers": [
-                        { "text": "money.", "correct": false },
-                        { "text": "services.", "correct": false },
-                        { "text": "covenants.", "correct": false },
-                        { "text": "all of the above", "correct": true }
-                    ],
-                    "explanation": "Covenants are promises and we know that consideration can be money, services, or promises. It can also be love and affection."
-                },
-                {
-                    "question": "There are many agreements that could be placed in promissory notes that would prohibit the borrower from doing certain things. An agreement that would prohibit the borrower from paying off the loan before the maturity date is called a:",
-                    "answers": [
-                        { "text": "prevention clause.", "correct": false },
-                        { "text": "defeasance clause.", "correct": false },
-                        { "text": "release clause.", "correct": false },
-                        { "text": "lock-in clause.", "correct": true }
-                    ],
-                    "explanation": "A lock-in clause prohibits borrowers from paying off a loan in advance. It is not allowed on residential units of less than four units."
-                }
-            ],
-            "Unit 3": [
-  {
-    "question": "Under the provisions of the Interstate Subdivided Lands Act, can the buyer rescind his offer within specified time limits, if he buys:",
-    "answers": [
-      { "text": "land projects.", "correct": true },
-      { "text": "condominium.", "correct": false },
-      { "text": "stock cooperative project.", "correct": false },
-      { "text": "none of the above", "correct": false }
-    ],
-    "explanation": "The law allows a buyer 14 days after signing a contract to purchase property in a land project to rescind the offer, with a full refund of any money paid."
-  },
-  {
-    "question": "In Texas, if an unlicensed person is charged with a first-time misdemeanor of performing activities requiring a real estate license, they:",
-    "answers": [
-      { "text": "May be subject to a penalty of imprisonment to exceed 90 days", "correct": false },
-      { "text": "May be subject to a penalty of a fine not to exceed $500", "correct": true },
-      { "text": "May be subject to a penalty of a fine to exceed $500", "correct": false },
-      { "text": "None of these", "correct": false }
-    ],
-    "explanation": "In Texas, any unlicensed person who is charged with a first-time misdemeanor of performing activities requiring a real estate license may be subject to a penalty of a fine not to exceed $500, imprisonment not to exceed 90 days, or both."
-  },
-  {
-    "question": "A cash payment of $10,001 is given as earnest money to secure a property. What must be filed?",
-    "answers": [
-      { "text": "A procurement contract", "correct": false },
-      { "text": "An expediting loan form", "correct": false },
-      { "text": "An IRS Form 8300", "correct": true },
-      { "text": "A documenting receipt", "correct": false }
-    ],
-    "explanation": "The IRS requires any cash payments over $10,000 be recorded by filing a form 8300."
-  },
-  {
-    "question": "When a broker obtains a new contract, it is considered what until fully performed?",
-    "answers": [
-      { "text": "Pre-performed", "correct": false },
-      { "text": "Invalid", "correct": false },
-      { "text": "Pre-executed", "correct": false },
-      { "text": "Executory", "correct": true }
-    ],
-    "explanation": "A contract that has not been fully performed is known as executory. Once it is performed, it is called executed."
-  },
-  {
-    "question": "A wife can will:",
-    "answers": [
-      { "text": "all the community property.", "correct": false },
-      { "text": "1/2 the community property.", "correct": true },
-      { "text": "any community property the husband has not willed.", "correct": false },
-      { "text": "none of the community property.", "correct": false }
-    ],
-    "explanation": "Both husband and wife have the right to will 1/2 the community property."
-  },
-  {
-    "question": "Individual lots that are created from a larger tract and that are offered for sale or lease best describes a:",
-    "answers": [
-      { "text": "Suburb", "correct": false },
-      { "text": "Housing tract", "correct": false },
-      { "text": "Development", "correct": false },
-      { "text": "Subdivision", "correct": true }
-    ],
-    "explanation": "Individual lots that are created from a larger tract and that are offered for sale or lease best describes a subdivision."
-  },
-  {
-    "question": "Mr. Noro bought a property using a purchase money trust deed. A few years later he sold the property to Ms. Hassen for all cash. Which of the following would not be disclosed by the public records?",
-    "answers": [
-      { "text": "A grant deed to Mr. Noro", "correct": false },
-      { "text": "The original trust deed that Mr. Noro used in purchasing the property", "correct": false },
-      { "text": "A reconveyance deed to Mr. Noro", "correct": false },
-      { "text": "A reconveyance deed to Ms. Hassen", "correct": true }
-    ],
-    "explanation": "Since Ms. Hassen paid all cash for the property, there would be no need for a reconveyance deed to Ms. Hassen. Therefore, it would not appear on public records."
-  },
-  {
-    "question": "A licensed agent working under John, a broker, withdraws funds from John’s broker trust account with John’s permission. The agent is licensed but not bonded. This transaction would be:",
-    "answers": [
-      { "text": "Illegal", "correct": true },
-      { "text": "None of these", "correct": false },
-      { "text": "Unethical", "correct": false },
-      { "text": "Legal", "correct": false }
-    ],
-    "explanation": "In order for someone other than the broker to withdraw funds from the broker’s trust account, the person must be bonded."
-  },
-  {
-    "question": "While the objective in the cost approach generally is to estimate the value of both land and improvements, the land typically is appraised using the:",
-    "answers": [
-      { "text": "income approach.", "correct": false },
-      { "text": "gross rent multiplier approach.", "correct": false },
-      { "text": "option approach.", "correct": false },
-      { "text": "market data approach.", "correct": true }
-    ],
-    "explanation": "Land is appraised by comparing the subject property to recent sales of comparable parcels of land."
-  },
-  {
-    "question": "A down payment of $1,000 for the purchase of an apartment house valued at $690,000 is a good example of:",
-    "answers": [
-      { "text": "plottage.", "correct": false },
-      { "text": "leverage.", "correct": true },
-      { "text": "highest and best value.", "correct": false },
-      { "text": "none of the above", "correct": false }
-    ],
-    "explanation": "The definition of leverage can be viewed as using a small down payment to purchase as much property as possible."
-  }
-],
-            "Unit 4":
-                [
-  {
-    "question": "In Texas, an on-site manager who negotiates apartment leases during the normal course of business:",
-    "answers": [
-      { "text": "Must hold a real estate salesperson’s or broker’s license", "correct": false },
-      { "text": "None of these", "correct": false },
-      { "text": "Must have applied for a real estate license", "correct": false },
-      { "text": "Is not required to hold a real estate salesperson’s or broker’s license", "correct": true }
-    ],
-    "explanation": "In Texas, an on-site manager who negotiates apartment leases during the normal course of business is not required to hold a real estate salesperson’s or broker’s license. This exemption only applies to apartments; managers of condominiums or town homes need to be licensed."
-  },
-  {
-    "question": "Which of these terms refers to the owner of real property selling the property to someone else and is a legal right?",
-    "answers": [
-      { "text": "Salage", "correct": false },
-      { "text": "Release", "correct": false },
-      { "text": "Salable", "correct": false },
-      { "text": "Disposition", "correct": true }
-    ],
-    "explanation": "Disposition (which can also be called alienation), refers to the disposal of something. In real estate it is a right of alienation to do this with real property."
-  },
-  {
-    "question": "Which of the following falls under the term “real property”?",
-    "answers": [
-      { "text": "Furniture", "correct": false },
-      { "text": "Crops", "correct": false },
-      { "text": "Trees", "correct": true },
-      { "text": "Fixtures", "correct": false }
-    ],
-    "explanation": "Real property is the things that “go with the land”. Clearly trees are not personal property and they must “go with the land”, therefore trees is the correct answer in this case."
-  },
-  {
-    "question": "Elderly homeowners can sometimes tap the equity in their home without having to make monthly payments by using a:",
-    "answers": [
-      { "text": "conversion option.", "correct": false },
-      { "text": "blanket mortgage.", "correct": false },
-      { "text": "wraparound mortgage.", "correct": false },
-      { "text": "reverse mortgage.", "correct": true }
-    ],
-    "explanation": "With a reverse mortgage, the homeowner receives a lump sum or monthly checks, and no repayment is made until the property is sold or the owner dies."
-  },
-  {
-    "question": "If there is an easement appurtenant, there must also be:",
-    "answers": [
-      { "text": "A dominant tenement", "correct": true },
-      { "text": "None of these", "correct": false },
-      { "text": "A tenement in gross", "correct": false },
-      { "text": "A specific lien", "correct": false }
-    ],
-    "explanation": "An easement appurtenant can only exist if there is a dominant tenement."
-  },
-  {
-    "question": "If an agent makes claims to homeowners in a certain geographical location that their property values would decrease if certain ethnic groups were to move into the area, this could be an example of:",
-    "answers": [
-      { "text": "Blockbusting", "correct": true },
-      { "text": "Negotiation", "correct": false },
-      { "text": "Coercion", "correct": false },
-      { "text": "Steering", "correct": false }
-    ],
-    "explanation": "Blockbusting is historically when a mostly white neighborhood is seen as less valuable if mainly African Americans were to move in. This has been a tactic of some real estate agents in the past to try to trick white homeowners into selling their property at a lower price “before it’s too late.” Subsequently this practice has been outlawed."
-  },
-  {
-    "question": "Broker Smith operates a small business in a small room in his home. The room has its own entrance with just a sign over the door reading \"Smith Realtor\". He has no salesperson working for him except a 17-year-old student he has in training for the business and to whom he pays $5.00 for each listing the student brings in. Broker Smith is not a member of a real estate board. Since he lives outside of town he holds all deposits received until he goes to town, about once a week. From the information given, broker Smith is in violation of the Real Estate Law in all of the following, except:",
-    "answers": [
-      { "text": "paying compensation to an unlicensed person.", "correct": false },
-      { "text": "using the term", "correct": false },
-      { "text": "location of his office.", "correct": true },
-      { "text": "commingling.", "correct": false }
-    ],
-    "explanation": "He is definitely in violation of the Real Estate Law in answers (a), (b), and (d)."
-  },
-  {
-    "question": "If a property is in default and a meeting is announced in a public location to sell the property in order to recoup the mortgage in default, this would be an example of a:",
-    "answers": [
-      { "text": "Foreclosure", "correct": false },
-      { "text": "Eviction", "correct": false },
-      { "text": "Public auction", "correct": true }
-    ],
-    "explanation": "In order to repay a mortgage in default, sometimes a meeting in an announced public location occurs to attempt to sell the property. This is called a public auction."
-  },
-  {
-    "question": "What relationship to the broker’s client is a salesperson?",
-    "answers": [
-      { "text": "A dual agent", "correct": false },
-      { "text": "A special agent", "correct": false },
-      { "text": "A joint agent", "correct": false },
-      { "text": "A subagent", "correct": true }
-    ],
-    "explanation": "A salesperson is a subagent to the broker’s client."
-  },
-  {
-    "question": "In the sale of real property which of the following runs with the land?",
-    "answers": [
-      { "text": "Easements", "correct": false },
-      { "text": "Conditions", "correct": false },
-      { "text": "Stock in a mutual water company", "correct": false },
-      { "text": "All of the above", "correct": true }
-    ],
-    "explanation": "All are appurtenant, incident to, and run with the land."
-  }
-],
-                        "Unit 5":
-                [],
-                        "Unit 6":
-                [],
-                        "Unit 7":
-                [],
-                        "Unit 8":
-                [],
-                        "Unit 9":
-                [],
-                        "Unit 10":
-                [],
-                            
-            "Animal": [
-                {
-                    "question": "What is the fastest land animal?",
-                    "answers": [
-                        { "text": "Lion", "correct": false },
-                        { "text": "Cheetah", "correct": true },
-                        { "text": "Gazelle", "correct": false },
-                        { "text": "Ostrich", "correct": false }
-                    ],
-                    "explanation": "The cheetah can reach speeds of up to 70 miles per hour (112 km/h) in short bursts."
-                },
-                {
-                    "question": "Which animal is known as the 'King of the Jungle'?",
-                    "answers": [
-                        { "text": "Tiger", "correct": false },
-                        { "text": "Lion", "correct": true },
-                        { "text": "Gorilla", "correct": false },
-                        { "text": "Elephant", "correct": false }
-                    ],
-                    "explanation": "Lions are widely known as the 'King of the Jungle,' although they primarily live in savannas and grasslands, not jungles."
-                },
-                {
-                    "question": "What is the only mammal that can truly fly?",
-                    "answers": [
-                        { "text": "Flying squirrel", "correct": false },
-                        { "text": "Bat", "correct": true },
-                        { "text": "Sugar glider", "correct": false },
-                        { "text": "Flying lemur", "correct": false }
-                    ],
-                    "explanation": "While other animals can glide, bats are the only mammals capable of sustained flight."
-                }
-            ],
-            "Unit 4": [ // Renamed from "Unit 2" to "Unit 4"
-                {
-                    "question": "Which planet is known as the Red Planet?",
-                    "answers": [
-                        { "text": "Mars", "correct": true }, // Changed "Unit 2" to "Mars"
-                        { "text": "Venus", "correct": false },
-                        { "text": "Jupiter", "correct": false },
-                        { "text": "Saturn", "correct": false }
-                    ],
-                    "explanation": "Mars is known as the Red Planet due to its reddish-orange appearance caused by iron oxide (rust) on its surface."
-                },
-                {
-                    "question": "What is the name of the largest volcano on Mars?", // Changed "Unit 2" to "Mars"
-                    "answers": [
-                        { "text": "Mount Sharp", "correct": false },
-                        { "text": "Valles Marineris", "correct": false },
-                        { "text": "Olympus Mons", "correct": true },
-                        { "text": "Elysium Mons", "correct": false }
-                    ],
-                    "explanation": "Olympus Mons is a massive shield volcano on Mars, and it is the largest volcano and highest known mountain on any planet in the Solar System."
-                }
-            ]
-        };
+        <div id="quiz-content">
+            <p class="text-center text-gray-600 dark:text-gray-400">
+                Click on a quiz from the left-hand navigation to get started!
+            </p>
+        </div>
+    </div>
+</main>
+
+<script>
+    // Quiz data as a JSON object
+    const quizData = {
+        "Unit 1": [
+            {
+                "question": "Which of these is considered to be an encumbrance?",
+                "answers": [
+                    { "text": "A mortgage", "correct": false },
+                    { "text": "A lease", "correct": false },
+                    { "text": "An easement", "correct": false },
+                    { "text": "All of these", "correct": true }
+                ],
+                "explanation": "A lease, mortgage, easement, or restriction is considered an encumbrance of a fee simple title."
+            },
+            {
+                "question": "Which of the following courses of action would the Federal Reserve Board take during an elongated period of \"tight money?\"",
+                "answers": [
+                    { "text": "Purchasing large blocks of government bonds", "correct": false },
+                    { "text": "Lower the reserve requirements of bank members", "correct": false },
+                    { "text": "Decrease the discount rate for bank members", "correct": false },
+                    { "text": "Any of the following", "correct": true }
+                ],
+                "explanation": "Answers (a), (b), (c), and (d) are all courses of action taken by the Federal Reserve Board to help alleviate tight money conditions in the country."
+            },
+            {
+                "question": "A broker acting as agent for a principal has as much authority as:",
+                "answers": [
+                    { "text": "other parties believe the agent to possess.", "correct": false },
+                    { "text": "the agent chooses to accept.", "correct": false },
+                    { "text": "he chooses to accept as limited by the Statute of Limitations.", "correct": false },
+                    { "text": "the principal actually or ostensibly confers upon him.", "correct": true }
+                ],
+                "explanation": "An agent has as much authority as his principal actually or ostensibly confers upon him."
+            },
+            {
+                "question": "What does a general warranty deed contain?",
+                "answers": [
+                    { "text": "None of these.", "correct": false },
+                    { "text": "Covenants regarding quiet enjoyment", "correct": false },
+                    { "text": "Covenants that include provisions of a quitclaim deed", "correct": false },
+                    { "text": "Covenants that warrant the new owner’s undisturbed and clear title", "correct": true }
+                ],
+                "explanation": "Covenants that warrant the new owner’s undisturbed and clear title are contained in a general warranty deed."
+            },
+            {
+                "question": "In Texas, if Heather is an agent for a buyer Harry and she shows him a property that is known to have ghosts living there according to the neighbors, but she does not inform Harry of this information, after Harry purchases the property, Heather would:",
+                "answers": [
+                    { "text": "Be considered to have misrepresented Harry", "correct": false },
+                    { "text": "Be liable for misrepresentation", "correct": false },
+                    { "text": "Be open to being sued by Harry if he finds out about the ghosts", "correct": false },
+                    { "text": "Not be liable for the nondisclosure of ghosts", "correct": true }
+                ],
+                "explanation": "In Texas, agents are absolved from any liability regarding nondisclosure of stigmatized properties."
+            },
+            {
+                "question": "A couple is looking at houses and turns one down because they felt the price of the home was too high. This is based on what principle of real estate?",
+                "answers": [
+                    { "text": "Conformity", "correct": false },
+                    { "text": "Anticipation", "correct": false },
+                    { "text": "All of these", "correct": false },
+                    { "text": "Substitution", "correct": true }
+                ],
+                "explanation": "The principle of substitution is the basis of the appraisal process. Explained simply, value is set by the cost of getting an equally desirable substitute."
+            },
+            {
+                "question": "Constructive eviction may allow for a tenant to vacate the premises before the expiration of a lease term. Which would be an example of this?",
+                "answers": [
+                    { "text": "Landlord has shown property to prospective tenant and is negotiating terms", "correct": false },
+                    { "text": "Property cannot be used for original purpose due to unnecessary and considerable changes made by landlord", "correct": false },
+                    { "text": "Landlord fails to make necessary repairs", "correct": false },
+                    { "text": "All of the above", "correct": true }
+                ],
+                "explanation": "All of the above are examples of constructive eviction. a) Landlord has shown property to prospective tenant and is negotiating terms b) Property cannot be used for original purpose due to unnecessary and considerable changes made by landlord c) Landlord fails to make necessary repairs"
+            },
+            {
+                "question": "\"A\" receives a life estate for the life of \"X.\" \"A\" dies before \"X.\" The estate:",
+                "answers": [
+                    { "text": "ceases to exist.", "correct": false },
+                    { "text": "reverts to the original grantor.", "correct": false },
+                    { "text": "vests in", "correct": false },
+                    { "text": "vests in the heirs of A until X dies at which time the estate will revert to the original grantor.", "correct": true }
+                ],
+                "explanation": "The estate vests in the heirs of \"A\" until \"X\" dies at which time the estate will revert to the original grantor."
+            },
+            {
+                "question": "The original amortization term minus the number of payments that have been applied refers to the:",
+                "answers": [
+                    { "text": "Remaining interest", "correct": false },
+                    { "text": "Total amortization term", "correct": false },
+                    { "text": "Loan amount", "correct": false },
+                    { "text": "Remaining term", "correct": true }
+                ],
+                "explanation": "The original amortization term minus the number of payments that have been applied refers to the remaining term."
+            },
+            {
+                "question": "If Franklin, a real estate agent, intentionally speaks very highly and enthusiastically about a property he is trying to sell to a client in order to secure the deal, this type of behavior would be:",
+                "answers": [
+                    { "text": "Steering", "correct": false },
+                    { "text": "Illegal", "correct": false },
+                    { "text": "Misrepresentation", "correct": false },
+                    { "text": "Puffing", "correct": true }
+                ],
+                "explanation": "The term “puffing” can be used to describe “sales talk” that is used to secure a deal. As long as there is no misrepresentation, it is considered a legal practice."
+            }
+        ],
+        "Unit 2": [
+            {
+                "question": "A credit arrangement which allows a customer to borrow against a pre-approved line of credit when purchasing goods and services is called:",
+                "answers": [
+                    { "text": "A loan", "correct": false },
+                    { "text": "A credit card", "correct": false },
+                    { "text": "None of these", "correct": false },
+                    { "text": "Revolving debt", "correct": true }
+                ],
+                "explanation": "A credit arrangement which allows a customer to borrow against a pre-approved line of credit when purchasing goods and services is called revolving debt."
+            },
+            {
+                "question": "A valid written lease must include:",
+                "answers": [
+                    { "text": "agreement to let, agreement to take delivery, and acceptance.", "correct": false },
+                    { "text": "term, consideration, and description of the premises.", "correct": false },
+                    { "text": "a landlord and tenant with the legal capacity to enter a binding contract.", "correct": false },
+                    { "text": "all of the above", "correct": true }
+                ],
+                "explanation": "Each of the choices describes a necessary element of a valid lease."
+            },
+            {
+                "question": "How many acres are in the following described area: the W 1/2 of the N 1/2 of section 5?",
+                "answers": [
+                    { "text": "110", "correct": false },
+                    { "text": "120", "correct": false },
+                    { "text": "140", "correct": false },
+                    { "text": "160", "correct": true }
+                ],
+                "explanation": "A standard section of land is one square mile, which contains 640 acres. The N 1/2 of section 5 is 320 acres (640 / 2), and the W 1/2 of that is 160 acres (320 / 2)."
+            },
+            {
+                "question": "In Texas, if a builder of residential homes sells more than _______________ properties a year, they are required to obtain a real estate license or employ a licensed broker.",
+                "answers": [
+                    { "text": "3", "correct": false },
+                    { "text": "2", "correct": false },
+                    { "text": "1", "correct": false },
+                    { "text": "4", "correct": true }
+                ],
+                "explanation": "If a builder of residential homes sells more than 4 properties in a single year, they must obtain a real estate license or employ a real estate broker."
+            },
+            {
+                "question": "Real property includes all of the following except:",
+                "answers": [
+                    { "text": "airspace.", "correct": false },
+                    { "text": "minerals.", "correct": false },
+                    { "text": "water rights.", "correct": false },
+                    { "text": "oil.", "correct": true }
+                ],
+                "explanation": "Real property is land, anything permanently attached to the land, anything appurtenant to the land or anything immovable by law. Land includes airspace, surface rights, mineral rights, and water rights."
+            },
+            {
+                "question": "Brad sold his house to Jerry, who did not record the deed, but moved in. Brad then sold the same property to George, who reviewed the county recorder's records, but did not look at the property. Brad gave George a deed, which was recorded. Which of the following would be true concerning title to the property?",
+                "answers": [
+                    { "text": "Jerry and George are co-owners of the property", "correct": false },
+                    { "text": "George now owns the property because he recorded his deed and Jerry did not", "correct": false },
+                    { "text": "George has recourse against Jerry for failure to record", "correct": false },
+                    { "text": "Jerry maintains title", "correct": true }
+                ],
+                "explanation": "Although Jerry did not record the deed, he took possession by moving in. Possession of the property by Jerry gives constructive notice. Since George recorded after Jerry took possession, he had constructive notice of Jerry's rights."
+            },
+            {
+                "question": "Which of the following is correct concerning an ALTA extended coverage policy of title insurance?",
+                "answers": [
+                    { "text": "It protects a lessee who occupies the property after the date shown on the title insurance policy", "correct": false },
+                    { "text": "It protects against any encroachment that occurs after the date of issuance of the title policy", "correct": false },
+                    { "text": "It protects against any easements created during the term of the title insurance policy", "correct": false },
+                    { "text": "It is limited to stated conditions of title as of the date of the issuance of the title policy", "correct": true }
+                ],
+                "explanation": "An ALTA policy applies to owners or lenders not to lessees. A survey of the property is done at the time the policy is issued, but it does not protect against subsequent encroachments. Answer (b) is the only one that is correct."
+            },
+            {
+                "question": "The final step in the Statutory Dedication process is:",
+                "answers": [
+                    { "text": "The acceptance by the proper official", "correct": false },
+                    { "text": "The signature of the Real Estate Commissioner", "correct": false },
+                    { "text": "None of these", "correct": false },
+                    { "text": "The recording of the subdivision map", "correct": true }
+                ],
+                "explanation": "When the subdivision map is approved and recorded, this would be the final step in the Statutory Dedication process."
+            },
+            {
+                "question": "Consideration can be:",
+                "answers": [
+                    { "text": "money.", "correct": false },
+                    { "text": "services.", "correct": false },
+                    { "text": "covenants.", "correct": false },
+                    { "text": "all of the above", "correct": true }
+                ],
+                "explanation": "Covenants are promises and we know that consideration can be money, services, or promises. It can also be love and affection."
+            },
+            {
+                "question": "There are many agreements that could be placed in promissory notes that would prohibit the borrower from doing certain things. An agreement that would prohibit the borrower from paying off the loan before the maturity date is called a:",
+                "answers": [
+                    { "text": "prevention clause.", "correct": false },
+                    { "text": "defeasance clause.", "correct": false },
+                    { "text": "release clause.", "correct": false },
+                    { "text": "lock-in clause.", "correct": true }
+                ],
+                "explanation": "A lock-in clause prohibits borrowers from paying off a loan in advance. It is not allowed on residential units of less than four units."
+            }
+        ],
+        "Unit 3": [
+            {
+                "question": "Under the provisions of the Interstate Subdivided Lands Act, can the buyer rescind his offer within specified time limits, if he buys:",
+                "answers": [
+                    { "text": "land projects.", "correct": true },
+                    { "text": "condominium.", "correct": false },
+                    { "text": "stock cooperative project.", "correct": false },
+                    { "text": "none of the above", "correct": false }
+                ],
+                "explanation": "The law allows a buyer 14 days after signing a contract to purchase property in a land project to rescind the offer, with a full refund of any money paid."
+            },
+            {
+                "question": "In Texas, if an unlicensed person is charged with a first-time misdemeanor of performing activities requiring a real estate license, they:",
+                "answers": [
+                    { "text": "May be subject to a penalty of imprisonment to exceed 90 days", "correct": false },
+                    { "text": "May be subject to a penalty of a fine not to exceed $500", "correct": true },
+                    { "text": "May be subject to a penalty of a fine to exceed $500", "correct": false },
+                    { "text": "None of these", "correct": false }
+                ],
+                "explanation": "In Texas, any unlicensed person who is charged with a first-time misdemeanor of performing activities requiring a real estate license may be subject to a penalty of a fine not to exceed $500, imprisonment not to exceed 90 days, or both."
+            },
+            {
+                "question": "A cash payment of $10,001 is given as earnest money to secure a property. What must be filed?",
+                "answers": [
+                    { "text": "A procurement contract", "correct": false },
+                    { "text": "An expediting loan form", "correct": false },
+                    { "text": "An IRS Form 8300", "correct": true },
+                    { "text": "A documenting receipt", "correct": false }
+                ],
+                "explanation": "The IRS requires any cash payments over $10,000 be recorded by filing a form 8300."
+            },
+            {
+                "question": "When a broker obtains a new contract, it is considered what until fully performed?",
+                "answers": [
+                    { "text": "Pre-performed", "correct": false },
+                    { "text": "Invalid", "correct": false },
+                    { "text": "Pre-executed", "correct": false },
+                    { "text": "Executory", "correct": true }
+                ],
+                "explanation": "A contract that has not been fully performed is known as executory. Once it is performed, it is called executed."
+            },
+            {
+                "question": "A wife can will:",
+                "answers": [
+                    { "text": "all the community property.", "correct": false },
+                    { "text": "1/2 the community property.", "correct": true },
+                    { "text": "any community property the husband has not willed.", "correct": false },
+                    { "text": "none of the community property.", "correct": false }
+                ],
+                "explanation": "Both husband and wife have the right to will 1/2 the community property."
+            },
+            {
+                "question": "Individual lots that are created from a larger tract and that are offered for sale or lease best describes a:",
+                "answers": [
+                    { "text": "Suburb", "correct": false },
+                    { "text": "Housing tract", "correct": false },
+                    { "text": "Development", "correct": false },
+                    { "text": "Subdivision", "correct": true }
+                ],
+                "explanation": "Individual lots that are created from a larger tract and that are offered for sale or lease best describes a subdivision."
+            },
+            {
+                "question": "Mr. Noro bought a property using a purchase money trust deed. A few years later he sold the property to Ms. Hassen for all cash. Which of the following would not be disclosed by the public records?",
+                "answers": [
+                    { "text": "A grant deed to Mr. Noro", "correct": false },
+                    { "text": "The original trust deed that Mr. Noro used in purchasing the property", "correct": false },
+                    { "text": "A reconveyance deed to Mr. Noro", "correct": false },
+                    { "text": "A reconveyance deed to Ms. Hassen", "correct": true }
+                ],
+                "explanation": "Since Ms. Hassen paid all cash for the property, there would be no need for a reconveyance deed to Ms. Hassen. Therefore, it would not appear on public records."
+            },
+            {
+                "question": "A licensed agent working under John, a broker, withdraws funds from John’s broker trust account with John’s permission. The agent is licensed but not bonded. This transaction would be:",
+                "answers": [
+                    { "text": "Illegal", "correct": true },
+                    { "text": "None of these", "correct": false },
+                    { "text": "Unethical", "correct": false },
+                    { "text": "Legal", "correct": false }
+                ],
+                "explanation": "In order for someone other than the broker to withdraw funds from the broker’s trust account, the person must be bonded."
+            },
+            {
+                "question": "While the objective in the cost approach generally is to estimate the value of both land and improvements, the land typically is appraised using the:",
+                "answers": [
+                    { "text": "income approach.", "correct": false },
+                    { "text": "gross rent multiplier approach.", "correct": false },
+                    { "text": "option approach.", "correct": false },
+                    { "text": "market data approach.", "correct": true }
+                ],
+                "explanation": "Land is appraised by comparing the subject property to recent sales of comparable parcels of land."
+            },
+            {
+                "question": "A down payment of $1,000 for the purchase of an apartment house valued at $690,000 is a good example of:",
+                "answers": [
+                    { "text": "plottage.", "correct": false },
+                    { "text": "leverage.", "correct": true },
+                    { "text": "highest and best value.", "correct": false },
+                    { "text": "none of the above", "correct": false }
+                ],
+                "explanation": "The definition of leverage can be viewed as using a small down payment to purchase as much property as possible."
+            }
+        ],
+        "Unit 4": [
+            {
+                "question": "In Texas, an on-site manager who negotiates apartment leases during the normal course of business:",
+                "answers": [
+                    { "text": "Must hold a real estate salesperson’s or broker’s license", "correct": false },
+                    { "text": "None of these", "correct": false },
+                    { "text": "Must have applied for a real estate license", "correct": false },
+                    { "text": "Is not required to hold a real estate salesperson’s or broker’s license", "correct": true }
+                ],
+                "explanation": "In Texas, an on-site manager who negotiates apartment leases during the normal course of business is not required to hold a real estate salesperson’s or broker’s license. This exemption only applies to apartments; managers of condominiums or town homes need to be licensed."
+            },
+            {
+                "question": "Which of these terms refers to the owner of real property selling the property to someone else and is a legal right?",
+                "answers": [
+                    { "text": "Salage", "correct": false },
+                    { "text": "Release", "correct": false },
+                    { "text": "Salable", "correct": false },
+                    { "text": "Disposition", "correct": true }
+                ],
+                "explanation": "Disposition (which can also be called alienation), refers to the disposal of something. In real estate it is a right of alienation to do this with real property."
+            },
+            {
+                "question": "Which of the following falls under the term “real property”?",
+                "answers": [
+                    { "text": "Furniture", "correct": false },
+                    { "text": "Crops", "correct": false },
+                    { "text": "Trees", "correct": true },
+                    { "text": "Fixtures", "correct": false }
+                ],
+                "explanation": "Real property is the things that “go with the land”. Clearly trees are not personal property and they must “go with the land”, therefore trees is the correct answer in this case."
+            },
+            {
+                "question": "Elderly homeowners can sometimes tap the equity in their home without having to make monthly payments by using a:",
+                "answers": [
+                    { "text": "conversion option.", "correct": false },
+                    { "text": "blanket mortgage.", "correct": false },
+                    { "text": "wraparound mortgage.", "correct": false },
+                    { "text": "reverse mortgage.", "correct": true }
+                ],
+                "explanation": "With a reverse mortgage, the homeowner receives a lump sum or monthly checks, and no repayment is made until the property is sold or the owner dies."
+            },
+            {
+                "question": "If there is an easement appurtenant, there must also be:",
+                "answers": [
+                    { "text": "A dominant tenement", "correct": true },
+                    { "text": "None of these", "correct": false },
+                    { "text": "A tenement in gross", "correct": false },
+                    { "text": "A specific lien", "correct": false }
+                ],
+                "explanation": "An easement appurtenant can only exist if there is a dominant tenement."
+            },
+            {
+                "question": "If an agent makes claims to homeowners in a certain geographical location that their property values would decrease if certain ethnic groups were to move into the area, this could be an example of:",
+                "answers": [
+                    { "text": "Blockbusting", "correct": true },
+                    { "text": "Negotiation", "correct": false },
+                    { "text": "Coercion", "correct": false },
+                    { "text": "Steering", "correct": false }
+                ],
+                "explanation": "Blockbusting is historically when a mostly white neighborhood is seen as less valuable if mainly African Americans were to move in. This has been a tactic of some real estate agents in the past to try to trick white homeowners into selling their property at a lower price “before it’s too late.” Subsequently this practice has been outlawed."
+            },
+            {
+                "question": "Broker Smith operates a small business in a small room in his home. The room has its own entrance with just a sign over the door reading \"Smith Realtor\". He has no salesperson working for him except a 17-year-old student he has in training for the business and to whom he pays $5.00 for each listing the student brings in. Broker Smith is not a member of a real estate board. Since he lives outside of town he holds all deposits received until he goes to town, about once a week. From the information given, broker Smith is in violation of the Real Estate Law in all of the following, except:",
+                "answers": [
+                    { "text": "paying compensation to an unlicensed person.", "correct": false },
+                    { "text": "using the term", "correct": false },
+                    { "text": "location of his office.", "correct": true },
+                    { "text": "commingling.", "correct": false }
+                ],
+                "explanation": "He is definitely in violation of the Real Estate Law in answers (a), (b), and (d)."
+            },
+            {
+                "question": "If a property is in default and a meeting is announced in a public location to sell the property in order to recoup the mortgage in default, this would be an example of a:",
+                "answers": [
+                    { "text": "Foreclosure", "correct": false },
+                    { "text": "Eviction", "correct": false },
+                    { "text": "Public auction", "correct": true }
+                ],
+                "explanation": "In order to repay a mortgage in default, sometimes a meeting in an announced public location occurs to attempt to sell the property. This is called a public auction."
+            },
+            {
+                "question": "What relationship to the broker’s client is a salesperson?",
+                "answers": [
+                    { "text": "A dual agent", "correct": false },
+                    { "text": "A special agent", "correct": false },
+                    { "text": "A joint agent", "correct": false },
+                    { "text": "A subagent", "correct": true }
+                ],
+                "explanation": "A salesperson is a subagent to the broker’s client."
+            },
+            {
+                "question": "In the sale of real property which of the following runs with the land?",
+                "answers": [
+                    { "text": "Easements", "correct": false },
+                    { "text": "Conditions", "correct": false },
+                    { "text": "Stock in a mutual water company", "correct": false },
+                    { "text": "All of the above", "correct": true }
+                ],
+                "explanation": "All are appurtenant, incident to, and run with the land."
+            }
+        ],
+        "Unit 5": [],
+        "Unit 6": [],
+        "Unit 7": [],
+        "Unit 8": [],
+        "Unit 9": [],
+        "Unit 10": [],
+        "Animal": [
+            {
+                "question": "What is the fastest land animal?",
+                "answers": [
+                    { "text": "Lion", "correct": false },
+                    { "text": "Cheetah", "correct": true },
+                    { "text": "Gazelle", "correct": false },
+                    { "text": "Ostrich", "correct": false }
+                ],
+                "explanation": "The cheetah can reach speeds of up to 70 miles per hour (112 km/h) in short bursts."
+            },
+            {
+                "question": "Which animal is known as the 'King of the Jungle'?",
+                "answers": [
+                    { "text": "Tiger", "correct": false },
+                    { "text": "Lion", "correct": true },
+                    { "text": "Gorilla", "correct": false },
+                    { "text": "Elephant", "correct": false }
+                ],
+                "explanation": "Lions are widely known as the 'King of the Jungle,' although they primarily live in savannas and grasslands, not jungles."
+            },
+            {
+                "question": "What is the only mammal that can truly fly?",
+                "answers": [
+                    { "text": "Flying squirrel", "correct": false },
+                    { "text": "Bat", "correct": true },
+                    { "text": "Sugar glider", "correct": false },
+                    { "text": "Flying lemur", "correct": false }
+                ],
+                "explanation": "While other animals can glide, bats are the only mammals capable of sustained flight."
+            }
+        ],
+        "Space": [ // Renamed from "Unit 4" to "Space"
+            {
+                "question": "Which planet is known as the Red Planet?",
+                "answers": [
+                    { "text": "Mars", "correct": true },
+                    { "text": "Venus", "correct": false },
+                    { "text": "Jupiter", "correct": false },
+                    { "text": "Saturn", "correct": false }
+                ],
+                "explanation": "Mars is known as the Red Planet due to its reddish-orange appearance caused by iron oxide (rust) on its surface."
+            },
+            {
+                "question": "What is the name of the largest volcano on Mars?",
+                "answers": [
+                    { "text": "Mount Sharp", "correct": false },
+                    { "text": "Olympus Mons", "correct": true },
+                    { "text": "Arsia Mons", "correct": false },
+                    { "text": "Pavonis Mons", "correct": false }
+                ],
+                "explanation": "Olympus Mons is the largest volcano and one of the largest mountains in the Solar System, located on Mars."
+            }
+        ]
+    };
+</script>
 
         // DOM elements
         const quizTitleEl = document.getElementById('quiz-title');
