@@ -1,18 +1,35 @@
 {
-  "M1 - Unit 1": [
+  "C1 - Unit 1": [
     {
-      "question": "What is the primary purpose of a real estate agent's license?",
+      "question": "What is the capital of France?",
       "answers": [
-        { "text": "To allow them to buy properties for themselves.", "correct": false },
-        { "text": "To protect the public from unqualified or unethical practitioners.", "correct": true },
-        { "text": "To ensure they pay taxes on their commissions.", "correct": false },
-        { "text": "To give them exclusive rights to sell properties.", "correct": false }
+        { "text": "Berlin", "correct": false },
+        { "text": "Paris", "correct": true },
+        { "text": "Rome", "correct": false }
       ],
-      "explanation": "Real estate licenses are primarily issued to safeguard the public by ensuring agents meet certain standards of knowledge and ethics."
+      "explanation": "Paris is the capital city of France."
+    },
+    {
+      "question": "Which planet is known as the Red Planet?",
+      "answers": [
+        { "text": "Earth", "correct": false },
+        { "text": "Mars", "correct": true },
+        { "text": "Jupiter", "correct": false }
+      ],
+      "explanation": "Mars is often referred to as the Red Planet."
     }
   ],
-  "M1 - Unit 2": [],
-  "M1 - Unit 3": [],
-  "M1 - Unit 4": [],
-  "M1 - Unit 5": []
+  "C1 - Unit 2": [
+    {
+      "question": "What is 2 + 2?",
+      "answers": [
+        { "text": "3", "correct": false },
+        { "text": "4", "correct": true }
+      ],
+      "explanation": "Basic arithmetic."
+    }
+  ],
+  "C1 - Unit 3": [],
+  "C1 - Unit 4": [],
+  "C1 - Unit 5": []
 }
