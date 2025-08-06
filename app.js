@@ -1,5 +1,3 @@
-// app.js
-
 // Global object to store fetched quiz data, keyed by module name (e.g., 'module1', 'module2')
 const quizDataCache = {};
 
