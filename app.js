@@ -1,7 +1,5 @@
-// Global object to store fetched quiz data, keyed by module name (e.g., 'module1', 'module2')
 const quizDataCache = {};
 
-// DOM elements
 const quizTitleEl = document.getElementById('quiz-title');
 const quizContentEl = document.getElementById('quiz-content');
 const progressContainer = document.getElementById('progress-container');
@@ -12,7 +10,6 @@ const incorrectBarEl = document.getElementById('incorrect-bar');
 const quizListContainer = document.getElementById('quiz-list-container');
 
 
-// State variables
 let currentQuizQuestions = [];
 let currentQuestionIndex = 0;
 let correctCount = 0;
