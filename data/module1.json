@@ -10,21 +10,8 @@
       ],
       "explanation": "Real estate licenses are primarily issued to safeguard the public by ensuring agents meet certain standards of knowledge and ethics."
     }
-    // Add more questions for M1 - Unit 1 here
   ],
-  "M1 - Unit 2": [
-    {
-      "question": "Which of the following is an example of an encumbrance?",
-      "answers": [
-        { "text": "A clear title", "correct": false },
-        { "text": "An easement", "correct": true },
-        { "text": "A property deed", "correct": false },
-        { "text": "A mortgage payment", "correct": false }
-      ],
-      "explanation": "An easement is a right to use the land of another for a specific purpose, which is a type of encumbrance on a property."
-    }
-    // Add more questions for M1 - Unit 2 here
-  ],
+  "M1 - Unit 2": [],
   "M1 - Unit 3": [],
   "M1 - Unit 4": [],
   "M1 - Unit 5": []
