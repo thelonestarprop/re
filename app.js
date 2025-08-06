@@ -27,29 +27,36 @@ let totalQuestions = 0;
  */
 async function loadQuiz(category) {
     // Extract the module identifier from the category string (e.g., "M1" from "M1 - Unit 1")
-    // This assumes module names are consistent (e.g., "M1", "M2", etc.)
     const modulePrefix = category.split(' ')[0]; // Gets "M1", "M2", etc.
     const moduleFileName = modulePrefix.toLowerCase(); // Converts to "m1", "m2" for file names
+
+    console.log(`Attempting to load quiz: ${category}`);
+    console.log(`Derived module prefix: ${modulePrefix}, file name: ${moduleFileName}.json`);
 
     // Check if the module data is already in our cache
     if (!quizDataCache[modulePrefix]) {
         try {
             // Construct the path to the JSON file
             const filePath = `data/${moduleFileName}.json`;
+            console.log(`Fetching new module data from: ${filePath}`);
             const response = await fetch(filePath);
 
             if (!response.ok) {
-                // Handle HTTP errors (e.g., 404 Not Found)
-                throw new Error(`Failed to load quiz data for ${modulePrefix}: ${response.statusText}`);
+                // Log detailed error if fetch fails (e.g., 404)
+                throw new Error(`HTTP error! Status: ${response.status} - ${response.statusText} for ${filePath}`);
             }
-            const data = await response.json();
+
+            const data = await response.json(); // Attempt to parse JSON
+            console.log(`Successfully fetched and parsed ${filePath}`);
             // Store the fetched data in the cache using the module prefix as the key
             quizDataCache[modulePrefix] = data;
         } catch (error) {
-            console.error('Error fetching quiz data:', error);
+            console.error('Error fetching or parsing quiz data:', error);
             quizContentEl.innerHTML = `<p class="text-center text-red-500">Error loading quiz data. Please check the console for details.</p>`;
-            return; // Stop execution if data fetching fails
+            return; // Stop execution if data fetching/parsing fails
         }
+    } else {
+        console.log(`Module data for ${modulePrefix} already in cache.`);
     }
 
     // Now that the module's data is guaranteed to be in quizDataCache,
@@ -57,7 +64,8 @@ async function loadQuiz(category) {
     const quizUnitData = quizDataCache[modulePrefix][category];
 
     if (!quizUnitData) {
-        quizContentEl.innerHTML = `<p class="text-center text-red-500">Error: Quiz unit "${category}" not found within its module.</p>`;
+        console.error(`Quiz unit "${category}" not found within cached module data for "${modulePrefix}".`);
+        quizContentEl.innerHTML = `<p class="text-center text-red-500">Error: Quiz unit "${category}" not found within its module. Ensure the unit name in the JSON matches the 'data-quiz' attribute.</p>`;
         return;
     }
 
